@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Premium cream/beige palette */
+    --background: 40 30% 97%;
+    --foreground: 30 10% 15%;
+
+    --card: 38 35% 96%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 40 30% 97%;
+    --popover-foreground: 30 10% 15%;
+
+    /* Primary: Deep charcoal for text/buttons */
+    --primary: 30 10% 15%;
+    --primary-foreground: 40 30% 97%;
+
+    /* Secondary: Warm cream accent */
+    --secondary: 38 45% 88%;
+    --secondary-foreground: 30 10% 15%;
+
+    /* Muted: Subtle backgrounds */
+    --muted: 38 35% 92%;
+    --muted-foreground: 30 8% 40%;
+
+    /* Accent: Rich cream for highlights */
+    --accent: 38 50% 85%;
+    --accent-foreground: 30 10% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 40 30% 97%;
+
+    --border: 38 25% 88%;
+    --input: 38 25% 88%;
+    --ring: 30 10% 15%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gradient-premium: linear-gradient(135deg, hsl(40 30% 97%), hsl(38 45% 90%));
+    --gradient-subtle: linear-gradient(180deg, hsl(40 30% 97%), hsl(38 35% 94%));
+    --shadow-soft: 0 4px 24px -4px hsl(30 10% 15% / 0.08);
+    --shadow-medium: 0 8px 32px -6px hsl(30 10% 15% / 0.12);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
