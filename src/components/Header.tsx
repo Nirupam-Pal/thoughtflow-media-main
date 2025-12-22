@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { MotionButton } from "./ui/motionButton";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -123,13 +124,14 @@ const Header = () => {
                 </div>
 
                 <div className="mt-8 relative z-10">
-                  <Button
+                  <MotionButton/>
+                  {/* <Button
                     onClick={() => scrollToSection("#contact")}
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft"
                     size="lg"
                   >
                     Get Started
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
 
@@ -176,9 +178,9 @@ const Header = () => {
         }}
         transition={{
           type: "spring",
-          stiffness: 300,
-          damping: 30,
-          mass: 0.5
+          stiffness: 800,
+          damping: 60,
+          mass: 1
         }}
         className={`fixed top-0 z-50 transition-all ${isScrolled ? "backdrop-blur-lg" : ""}`}
       >
@@ -217,12 +219,13 @@ const Header = () => {
                 </button>
               ))}
 
-              <Button
+              {/* <Button
                 onClick={() => scrollToSection("#contact")}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105"
               >
                 Get Started
-              </Button>
+              </Button> */}
+              <MotionButton/>
             </div>
 
             {/* Mobile Menu Button */}

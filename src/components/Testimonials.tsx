@@ -1,4 +1,8 @@
 import { Star } from "lucide-react";
+import { twMerge } from "tailwind-merge";
+import Marquee from "./ui/marquee";
+
+
 
 const testimonials = [
   {
@@ -45,9 +49,39 @@ const testimonials = [
   }
 ];
 
+const firstRow = testimonials.slice(0, testimonials.length / 2);
+const secondRow = testimonials.slice(testimonials.length / 2);
+
+const ReviewCard = ({ image, name, role, content }) => {
+  return (
+    <figure
+      className={twMerge(
+        "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border border-gray-200 p-4 bg-gradient-to-r from-card to-muted hover:from-accent/20 hover:to-secondary/20 transition-all duration-300"
+      )}
+    >
+      <div className="flex flex-row items-center gap-2">
+        <img
+          className="rounded-full bg-white/10"
+          width="32"
+          height="32"
+          alt=""
+          src={image}
+        />
+        <div className="flex flex-col">
+          <figcaption className="text-sm font-medium ">
+            {name}
+          </figcaption>
+          <p className="text-xs font-medium text-black/40">{role}</p>
+        </div>
+      </div>
+      <blockquote className="mt-2 text-sm">{content}</blockquote>
+    </figure>
+  );
+};
+
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-20 lg:py-32 bg-secondary/30">
+    <section id="testimonials" className="relative py-20 lg:py-32 bg-secondary/30 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -58,38 +92,25 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="bg-card p-8 rounded-2xl shadow-soft border border-border group hover:shadow-medium transition-all duration-300 animate-fade-in hover:-translate-y-2"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                ))}
-              </div>
-              
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                "{testimonial.content}"
-              </p>
-
-              <div className="flex items-center gap-4 mt-auto">
-                <img 
-                  src={testimonial.image} 
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-border"
-                />
-                <div>
-                  <h4 className="font-semibold">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="relative flex flex-col items-center justify-center w-full mt-12 overflow-hidden">
+          <div className="relative w-full [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]">
+            <Marquee pauseOnHover className="[--duration:20s]">
+              {firstRow.map((review) => (
+                <ReviewCard key={review.role} {...review} />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover className="[--duration:20s]">
+              {secondRow.map((review) => (
+                <ReviewCard key={review.role} {...review} />
+              ))}
+            </Marquee>
+          </div>
+          <div className="absolute inset-y-0 left-0 w-1/4 pointer-events-none z-30 bg-gradient-to-r from-secondary/30 to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-1/4 pointer-events-none z-30 bg-gradient-to-l from-secondary/30 to-transparent"></div>
         </div>
       </div>
+      <div className="absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
+      <div className="absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>
     </section>
   );
 };

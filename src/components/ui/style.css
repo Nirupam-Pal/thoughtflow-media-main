@@ -1,0 +1,82 @@
+.icon{
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+    /* color: #ffffff; */
+}
+
+.iconContainer{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 22px;
+}
+
+.title{
+    font-size: 16px;
+    letter-spacing: -0.5px;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+
+    border-radius: 20px;
+    padding: 12px 36px;
+    width: 200px;
+    overflow: clip;
+}
+
+.circle{
+    width: 6px;
+    height: 6px;
+    background-color: hsl(var(--primary));
+    border-radius: 100%;
+    position: absolute;
+    left: 22px;
+}
+
+/* Motion Button */
+.button{
+    all: unset;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 10px 19px;
+    border-color: rgb(67, 62, 62);
+    color: #000;
+    border-radius: 100px;
+    position: relative;
+    overflow: clip;
+}
+
+.buttonTitle{
+    margin: 0;
+}
+
+.buttonTitle2{
+    margin: 0;
+    height: 100%;
+    top: 0;
+    transform: translateY(-50%);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.buttonBackground{
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    color: #fff;
+    background-color: hsl(32, 25%, 27%);
+}
