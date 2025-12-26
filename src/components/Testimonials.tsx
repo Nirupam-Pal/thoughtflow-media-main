@@ -163,7 +163,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Trusted by Industry Leaders
+            Trusted by 100+ Brands
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             We've partnered with ambitious brands to drive meaningful growth.
