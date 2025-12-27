@@ -4,11 +4,13 @@ import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Portfolio from "@/components/Portfolio";
 import Team from "@/components/Team";
-import Testimonials from "@/components/Testimonials";
 import ContactForm from "@/components/ContactForm";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { Skiper30 } from "@/components/parallax";
+import Clients from "@/components/Clients";
+import Testimonials from "@/components/Testimonials";
+// import AnimatedTestimonialsDemo from "@/components/Testimonials";
 
 const Index = () => {
   return (
@@ -18,8 +20,11 @@ const Index = () => {
       <Services />
       <WhyChooseUs />
       <Portfolio />
+      <Testimonials/>
+      {/* <AnimatedTestimonialsDemo /> */}
       <Team />
-      <Testimonials />
+      {/* <Testimonials /> */}
+      <Clients/>
       <ContactForm />
       <Skiper30/>
       <CTA />
