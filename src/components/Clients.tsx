@@ -55,12 +55,12 @@ const logos = [
   { name: "Aimsas", src: "/logos/4.png" },
   { name: "The Core Acedemy", src: "/logos/5.png" },
   { name: "Milestone Institute", src: "/logos/6.png" },
-  // { name: "Synapse", src: "/logos/7.png" },
+  { name: "Dr. SK Biology", src: "/logos/7.png" },
   { name: "Synapse", src: "/logos/8.png" },
   { name: "Longtharai", src: "/logos/9.png" },
   { name: "Petuk Somabesh 3.0", src: "/logos/10.png" },
   { name: "Smoke Of Longtwrai", src: "/logos/11.png" },
-  // { name: "CA ANKITA BORA", src: "/logos/12.png" },
+  { name: "Dr. SK Global", src: "/logos/12.png" },
   { name: "Aadhyan", src: "/logos/13.png" },
   { name: "Junior", src: "/logos/14.png" },
   { name: "Untitled 3", src: "/logos/15.png" },
@@ -70,6 +70,10 @@ const logos = [
   { name: "Prayam Classes", src: "/logos/19.png" },
   { name: "7 Oceans Centre of Music", src: "/logos/20.jpg" },
   { name: "Chessverse", src: "/logos/21.jpg" },
+  { name: "Dilaas", src: "/logos/22.png" },
+  { name: "NPA", src: "/logos/23.png" },
+  { name: "stylelinepols", src: "/logos/24.png" },
+  { name: "Barat Gro Kids", src: "/logos/25.png" },
 ];
 
 const firstRow = logos.slice(0, logos.length / 2);
@@ -162,7 +166,7 @@ const Clients = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Trusted by 100+ Brands
+            Trusted by 50+ Brands
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             We've partnered with ambitious brands to drive meaningful growth.
