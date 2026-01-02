@@ -131,7 +131,7 @@ import "swiper/css";
 
 import { cn } from "@/lib/utils";
 
-const Skiper48 = () => {
+const Contents = () => {
   const images = [
   { 
     src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80", 
@@ -283,4 +283,4 @@ const Carousel_003 = ({
   );
 };
 
-export default Skiper48;
+export default Contents;

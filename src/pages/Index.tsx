@@ -3,13 +3,14 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Portfolio from "@/components/Portfolio";
-import Team from "@/components/Team";
+// import Team from "@/components/Contents";
 import ContactForm from "@/components/ContactForm";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { Skiper30 } from "@/components/parallax";
 import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
+import Contents from "@/components/Contents";
 // import AnimatedTestimonialsDemo from "@/components/Testimonials";
 
 const Index = () => {
@@ -22,7 +23,7 @@ const Index = () => {
       <Portfolio />
       <Testimonials/>
       {/* <AnimatedTestimonialsDemo /> */}
-      <Team />
+      <Contents />
       {/* <Testimonials /> */}
       <Clients/>
       <ContactForm />
