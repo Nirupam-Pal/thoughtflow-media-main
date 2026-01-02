@@ -137,8 +137,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-// CHANGE 1: Define Local Video Paths matching your public/videos folder
-// We create an array for 1.mp4 through 12.mp4
+// Local Video Paths
 const localVideos = [
   "/videos/1.mp4",
   "/videos/2.mp4",
@@ -154,7 +153,7 @@ const localVideos = [
   "/videos/12.mp4",
 ];
 
-// Base images to cycle through
+// Base images
 const baseImages = [
   {
     src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
@@ -178,15 +177,12 @@ const baseImages = [
   }
 ];
 
-// CHANGE 2: Combine videos with images
-// We map the local video path directly to 'videoSrc'
 const contentItems = localVideos.map((videoPath, index) => ({
   videoSrc: videoPath,
   ...baseImages[index % baseImages.length]
 }));
 
 const Contents = () => {
-  // CHANGE 3: State now holds the file path string instead of an ID
   const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
 
   return (
@@ -206,12 +202,12 @@ const Contents = () => {
             items={contentItems}
             loop={true}
             showNavigation={true}
-            autoplay={true}
+            // CHANGE 1: Pass false if video modal is open, otherwise true
+            autoplay={!openVideoSrc} 
             onItemClick={(src) => setOpenVideoSrc(src)}
           />
         </div>
 
-        {/* Video Modal */}
         <Dialog open={!!openVideoSrc} onOpenChange={(open) => !open && setOpenVideoSrc(null)}>
           <DialogContent className="sm:max-w-[450px] p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center outline-none">
             <DialogTitle className="sr-only">Project Video</DialogTitle>
@@ -219,8 +215,6 @@ const Contents = () => {
 
             {openVideoSrc && (
               <div className="relative w-full aspect-[9/16] max-h-[85vh] flex items-center justify-center">
-
-                {/* MOBILE FIX: Kept exactly as requested */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -252,7 +246,6 @@ const Contents = () => {
                 </button>
 
                 <div className="w-full h-full rounded-2xl overflow-hidden bg-black shadow-2xl relative z-10">
-                  {/* CHANGE 4: Replaced iframe with HTML5 Video */}
                   <video
                     src={openVideoSrc}
                     className="w-full h-full object-cover"
@@ -278,11 +271,10 @@ const Carousel_003 = ({
   showPagination = false,
   showNavigation = false,
   loop = true,
-  autoplay = false,
+  autoplay = true,
   spaceBetween = 0,
   onItemClick,
 }: {
-  // CHANGE 5: Updated Type Definition
   items: { src: string; alt: string; videoSrc: string | null }[];
   className?: string;
   showPagination?: boolean;
@@ -343,9 +335,15 @@ const Carousel_003 = ({
         grabCursor={true}
         slidesPerView="auto"
         centeredSlides={true}
+        loop={loop}
         loopAdditionalSlides={5}
         watchSlidesProgress={true}
-
+        // CHANGE 2: Added detailed autoplay configuration
+        autoplay={autoplay ? {
+          delay: 3000,                // 3 seconds delay
+          disableOnInteraction: false, // Resume after user manually swipes
+          pauseOnMouseEnter: true     // Pause when user hovers over the slide
+        } : false}
         coverflowEffect={{
           rotate: 30,
           stretch: 0,
@@ -361,7 +359,6 @@ const Carousel_003 = ({
         {items.map((item, index) => (
           <SwiperSlide
             key={`content-slide-${index}`}
-            // CHANGE 6: Pass videoSrc to the click handler
             onClick={() => item.videoSrc && onItemClick?.(item.videoSrc)}
           >
             <div className="relative w-full h-full group">
