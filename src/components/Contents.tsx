@@ -340,7 +340,7 @@ const Carousel_003 = ({
         watchSlidesProgress={true}
         // CHANGE 2: Added detailed autoplay configuration
         autoplay={autoplay ? {
-          delay: 3000,                // 3 seconds delay
+          delay: 2000,                // 3 seconds delay
           disableOnInteraction: false, // Resume after user manually swipes
           pauseOnMouseEnter: true     // Pause when user hovers over the slide
         } : false}
