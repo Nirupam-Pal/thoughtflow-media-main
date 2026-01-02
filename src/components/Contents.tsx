@@ -137,20 +137,21 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-// Instagram Video Links
-const videoLinks = [
-  "https://www.instagram.com/reel/DKJaKBtzZlJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DKPphjez3o-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DSMkbRxgOgT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DQuBKokjZ60/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DQmY_Zggrb1/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DPgU35NjdTa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DHQEaJPhi4V/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DOX1ObDDFTE/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DOTX9HbiNv5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DOOhSFMD20S/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DNpd21gO3wB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  "https://www.instagram.com/reel/DJ9VxYAuszT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+// CHANGE 1: Define Local Video Paths matching your public/videos folder
+// We create an array for 1.mp4 through 12.mp4
+const localVideos = [
+  "/videos/1.mp4",
+  "/videos/2.mp4",
+  "/videos/3.mp4",
+  "/videos/4.mp4",
+  "/videos/5.mp4",
+  "/videos/6.mp4",
+  "/videos/7.mp4",
+  "/videos/8.mp4",
+  "/videos/9.mp4",
+  "/videos/10.mp4",
+  "/videos/11.mp4",
+  "/videos/12.mp4",
 ];
 
 // Base images to cycle through
@@ -177,20 +178,16 @@ const baseImages = [
   }
 ];
 
-// Helper to extract ID
-const getVideoId = (url: string) => {
-  const match = url.match(/\/reel\/([^/?]+)/);
-  return match ? match[1] : null;
-};
-
-// Combine videos with images (cycling images)
-const contentItems = videoLinks.map((link, index) => ({
-  videoId: getVideoId(link),
+// CHANGE 2: Combine videos with images
+// We map the local video path directly to 'videoSrc'
+const contentItems = localVideos.map((videoPath, index) => ({
+  videoSrc: videoPath,
   ...baseImages[index % baseImages.length]
 }));
 
 const Contents = () => {
-  const [openVideoId, setOpenVideoId] = useState<string | null>(null);
+  // CHANGE 3: State now holds the file path string instead of an ID
+  const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
 
   return (
     <section id="team" className="py-20 lg:py-32 bg-[#f5f4f3]">
@@ -210,29 +207,24 @@ const Contents = () => {
             loop={true}
             showNavigation={true}
             autoplay={true}
-            onItemClick={(videoId) => setOpenVideoId(videoId)}
+            onItemClick={(src) => setOpenVideoSrc(src)}
           />
         </div>
 
         {/* Video Modal */}
-        <Dialog open={!!openVideoId} onOpenChange={(open) => !open && setOpenVideoId(null)}>
+        <Dialog open={!!openVideoSrc} onOpenChange={(open) => !open && setOpenVideoSrc(null)}>
           <DialogContent className="sm:max-w-[450px] p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center outline-none">
-            <DialogTitle className="sr-only">Instagram Video</DialogTitle>
+            <DialogTitle className="sr-only">Project Video</DialogTitle>
             <DialogDescription className="sr-only">Video Player Overlay</DialogDescription>
 
-            {openVideoId && (
+            {openVideoSrc && (
               <div className="relative w-full aspect-[9/16] max-h-[85vh] flex items-center justify-center">
 
-                {/* MOBILE FIX: 
-                  - position: fixed (relative to viewport, NOT iframe container)
-                  - top-4 right-4 (safe corner placement)
-                  - z-[100] (highest layer)
-                  - stopPropagation() (prevents click-through to iframe)
-                */}
+                {/* MOBILE FIX: Kept exactly as requested */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    setOpenVideoId(null);
+                    setOpenVideoSrc(null);
                   }}
                   className="
                     hidden
@@ -260,14 +252,15 @@ const Contents = () => {
                 </button>
 
                 <div className="w-full h-full rounded-2xl overflow-hidden bg-black shadow-2xl relative z-10">
-                  <iframe
-                    src={`https://www.instagram.com/reel/${openVideoId}/embed/?autoplay=1&muted=1&playsinline=1`}
+                  {/* CHANGE 4: Replaced iframe with HTML5 Video */}
+                  <video
+                    src={openVideoSrc}
                     className="w-full h-full object-cover"
-                    frameBorder="0"
-                    allowFullScreen
-                    allow="autoplay; encrypted-media"
-                    scrolling="no"
-                    title="Instagram Reel"
+                    controls
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
                   />
                 </div>
               </div>
@@ -289,14 +282,15 @@ const Carousel_003 = ({
   spaceBetween = 0,
   onItemClick,
 }: {
-  items: { src: string; alt: string; videoId: string | null }[];
+  // CHANGE 5: Updated Type Definition
+  items: { src: string; alt: string; videoSrc: string | null }[];
   className?: string;
   showPagination?: boolean;
   showNavigation?: boolean;
   loop?: boolean;
   autoplay?: boolean;
   spaceBetween?: number;
-  onItemClick?: (id: string) => void;
+  onItemClick?: (src: string) => void;
 }) => {
   const css = `
   .Carousal_003 {
@@ -367,7 +361,8 @@ const Carousel_003 = ({
         {items.map((item, index) => (
           <SwiperSlide
             key={`content-slide-${index}`}
-            onClick={() => item.videoId && onItemClick?.(item.videoId)}
+            // CHANGE 6: Pass videoSrc to the click handler
+            onClick={() => item.videoSrc && onItemClick?.(item.videoSrc)}
           >
             <div className="relative w-full h-full group">
               <img className="h-full w-full object-cover" src={item.src} alt={item.alt} />
