@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 const projects = [
   {
@@ -42,6 +43,33 @@ const projects = [
 
 const categories = ["All", "Content Production", "Social Media", "Web Development", "Performance Marketing"];
 
+// 1. Container controls the sequence (Stagger)
+const gridContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Delay between each card
+    },
+  },
+};
+
+// 2. Card controls the individual look (From top to bottom)
+const cardVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: -50 // Starts 50px above the final position
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0, // Slides down to natural position
+    transition: {
+      duration: 0.7, // Slows down the animation
+      ease: "easeOut"
+    }
+  },
+};
+
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -52,16 +80,30 @@ const Portfolio = () => {
   return (
     <section id="portfolio" className="py-20 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        {/* Header Animation */}
+        <motion.div 
+           initial={{ opacity: 0, y: -20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ margin: "-50px" }}
+           transition={{ duration: 0.6 }}
+           className="text-center mb-16"
+        >
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Our Work
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Explore our portfolio of successful projects and transformative campaigns
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+        {/* Filter Buttons Animation */}
+        <motion.div 
+           initial={{ opacity: 0, y: -20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ margin: "-50px" }}
+           transition={{ duration: 0.6, delay: 0.2 }}
+           className="flex flex-wrap justify-center gap-4 mb-12"
+        >
           {categories.map((category) => (
             <button
               key={category}
@@ -75,14 +117,23 @@ const Portfolio = () => {
               {category}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {/* Project Grid */}
+        <motion.div 
+          // Key ensures animation restarts when category changes
+          key={activeCategory}
+          variants={gridContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ margin: "-50px", once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        >
           {filteredProjects.map((project, index) => (
-            <div 
-              key={index}
-              className="group relative overflow-hidden rounded-2xl bg-card shadow-soft hover:shadow-medium transition-all duration-500 animate-fade-in hover:-translate-y-2"
-              style={{ animationDelay: `${index * 0.1}s` }}
+            <motion.div 
+              key={`${project.title}-${index}`}
+              variants={cardVariants}
+              className="group relative overflow-hidden rounded-2xl bg-card shadow-soft hover:shadow-medium transition-all duration-500 hover:-translate-y-2"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img 
@@ -108,9 +159,9 @@ const Portfolio = () => {
                   {project.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
