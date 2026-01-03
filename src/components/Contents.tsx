@@ -147,8 +147,6 @@ const localVideos = [
   "/videos/6.mp4",
   "/videos/7.mp4",
   "/videos/8.mp4",
-  "/videos/9.mp4",
-  "/videos/10.mp4",
   "/videos/11.mp4",
   "/videos/12.mp4",
 ];
@@ -202,27 +200,27 @@ const Contents = () => {
             items={contentItems}
             loop={true}
             showNavigation={true}
-            // CHANGE 1: Pass false if video modal is open, otherwise true
             autoplay={!openVideoSrc} 
             onItemClick={(src) => setOpenVideoSrc(src)}
           />
         </div>
 
         <Dialog open={!!openVideoSrc} onOpenChange={(open) => !open && setOpenVideoSrc(null)}>
-          <DialogContent className="sm:max-w-[450px] p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center outline-none">
+          {/* CHANGED: Changed sm:max-w-[450px] to max-w-fit to allow wider videos */}
+          <DialogContent className=" p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center outline-none">
             <DialogTitle className="sr-only">Project Video</DialogTitle>
             <DialogDescription className="sr-only">Video Player Overlay</DialogDescription>
 
             {openVideoSrc && (
-              <div className="relative w-full aspect-[9/16] max-h-[85vh] flex items-center justify-center">
+              /* CHANGED: Removed aspect-[9/16] and fixed width/height constraints. 
+                 Added max viewport constraints and flex centering. */
+              <div className="relative  rounded-2xl overflow-hidden bg-black shadow-2xl z-10 flex items-center justify-center">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setOpenVideoSrc(null);
                   }}
                   className="
-                    hidden
-                    md:block
                     fixed 
                     top-5 
                     right-5 
@@ -245,17 +243,17 @@ const Contents = () => {
                   <X className="w-6 h-6" />
                 </button>
 
-                <div className="w-full h-full rounded-2xl overflow-hidden bg-black shadow-2xl relative z-10">
-                  <video
-                    src={openVideoSrc}
-                    className="w-full h-full object-cover"
-                    controls
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                  />
-                </div>
+                {/* CHANGED: Removed w-full h-full wrapper div */}
+                <video
+                  src={openVideoSrc}
+                  // CHANGED: Replaced 'w-full h-full object-cover' with intrinsic sizing classes
+                  className="w-auto h-auto max-w-full max-h-full object-contain"
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                />
               </div>
             )}
           </DialogContent>
@@ -338,11 +336,10 @@ const Carousel_003 = ({
         loop={loop}
         loopAdditionalSlides={5}
         watchSlidesProgress={true}
-        // CHANGE 2: Added detailed autoplay configuration
         autoplay={autoplay ? {
-          delay: 2000,                // 3 seconds delay
-          disableOnInteraction: false, // Resume after user manually swipes
-          pauseOnMouseEnter: true     // Pause when user hovers over the slide
+          delay: 2000,                
+          disableOnInteraction: false, 
+          pauseOnMouseEnter: true     
         } : false}
         coverflowEffect={{
           rotate: 30,
@@ -362,7 +359,14 @@ const Carousel_003 = ({
             onClick={() => item.videoSrc && onItemClick?.(item.videoSrc)}
           >
             <div className="relative w-full h-full group">
-              <img className="h-full w-full object-cover" src={item.src} alt={item.alt} />
+              <video
+                className="h-full w-full object-cover"
+                src={item.videoSrc || ""}
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
 
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                 <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full">
