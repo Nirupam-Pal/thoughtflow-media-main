@@ -73,7 +73,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Email</h4>
-                  <p className="text-muted-foreground">hello@thoughtflowmedia.com</p>
+                  <p className="text-muted-foreground">thoughtflowmedia@gmail.com</p>
                 </div>
               </div>
 
@@ -83,7 +83,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Phone</h4>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <p className="text-muted-foreground">+91 7005046836</p>
                 </div>
               </div>
 
@@ -93,7 +93,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Location</h4>
-                  <p className="text-muted-foreground">San Francisco, CA</p>
+                  <p className="text-muted-foreground">Agartala, Tripura</p>
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@ const ContactForm = () => {
                     <FormItem>
                       <FormLabel>Phone (Optional)</FormLabel>
                       <FormControl>
-                        <Input type="tel" placeholder="+1 (555) 123-4567" {...field} />
+                        <Input type="tel" placeholder="+91 7005046836" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
