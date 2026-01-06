@@ -74,6 +74,9 @@ const logos = [
   { name: "NPA", src: "/logos/23.png" },
   { name: "stylelinepols", src: "/logos/24.png" },
   { name: "Barat Gro Kids", src: "/logos/25.png" },
+  { name: "Smoke of Longtwrai", src: "/logos/26.jpeg" },
+  { name: "Adflow Productions", src: "/logos/27.jpeg" },
+  { name: "Swaad Korok ", src: "/logos/28.png" },
 ];
 
 const firstRow = logos.slice(0, logos.length / 2);
