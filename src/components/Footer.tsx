@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,9 +17,9 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: Linkedin, href: "#" },
-                { icon: Twitter, href: "#" },
-                { icon: Instagram, href: "#" }
+                { icon: Instagram, href: "https://www.instagram.com/thoughtflowmediaa/" },
+                { icon: Facebook, href: "https://www.facebook.com/profile.php?id=100094976734947#" },
+                { icon: Linkedin, href: "https://www.linkedin.com/company/thoughtflow-media/posts/?feedView=all" },
               ].map((social, index) => {
                 const Icon = social.icon;
                 return (
@@ -60,21 +60,21 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <a href="mailto:hello@thoughtflow.media" className="hover:text-foreground transition-colors">
-                  hello@thoughtflow.media
+                <a href="thoughtflowmedia@gmail.com" className="hover:text-foreground transition-colors">
+                  thoughtflowmedia@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <a href="tel:+1234567890" className="hover:text-foreground transition-colors">
-                  +1 (234) 567-890
+                  +91 7005046836
                 </a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <span>
-                  123 Creative Street<br />
-                  New York, NY 10001
+                  Agartala, West Tripura<br />
+                  Tripura, 
                 </span>
               </li>
             </ul>
