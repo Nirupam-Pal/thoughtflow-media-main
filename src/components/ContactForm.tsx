@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import emailjs from "@emailjs/browser"; // Import EmailJS
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,11 +10,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin } from "lucide-react";
 
+// 1. Updated Schema with Honeypot field (hidden from users)
 const contactSchema = z.object({
-  name: z.string().trim().nonempty({ message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
-  email: z.string().trim().email({ message: "Invalid email address" }).max(255, { message: "Email must be less than 255 characters" }),
-  phone: z.string().trim().max(20, { message: "Phone must be less than 20 characters" }).optional(),
-  message: z.string().trim().nonempty({ message: "Message is required" }).max(1000, { message: "Message must be less than 1000 characters" })
+  name: z.string().trim().nonempty({ message: "Name is required" }).max(100),
+  email: z.string().trim().email({ message: "Invalid email address" }).max(255),
+  phone: z.string().trim().nonempty({ message: "Phone number is required" }).max(20),
+  message: z.string().trim().nonempty({ message: "Message is required" }).max(1000),
+  gotcha: z.string().optional(), // Honeypot field for spam protection
 });
 
 const ContactForm = () => {
@@ -26,23 +29,60 @@ const ContactForm = () => {
       name: "",
       email: "",
       phone: "",
-      message: ""
+      message: "",
+      gotcha: "", // Default empty
     }
   });
 
   const onSubmit = async (values: z.infer<typeof contactSchema>) => {
+    // 2. Spam Prevention: Silent Reject
+    // If the hidden 'gotcha' field is filled, it's a bot. Fake success.
+    if (values.gotcha) {
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      form.reset();
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    
-    form.reset();
-    setIsSubmitting(false);
+    try {
+      // 3. Send Email via EmailJS
+      // Replace these placeholders with your actual IDs from EmailJS dashboard
+      const serviceID = import.meta.env.VITE_SERVICE_ID;
+      const templateID = import.meta.env.VITE_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+
+      await emailjs.send(
+        serviceID,
+        templateID,
+        {
+          from_name: values.name,
+          from_email: values.email,
+          phone: values.phone,
+          message: values.message,
+        },
+        publicKey
+      );
+      
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      console.error("Email Error:", error);
+      toast({
+        title: "Something went wrong.",
+        description: "Please try again later or email us directly.",
+        variant: "destructive", // Shows red error toast
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -58,6 +98,7 @@ const ContactForm = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Info Section - Unchanged */}
           <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             <div>
               <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">Get In Touch</h3>
@@ -99,9 +140,22 @@ const ContactForm = () => {
             </div>
           </div>
 
+          {/* Form Section */}
           <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-8 rounded-2xl shadow-soft border border-border">
+                
+                {/* 4. Honeypot Field (Hidden) */}
+                <FormField
+                  control={form.control}
+                  name="gotcha"
+                  render={({ field }) => (
+                    <FormItem className="hidden" aria-hidden="true">
+                      <Input {...field} tabIndex={-1} autoComplete="off" />
+                    </FormItem>
+                  )}
+                />
+
                 <FormField
                   control={form.control}
                   name="name"
