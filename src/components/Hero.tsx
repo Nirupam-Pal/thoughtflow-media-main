@@ -31,7 +31,7 @@ const Hero = () => {
             
           </div>
 
-          <div className="opacity-0 animate-fade-in-up gap-6 flex flex-col sm:flex-row justify-center items-center" style={{ animationDelay: "0.5s" }}>
+          <div className="opacity-0 animate-fade-in-up gap-6 flex flex-col sm:flex-row justify-center items-center">
             {/* <Button
               size="lg"
               className="group bg-primary text-primary-foreground hover:bg-primary/90 shadow-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
