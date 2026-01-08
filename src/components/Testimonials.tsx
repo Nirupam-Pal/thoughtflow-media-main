@@ -157,31 +157,33 @@ function AnimatedTestimonialsDemo() {
       src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
-  
+
   // CHANGE: Passed autoplay={true} to enable the timer
   return <AnimatedTestimonials testimonials={testimonials} autoplay={true} />;
 }
 
 
 const Testimonials = () => {
-    return (
-        <section id="clients" className="relative py-20 lg:py-32 bg-secondary/30 overflow-hidden">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16 animate-fade-in">
-                    <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                        What Our Clients Say
-                    </h2>
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                        See what our clients have to say about our services and the results they've achieved.
-                    </p>
-                </div>
+  return (
+    <section id="clients" className="relative py-20 lg:py-32 bg-secondary/30 overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            What Our Clients Say
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            See what our clients have to say about our services and the results they've achieved.
+          </p>
+        </div>
 
-                <div className="relative flex flex-col items-center justify-center w-full">
-                    <AnimatedTestimonialsDemo />
-                </div>
-            </div>
-        </section>
-    );
+        <div className="relative flex flex-col items-center justify-center w-full">
+          <AnimatedTestimonialsDemo />
+        </div>
+      </div>
+      <div className="absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
+      <div className="absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>
+    </section>
+  );
 };
 
 export default Testimonials;

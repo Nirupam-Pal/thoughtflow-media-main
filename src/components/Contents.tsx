@@ -129,6 +129,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 import "swiper/css";
+import "swiper/css/effect-cards";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -154,25 +155,80 @@ const localVideos = [
 // Base images
 const baseImages = [
   {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    src: "",
     alt: "Modern Office Interior"
   },
   {
-    src: "https://images.unsplash.com/photo-1765748292453-be1838360416?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "",
     alt: "Minimalist Architecture"
   },
   {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    src: "",
     alt: "Skyscraper Facade"
   },
   {
-    src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80",
+    src: "",
     alt: "Professional Workspace"
   },
   {
-    src: "https://images.unsplash.com/photo-1766506366613-22641a82be26?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "",
     alt: "Abstract Geometry"
   }
+];
+
+const images = [
+  {
+    src: "/posters/1.jpg",
+    alt: "Modern Office Interior"
+  },
+  {
+    src: "/posters/2.jpg",
+    alt: "Minimalist Architecture"
+  },
+  {
+    src: "/posters/3.jpg",
+    alt: "Skyscraper Facade"
+  },
+  {
+    src: "/posters/4.jpg",
+    alt: "Professional Workspace"
+  },
+  {
+    src: "/posters/5.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/6.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/7.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/8.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/9.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/10.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/11.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/12.jpg",
+    alt: "Abstract Geometry"
+  },
+  {
+    src: "/posters/13.jpg",
+    alt: "Abstract Geometry"
+  },
 ];
 
 const contentItems = localVideos.map((videoPath, index) => ({
@@ -195,12 +251,13 @@ const Contents = () => {
           </p>
         </div>
 
-        <div className="flex h-full w-full items-center justify-center overflow-hidden">
+        <div className="flex flex-col h-full w-full items-center justify-center overflow-hidden">
+          <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Video Production</h3>
           <Carousel_003
             items={contentItems}
             loop={true}
             showNavigation={true}
-            autoplay={!openVideoSrc} 
+            autoplay={!openVideoSrc}
             onItemClick={(src) => setOpenVideoSrc(src)}
           />
         </div>
@@ -258,6 +315,10 @@ const Contents = () => {
             )}
           </DialogContent>
         </Dialog>
+      </div>
+      <div className="flex flex-col h-full w-full items-center justify-center overflow-hidden mt-10 bg-[#f5f4f3]">
+        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Posters And Banner Designs</h3>
+        <Carousel_001 className="" images={images} showPagination loop autoplay />
       </div>
     </section>
   );
@@ -337,9 +398,9 @@ const Carousel_003 = ({
         loopAdditionalSlides={5}
         watchSlidesProgress={true}
         autoplay={autoplay ? {
-          delay: 2000,                
-          disableOnInteraction: false, 
-          pauseOnMouseEnter: true     
+          delay: 2000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
         } : false}
         coverflowEffect={{
           rotate: 30,
@@ -387,5 +448,105 @@ const Carousel_003 = ({
     </motion.div>
   );
 };
+
+const Carousel_001 = ({
+  images,
+  className,
+  showPagination = false,
+  showNavigation = false,
+  loop = true,
+  autoplay = false,
+  spaceBetween = 40,
+}: {
+  images: { src: string; alt: string }[];
+  className?: string;
+  showPagination?: boolean;
+  showNavigation?: boolean;
+  loop?: boolean;
+  autoplay?: boolean;
+  spaceBetween?: number;
+}) => {
+  const css = `
+  .Carousal_001 {
+    padding-bottom: 50px !important;
+  }
+  `;
+  return (
+    <motion.div
+      initial={{ opacity: 0, translateY: 20 }}
+      animate={{ opacity: 1, translateY: 0 }}
+      transition={{
+        duration: 0.3,
+        delay: 0.5,
+      }}
+      className={cn("w-full max-w-5xl relative", className)}
+    >
+      <style>{css}</style>
+
+      <Swiper
+        spaceBetween={spaceBetween}
+        autoplay={
+          autoplay
+            ? {
+                delay: 1500,
+                disableOnInteraction: false,
+              }
+            : false
+        }
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        loop={loop}
+        slidesPerView={2.43}
+        coverflowEffect={{
+          rotate: 0,
+          slideShadows: false,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5,
+        }}
+        pagination={
+          showPagination
+            ? {
+                clickable: true,
+              }
+            : false
+        }
+        navigation={
+          showNavigation
+            ? {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }
+            : false
+        }
+        className="Carousal_001"
+        modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
+      >
+        {images.map((image, index) => (
+          <SwiperSlide key={index} className="!h-[520px] w-full border">
+            <img
+              className="h-full w-full object-cover"
+              src={image.src}
+              alt={image.alt}
+            />
+          </SwiperSlide>
+        ))}
+        {showNavigation && (
+          <div>
+            <div className="swiper-button-next after:hidden">
+              <ChevronRightIcon className="h-6 w-6 text-white" />
+            </div>
+            <div className="swiper-button-prev after:hidden">
+              <ChevronLeftIcon className="h-6 w-6 text-white" />
+            </div>
+          </div>
+        )}
+      </Swiper>
+    </motion.div>
+  );
+};
+
+export { Carousel_001 };
 
 export default Contents;

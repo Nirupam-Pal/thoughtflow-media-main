@@ -7,8 +7,8 @@ import { MotionButton } from "./ui/motionButton";
 const navLinks = [
   { name: "Services", href: "#services" },
   { name: "Portfolio", href: "#portfolio" },
-  { name: "Team", href: "#team" },
-  { name: "Testimonials", href: "#testimonials" },
+  { name: "Contents", href: "#team" },
+  { name: "Clients", href: "#testimonials" },
   { name: "Contact", href: "#contact" }
 ];
 
