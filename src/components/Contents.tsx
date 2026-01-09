@@ -148,6 +148,8 @@ const localVideos = [
   "/videos/6.mp4",
   "/videos/7.mp4",
   "/videos/8.mp4",
+  "/videos/9.mp4",
+  "/videos/10.mp4",
   "/videos/11.mp4",
   "/videos/12.mp4",
 ];
