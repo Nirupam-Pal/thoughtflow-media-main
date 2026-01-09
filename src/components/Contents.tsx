@@ -497,7 +497,21 @@ const Carousel_001 = ({
         grabCursor={true}
         centeredSlides={true}
         loop={loop}
-        slidesPerView={2.43}
+        slidesPerView={1.2}
+        breakpoints={{
+          640: {
+            slidesPerView: 1.8,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 2.5,
+            spaceBetween: 40,
+          },
+        }}
         coverflowEffect={{
           rotate: 0,
           slideShadows: false,
@@ -524,9 +538,9 @@ const Carousel_001 = ({
         modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className="!h-[520px] w-full border">
+          <SwiperSlide key={index} className="h-[500px] sm:h-[500px] md:h-[500px] w-full">
             <img
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               src={image.src}
               alt={image.alt}
             />
