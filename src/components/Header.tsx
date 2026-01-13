@@ -15,7 +15,7 @@ const navLinks = [
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hovered, setHovered] = useState(null)
+  const [hovered, setHovered] = useState<number | null>(null);
   const { scrollY } = useScroll();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -94,12 +94,13 @@ const Header = () => {
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border shrink-0">
-                <span className="font-display text-lg sm:text-xl font-bold">
-                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                    Thoughtflow
-                  </span>
-                  <span className="text-foreground"> Media</span>
-                </span>
+                <a href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <img 
+                    src="/header_logo.png" 
+                    alt="Thoughtflow Media" 
+                    className="h-14 w-auto object-contain"
+                  />
+                </a>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 hover:bg-accent rounded-lg transition-colors duration-300"
@@ -189,12 +190,13 @@ const Header = () => {
             {/* Logo */}
             <a
               href="/"
-              className="font-display text-lg sm:text-xl md:text-2xl font-bold tracking-tight hover:scale-105 transition-transform duration-300"
+              className="block hover:scale-105 transition-transform duration-300"
             >
-              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Thoughtflow
-              </span>
-              <span className="text-foreground"> Media</span>
+              <img 
+                src="/header_logo.png" 
+                alt="Thoughtflow Media" 
+                className="h-12 w-auto object-contain m:h-14 "
+              />
             </a>
 
             {/* Desktop Navigation */}
