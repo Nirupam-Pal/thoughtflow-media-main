@@ -1,6 +1,6 @@
 "use client";
 
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowLeft, IconArrowRight, IconStarFilled } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,7 @@ type Testimonial = {
   name: string;
   designation: string;
   src: string;
+  rating: number; // Added rating field
 };
 
 export const AnimatedTestimonials = ({
@@ -32,14 +33,12 @@ export const AnimatedTestimonials = ({
     return index === active;
   };
 
-  // CHANGE: Added 'active' to dependencies to reset timer on interaction
-  // CHANGE: Set interval to 4000ms (4 seconds)
   useEffect(() => {
     if (autoplay) {
       const interval = setInterval(handleNext, 4000);
       return () => clearInterval(interval);
     }
-  }, [autoplay, active]); // <--- 'active' dependency ensures timer resets on manual click
+  }, [autoplay, active]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
@@ -146,6 +145,21 @@ export const AnimatedTestimonials = ({
                 </motion.span>
               ))}
             </motion.p>
+            
+            {/* Added Star Rating Section */}
+            <div className="flex gap-1 mt-4">
+              {[...Array(5)].map((_, i) => (
+                <IconStarFilled
+                  key={i}
+                  className={`w-5 h-5 ${
+                    i < testimonials[active].rating
+                      ? "text-yellow-500"
+                      : "text-gray-300 dark:text-gray-600"
+                  }`}
+                />
+              ))}
+            </div>
+
           </motion.div>
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
