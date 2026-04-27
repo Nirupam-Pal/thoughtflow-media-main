@@ -15,18 +15,18 @@ const Hero = () => {
           <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
               <div className="bg-gradient-to-r from-primary via-primary/35 to-primary bg-clip-text text-transparent">
-                Creative AI-Powered
+                AI-Powered Marketing Agency 
               </div>
               <span className="block mt-2 ">
-                Marketing <span><HeroText /> </span>
+                In Agartala, India 
+                {/* <span><HeroText /> </span> */}
               </span>
             </h1>
           </div>
 
           <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-              Transform your brand with premium content creation, performance marketing,
-              and cutting-edge web development. Where creativity meets results.
+              Thoughtflow Media is an <span className="highlight-text bg-primary/20 text-primary font-semibold px-2 rounded-md">AI-powered creative marketing agency</span> based in Agartala, Tripura. We've delivered <span className="highlight-text bg-primary/20 text-primary font-semibold px-2 rounded-md">1,000+ projects</span> for 50+ brands — from UGC videos and Meta Ad campaigns to custom websites — helping businesses across Northeast India grow faster.
             </p>
             
           </div>
@@ -54,16 +54,18 @@ const Hero = () => {
           <div className="opacity-0 animate-fade-in mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto" style={{ animationDelay: "0.7s" }}>
             {[
               { number: "1000+", label: "Projects Delivered" },
-              { number: "98%", label: "Client Satisfaction" },
-              { number: "20+", label: "Team Members" },
-              { number: "15+ lacs", label: "Ads Spend Experience" },
+              { number: "98%", label: "Client Satisfaction Rate" },
+              { number: "20+", label: "Creative Specialists" },
+              { number: "15+ lakhs", label: "Ads Spend Experience" },
             ].map((stat, index) => {
               const numericValue = parseInt(stat.number.replace(/[^\d]/g, ''));
               const suffix = stat.number.replace(/\d/g, '');
+              const prefix = index === 3 ? "₹" : "";
               
               return (
-                <div key={index} className="text-center border border-slate-400 rounded-xl px-2 py-3">
+                <div key={index} className="text-center border border-slate-400 rounded-xl px-2 py-3 flex flex-col items-center justify-center min-h-[100px]">
                   <div className="font-display  text-3xl md:text-4xl font-bold text-primary mb-1">
+                    {prefix}
                     <CountUp
                       end={numericValue}
                       duration={3.5}
