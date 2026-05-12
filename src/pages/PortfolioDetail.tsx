@@ -1,0 +1,267 @@
+import { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ChevronLeft, ChevronRight, X } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { getPortfolioProjectBySlug, type PortfolioGalleryItem } from "@/data/portfolioData";
+import { cn } from "@/lib/utils";
+
+const pageVariants = {
+  initial: { opacity: 0, y: 12 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const galleryItemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 0.08 * i,
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const PortfolioDetail = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const project = getPortfolioProjectBySlug(slug);
+
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (!project) {
+      navigate("/404", { replace: true });
+    }
+  }, [project, navigate]);
+
+  const gallery = project?.gallery ?? [];
+  const activeItem: PortfolioGalleryItem | undefined = gallery[activeIndex];
+
+  const openLightbox = useCallback((index: number) => {
+    setActiveIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setActiveIndex((i) => (i <= 0 ? gallery.length - 1 : i - 1));
+  }, [gallery.length]);
+
+  const goNext = useCallback(() => {
+    setActiveIndex((i) => (i >= gallery.length - 1 ? 0 : i + 1));
+  }, [gallery.length]);
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxOpen, goPrev, goNext]);
+
+  if (!project) {
+    return null;
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
+      <main className="flex-1 pt-28 md:pt-32 pb-20">
+        <motion.div
+          className="container mx-auto px-4 max-w-6xl"
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.35 }}
+          >
+            <Button
+              variant="ghost"
+              className="group -ml-2 mb-8 rounded-full text-muted-foreground hover:text-foreground"
+              asChild
+            >
+              <Link to="/#portfolio">
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+                Back to Portfolio
+              </Link>
+            </Button>
+          </motion.div>
+
+          <header className="mb-12 md:mb-16">
+            <motion.span
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05, duration: 0.4 }}
+              className="inline-block px-3 py-1 bg-secondary rounded-full text-xs font-medium text-secondary-foreground mb-4"
+            >
+              {project.category}
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+            >
+              {project.title}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.45 }}
+              className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed"
+            >
+              {project.description}
+            </motion.p>
+          </header>
+
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.22, duration: 0.4 }}
+            aria-label="Project gallery"
+          >
+            <h2 className="sr-only">Gallery</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              {gallery.map((item, index) => (
+                <motion.button
+                  key={`${item.src}-${index}`}
+                  type="button"
+                  custom={index}
+                  variants={galleryItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  onClick={() => openLightbox(index)}
+                  className={cn(
+                    "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
+                    "shadow-soft ring-1 ring-border/60 transition-all duration-500",
+                    "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    index === 0 && "sm:col-span-2 lg:col-span-2 lg:row-span-1 lg:aspect-[21/9]",
+                  )}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    loading={index < 3 ? "eager" : "lazy"}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-xs font-medium text-primary-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2">
+                    {item.alt}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
+          </motion.section>
+        </motion.div>
+      </main>
+      <Footer />
+
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent
+          className={cn(
+            "max-w-[min(96vw,1200px)] w-full border-0 bg-transparent p-0 shadow-none",
+            "[&>button]:hidden",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out",
+            "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+            "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+          )}
+          onPointerDownOutside={() => setLightboxOpen(false)}
+        >
+          <DialogTitle className="sr-only">
+            {activeItem ? `${project.title} — ${activeItem.alt}` : "Image preview"}
+          </DialogTitle>
+          <div className="relative rounded-2xl overflow-hidden bg-primary/95 ring-1 ring-white/10 shadow-2xl">
+            <button
+              type="button"
+              className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-foreground shadow-soft backdrop-blur-sm transition hover:bg-background"
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close preview"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <AnimatePresence mode="wait">
+              {activeItem && (
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, scale: 0.985 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.985 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative"
+                >
+                  <img
+                    src={activeItem.src}
+                    alt={activeItem.alt}
+                    className="max-h-[min(78vh,820px)] w-full object-contain bg-black/20"
+                  />
+                  <p className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-6 pb-5 pt-12 text-sm text-white/95">
+                    {activeItem.alt}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {gallery.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={goPrev}
+                  className="absolute left-2 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-soft backdrop-blur-sm transition hover:bg-background md:left-4"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={goNext}
+                  className="absolute right-2 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-soft backdrop-blur-sm transition hover:bg-background md:right-4"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+                <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-1.5">
+                  {gallery.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      aria-label={`Go to image ${i + 1}`}
+                      onClick={() => setActiveIndex(i)}
+                      className={cn(
+                        "h-1.5 rounded-full transition-all duration-300",
+                        i === activeIndex ? "w-6 bg-primary-foreground" : "w-1.5 bg-primary-foreground/35 hover:bg-primary-foreground/60",
+                      )}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};
+
+export default PortfolioDetail;

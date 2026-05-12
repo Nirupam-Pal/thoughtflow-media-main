@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
+            <h1 className="font-display text-5xl md:text-7xl lg:text-7xl font-bold mb-6 tracking-tight">
               <div className="bg-gradient-to-r from-primary via-primary/35 to-primary bg-clip-text text-transparent">
                 AI-Powered Marketing Agency 
               </div>

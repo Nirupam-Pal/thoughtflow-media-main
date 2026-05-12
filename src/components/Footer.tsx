@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
@@ -47,9 +48,9 @@ const Footer = () => {
                 "Lead Generation"
               ].map((item, index) => (
                 <li key={index}>
-                  <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to="/#services" className="text-muted-foreground hover:text-foreground transition-colors">
                     {item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

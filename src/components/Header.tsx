@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { MotionButton } from "./ui/motionButton";
 
@@ -13,6 +13,8 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
@@ -20,6 +22,7 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const [scrolled, setScrolled] = useState(false);
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const checkMobile = () => {
@@ -48,13 +51,21 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = useCallback(
+    (href: string) => {
+      if (isHome) {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          setIsMobileMenuOpen(false);
+        }
+        return;
+      }
+      navigate(`/${href}`);
       setIsMobileMenuOpen(false);
-    }
-  };
+    },
+    [isHome, navigate],
+  );
 
   return (
     <>
@@ -94,13 +105,13 @@ const Header = () => {
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border shrink-0">
-                <a href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
                   <img 
                     src="/header_logo.png" 
                     alt="Thoughtflow Media" 
                     className="h-14 w-auto object-contain"
                   />
-                </a>
+                </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 hover:bg-accent rounded-lg transition-colors duration-300"
@@ -188,8 +199,8 @@ const Header = () => {
         <nav className="container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a
-              href="/"
+            <Link
+              to="/"
               className="block hover:scale-105 transition-transform duration-300"
             >
               <img 
@@ -197,7 +208,7 @@ const Header = () => {
                 alt="Thoughtflow Media" 
                 className="h-12 w-auto object-contain m:h-14 "
               />
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
