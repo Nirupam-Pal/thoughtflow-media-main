@@ -194,7 +194,7 @@ const Header = () => {
           damping: 60,
           mass: 1
         }}
-        className={`fixed top-0 z-50 transition-all ${isScrolled ? "backdrop-blur-lg" : ""}`}
+        className={`fixed top-0 z-50 max-w-[100vw] overflow-x-clip transition-all ${isScrolled ? "backdrop-blur-lg" : ""}`}
       >
         <nav className="container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
@@ -206,7 +206,7 @@ const Header = () => {
               <img 
                 src="/header_logo.png" 
                 alt="Thoughtflow Media" 
-                className="h-12 w-auto object-contain m:h-14 "
+                className="h-12 w-auto max-h-12 object-contain sm:h-14 sm:max-h-14"
               />
             </Link>
 

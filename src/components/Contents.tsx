@@ -242,8 +242,8 @@ const Contents = () => {
   const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
 
   return (
-    <section id="team" className="py-20 lg:py-32 bg-[#f5f4f3]">
-      <div className="container mx-auto px-4">
+    <section id="team" className="py-16 sm:py-20 lg:py-32 bg-[#f5f4f3] overflow-x-clip">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <div className="text-center mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Take a look of our contents
@@ -266,14 +266,14 @@ const Contents = () => {
 
         <Dialog open={!!openVideoSrc} onOpenChange={(open) => !open && setOpenVideoSrc(null)}>
           {/* CHANGED: Changed sm:max-w-[450px] to max-w-fit to allow wider videos */}
-          <DialogContent className=" p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center outline-none">
+          <DialogContent className="max-w-[calc(100vw-1rem)] sm:max-w-[90vw] p-2 sm:p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center outline-none">
             <DialogTitle className="sr-only">Project Video</DialogTitle>
             <DialogDescription className="sr-only">Video Player Overlay</DialogDescription>
 
             {openVideoSrc && (
               /* CHANGED: Removed aspect-[9/16] and fixed width/height constraints. 
                  Added max viewport constraints and flex centering. */
-              <div className="relative  rounded-2xl overflow-hidden bg-black shadow-2xl z-10 flex items-center justify-center">
+              <div className="relative max-w-full rounded-2xl overflow-hidden bg-black shadow-2xl z-10 flex items-center justify-center">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -281,10 +281,13 @@ const Contents = () => {
                   }}
                   className="
                     fixed 
-                    top-5 
-                    right-5 
+                    top-3
+                    right-3
+                    sm:top-5 
+                    sm:right-5 
                     z-[100] 
-                    p-3 
+                    p-2.5
+                    sm:p-3 
                     bg-black/60 
                     hover:bg-black/80 
                     backdrop-blur-md 
@@ -305,8 +308,7 @@ const Contents = () => {
                 {/* CHANGED: Removed w-full h-full wrapper div */}
                 <video
                   src={openVideoSrc}
-                  // CHANGED: Replaced 'w-full h-full object-cover' with intrinsic sizing classes
-                  className="w-auto h-auto max-w-full max-h-full object-contain"
+                  className="w-full max-w-full h-auto max-h-[min(85dvh,85vh)] object-contain"
                   controls
                   autoPlay
                   muted
@@ -318,7 +320,7 @@ const Contents = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="flex flex-col h-full w-full items-center justify-center overflow-hidden mt-10 bg-[#f5f4f3]">
+      <div className="flex flex-col h-full w-full min-w-0 items-center justify-center overflow-x-clip overflow-y-hidden mt-8 sm:mt-10 bg-[#f5f4f3] px-1">
         <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Posters And Banner Designs</h3>
         <Carousel_001 className="" images={images} showPagination loop autoplay />
       </div>
@@ -348,17 +350,42 @@ const Carousel_003 = ({
   const css = `
   .Carousal_003 {
     width: 100%;
-    height: 450px;
-    padding-bottom: 50px !important;
+    height: min(52vh, 420px);
+    padding-bottom: 2.5rem !important;
+  }
+
+  @media (min-width: 640px) {
+    .Carousal_003 {
+      height: min(48vh, 440px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .Carousal_003 {
+      height: 450px;
+    }
   }
   
   .Carousal_003 .swiper-slide {
     background-position: center;
     background-size: cover;
-    width: 300px;
+    width: min(88vw, 300px);
+    max-width: 300px;
     border-radius: 1.5rem;
     overflow: hidden;
     cursor: pointer;
+  }
+
+  @media (min-width: 640px) {
+    .Carousal_003 .swiper-slide {
+      width: min(72vw, 300px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .Carousal_003 .swiper-slide {
+      width: 300px;
+    }
   }
 
   .swiper-button-next, .swiper-button-prev {
@@ -386,7 +413,7 @@ const Carousel_003 = ({
       initial={{ opacity: 0, translateY: 20 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ duration: 0.3, delay: 0.5 }}
-      className={cn("relative w-full max-w-5xl px-5", className)}
+      className={cn("relative w-full max-w-5xl min-w-0 px-3 sm:px-5", className)}
     >
       <style>{css}</style>
 
@@ -481,7 +508,7 @@ const Carousel_001 = ({
         duration: 0.3,
         delay: 0.5,
       }}
-      className={cn("w-full max-w-5xl relative", className)}
+      className={cn("w-full max-w-5xl min-w-0 relative px-1 sm:px-0", className)}
     >
       <style>{css}</style>
 
@@ -540,9 +567,12 @@ const Carousel_001 = ({
         modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className="h-[500px] sm:h-[500px] md:h-[500px] w-full">
+          <SwiperSlide
+            key={index}
+            className="h-[min(52vh,360px)] w-full sm:h-[min(50vh,420px)] md:h-[min(55vh,480px)] lg:h-[500px]"
+          >
             <img
-              className="h-full w-full object-contain"
+              className="h-full w-full max-h-full object-contain"
               src={image.src}
               alt={image.alt}
             />

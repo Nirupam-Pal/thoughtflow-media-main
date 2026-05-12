@@ -57,23 +57,19 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "kern" 1, "liga" 1;
-  }
-
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
+    overflow-x: clip;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+    overflow-x: clip;
+    min-width: 0;
+  }
+
+  #root {
+    min-width: 0;
   }
 }

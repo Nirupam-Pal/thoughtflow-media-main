@@ -1,23 +1,20 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import HeroText from "./ui/HeroText";
 import { CtaButton } from "./ui/cta-button";
 import CountUp from "react-countup";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-subtle pt-16 sm:pt-20 md:pt-24">
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-x-clip overflow-y-hidden bg-gradient-subtle pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(38_45%_90%),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(38_35%_92%),transparent_50%)]" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-7xl font-bold mb-6 tracking-tight">
-              <div className="bg-gradient-to-r from-primary via-primary/35 to-primary bg-clip-text text-transparent">
+            <h1 className="font-display text-[clamp(1.75rem,5vw+1rem,4.5rem)] md:text-7xl lg:text-7xl font-bold mb-5 sm:mb-6 tracking-tight px-0.5">
+              <div className="bg-gradient-to-r from-primary via-primary/35 to-primary bg-clip-text text-transparent break-words">
                 AI-Powered Marketing Agency 
               </div>
-              <span className="block mt-2 ">
+              <span className="block mt-2 text-foreground">
                 In Agartala, India 
                 {/* <span><HeroText /> </span> */}
               </span>
@@ -25,7 +22,7 @@ const Hero = () => {
           </div>
 
           <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-            <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 sm:mb-12 max-w-3xl mx-auto leading-relaxed break-words px-0.5">
               Thoughtflow Media is an <span className="highlight-text bg-primary/20 text-primary font-semibold px-2 rounded-md">AI-powered creative marketing agency</span> based in Agartala, Tripura. We've delivered <span className="highlight-text bg-primary/20 text-primary font-semibold px-2 rounded-md">1,000+ projects</span> for 50+ brands — from UGC videos and Meta Ad campaigns to custom websites — helping businesses across Northeast India grow faster.
             </p>
             
@@ -51,7 +48,10 @@ const Hero = () => {
             </Button> */}
           </div>
 
-          <div className="opacity-0 animate-fade-in mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto" style={{ animationDelay: "0.7s" }}>
+          <div
+            className="opacity-0 animate-fade-in mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 md:gap-8 max-w-3xl mx-auto min-w-0"
+            style={{ animationDelay: "0.7s" }}
+          >
             {[
               { number: "1000+", label: "Projects Delivered" },
               { number: "98%", label: "Client Satisfaction Rate" },
@@ -63,8 +63,11 @@ const Hero = () => {
               const prefix = index === 3 ? "₹" : "";
               
               return (
-                <div key={index} className="text-center border border-slate-400 rounded-xl px-2 py-3 flex flex-col items-center justify-center min-h-[100px]">
-                  <div className="font-display  text-3xl md:text-4xl font-bold text-primary mb-1">
+                <div
+                  key={index}
+                  className="text-center border border-slate-400 rounded-xl px-1.5 py-2.5 sm:px-2 sm:py-3 flex flex-col items-center justify-center min-h-[92px] sm:min-h-[100px] min-w-0"
+                >
+                  <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-1 tabular-nums">
                     {prefix}
                     <CountUp
                       end={numericValue}
@@ -75,7 +78,7 @@ const Hero = () => {
                       scrollSpyOnce
                     />
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-[11px] leading-snug sm:text-sm text-muted-foreground break-words hyphens-auto px-0.5">
                     {stat.label}
                   </div>
                 </div>

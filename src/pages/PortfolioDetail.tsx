@@ -81,11 +81,11 @@ const PortfolioDetail = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background min-w-0 w-full max-w-[100vw] overflow-x-clip">
       <Header />
-      <main className="flex-1 pt-28 md:pt-32 pb-20">
+      <main className="flex-1 pt-24 pb-16 sm:pt-28 md:pt-32 sm:pb-20 min-w-0">
         <motion.div
-          className="container mx-auto px-4 max-w-6xl"
+          className="container mx-auto min-w-0 px-4 sm:px-6 max-w-6xl"
           variants={pageVariants}
           initial="initial"
           animate="animate"
@@ -107,7 +107,7 @@ const PortfolioDetail = () => {
             </Button>
           </motion.div>
 
-          <header className="mb-12 md:mb-16">
+          <header className="mb-10 sm:mb-12 md:mb-16 min-w-0">
             <motion.span
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ const PortfolioDetail = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 break-words hyphens-auto"
             >
               {project.title}
             </motion.h1>
@@ -156,7 +156,8 @@ const PortfolioDetail = () => {
                     "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
                     "shadow-soft ring-1 ring-border/60 transition-all duration-500",
                     "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    index === 0 && "sm:col-span-2 lg:col-span-2 lg:row-span-1 lg:aspect-[21/9]",
+                    index === 0 &&
+                      "sm:col-span-2 lg:col-span-2 aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]",
                   )}
                 >
                   <img
@@ -180,7 +181,7 @@ const PortfolioDetail = () => {
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent
           className={cn(
-            "max-w-[min(96vw,1200px)] w-full border-0 bg-transparent p-0 shadow-none",
+            "max-w-[min(calc(100vw-1rem),1200px)] w-[calc(100vw-1rem)] sm:w-full max-h-[90dvh] border-0 bg-transparent p-0 shadow-none",
             "[&>button]:hidden",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
@@ -214,9 +215,9 @@ const PortfolioDetail = () => {
                   <img
                     src={activeItem.src}
                     alt={activeItem.alt}
-                    className="max-h-[min(78vh,820px)] w-full object-contain bg-black/20"
+                    className="max-h-[min(70dvh,78vh,820px)] w-full max-w-full object-contain bg-black/20"
                   />
-                  <p className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-6 pb-5 pt-12 text-sm text-white/95">
+                  <p className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 sm:px-6 pb-4 sm:pb-5 pt-10 sm:pt-12 text-xs sm:text-sm text-white/95 line-clamp-3 sm:line-clamp-none">
                     {activeItem.alt}
                   </p>
                 </motion.div>

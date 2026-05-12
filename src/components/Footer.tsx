@@ -5,9 +5,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-subtle border-t border-border/50">
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
+    <footer className="bg-gradient-subtle border-t border-border/50 overflow-x-clip">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6 py-12 sm:py-16">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-10 sm:gap-12 mb-10 sm:mb-12">
           <div className="md:col-span-2">
             <h3 className="font-display text-2xl font-bold mb-4">
               Thoughtflow Media
@@ -61,7 +61,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <a href="thoughtflowmedia@gmail.com" className="hover:text-foreground transition-colors">
+                <a href="mailto:thoughtflowmedia@gmail.com" className="hover:text-foreground transition-colors break-all sm:break-words">
                   thoughtflowmedia@gmail.com
                 </a>
               </li>
@@ -82,9 +82,9 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground text-center md:text-left">
           <p>© {currentYear} Thoughtflow Media. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center md:justify-end gap-4 sm:gap-6">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
           </div>

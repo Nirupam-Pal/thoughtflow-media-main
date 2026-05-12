@@ -54,7 +54,7 @@ const Skiper30 = () => {
     }, []);
 
     return (
-        <main className="w-full bg-[#eee] text-black">
+        <main className="w-full max-w-[100vw] min-w-0 bg-[#eee] text-black overflow-x-clip">
             {/* <div className="font-geist flex items-center justify-center gap-2">
                 <div className="absolute left-1/2 top-[10%] grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-black">
                     <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-white after:to-black after:content-['']">
@@ -65,7 +65,7 @@ const Skiper30 = () => {
 
             <div
                 ref={gallery}
-                className="relative box-border flex h-[175vh] gap-[2vw] overflow-hidden bg-white p-[2vw]"
+                className="relative box-border grid grid-cols-2 lg:grid-cols-4 h-[125vh] sm:h-[150vh] lg:h-[175vh] gap-2 p-2 sm:gap-[2vw] sm:p-[2vw] overflow-hidden bg-white"
             >
                 <Column images={[images[0], images[1], images[2]]} y={y} />
                 <Column images={[images[3], images[4], images[5]]} y={y2} />
@@ -91,15 +91,15 @@ type ColumnProps = {
 const Column = ({ images, y }: ColumnProps) => {
     return (
         <motion.div
-            className="relative -top-[45%] flex h-full w-1/4 min-w-[250px] flex-col gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%]"
+            className="relative -top-[45%] flex h-full w-full min-w-0 flex-col gap-2 sm:gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%]"
             style={{ y }}
         >
             {images.map((src, i) => (
-                <div key={i} className="relative h-full w-full overflow-hidden">
+                <div key={i} className="relative min-h-[100px] flex-1 w-full overflow-hidden rounded-lg sm:rounded-none">
                     <img
                         src={`${src}`}
                         alt="image"
-                        className="pointer-events-none object-cover"
+                        className="pointer-events-none h-full w-full min-h-[100px] object-cover"
                     />
                 </div>
             ))}

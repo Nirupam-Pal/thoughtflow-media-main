@@ -66,10 +66,10 @@ const itemVariants: Variants = {
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-24 md:py-32 bg-gradient-premium relative overflow-hidden">
+    <section className="py-20 md:py-28 lg:py-32 bg-gradient-premium relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(38_25%_88%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(38_25%_88%)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6 relative z-10">
         {/* Header Animation */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

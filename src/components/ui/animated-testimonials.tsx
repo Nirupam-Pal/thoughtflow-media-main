@@ -45,10 +45,10 @@ export const AnimatedTestimonials = ({
   };
 
   return (
-    <div className="mx-auto max-w-sm px-4 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-      <div className="relative grid grid-cols-1 gap-10 md:gap-20 md:grid-cols-2">
-        <div>
-          <div className="relative h-80 w-full">
+    <div className="mx-auto w-full max-w-full min-w-0 px-3 font-sans antialiased sm:px-4 md:max-w-4xl md:px-8 lg:px-12">
+      <div className="relative grid min-w-0 grid-cols-1 gap-8 sm:gap-10 md:gap-20 md:grid-cols-2">
+        <div className="min-w-0">
+          <div className="relative mx-auto h-64 w-full max-w-sm sm:h-72 md:h-80 md:max-w-none">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -94,7 +94,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between md:py-4">
+        <div className="flex min-w-0 flex-col justify-between md:py-4">
           <motion.div
             key={active}
             initial={{
@@ -114,13 +114,13 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-black dark:text-white">
+            <h3 className="text-xl font-bold text-black break-words sm:text-2xl dark:text-white">
               {testimonials[active].name}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-neutral-500">
+            <p className="text-sm text-gray-500 break-words dark:text-neutral-500">
               {testimonials[active].designation}
             </p>
-            <motion.p className="mt-2 md:mt-8 text-lg text-gray-500 dark:text-neutral-300">
+            <motion.p className="mt-2 text-base leading-relaxed text-gray-500 break-words sm:mt-8 sm:text-lg dark:text-neutral-300">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -139,7 +139,7 @@ export const AnimatedTestimonials = ({
                     ease: "easeInOut",
                     delay: 0.02 * index,
                   }}
-                  className="inline-block"
+                  className="inline-block max-w-full break-words"
                 >
                   {word}&nbsp;
                 </motion.span>
@@ -161,16 +161,20 @@ export const AnimatedTestimonials = ({
             </div>
 
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="flex flex-wrap gap-3 pt-8 sm:gap-4 md:pt-0">
             <button
+              type="button"
               onClick={handlePrev}
-              className="group/button flex h-7 w-7 items-center border border-slate-400 justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="group/button flex h-10 w-10 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full border border-slate-400 bg-gray-100 dark:bg-neutral-800"
+              aria-label="Previous testimonial"
             >
               <IconArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
             </button>
             <button
+              type="button"
               onClick={handleNext}
-              className="group/button flex h-7 w-7 items-center border border-slate-400 justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="group/button flex h-10 w-10 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full border border-slate-400 bg-gray-100 dark:bg-neutral-800"
+              aria-label="Next testimonial"
             >
               <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
             </button>

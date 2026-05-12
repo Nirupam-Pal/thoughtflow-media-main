@@ -165,8 +165,8 @@ const LogoCard = ({ src, name }) => {
 
 const Clients = () => {
   return (
-    <section id="testimonials" className="relative py-20 lg:py-32 bg-secondary/30 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="testimonials" className="relative py-16 sm:py-20 lg:py-32 bg-secondary/30 overflow-x-clip overflow-hidden">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Trusted by 50+ Brands
@@ -176,7 +176,7 @@ const Clients = () => {
           </p>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center w-full mt-12 overflow-hidden">
+        <div className="relative flex flex-col items-center justify-center w-full min-w-0 mt-8 sm:mt-12 overflow-hidden">
           <div className="relative w-full [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]">
             <Marquee pauseOnHover className="[--duration:30s] [--gap:.5rem] sm:[--gap:.75rem] md:[--gap:1rem]">
               {firstRow.map((logo) => (

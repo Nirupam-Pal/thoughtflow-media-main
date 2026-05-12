@@ -29,7 +29,7 @@ const Index = () => {
   }, [location.hash, location.pathname]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen min-w-0 w-full max-w-[100vw] overflow-x-clip">
       <Header />
       <Hero />
       <Services />

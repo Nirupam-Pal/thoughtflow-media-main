@@ -66,8 +66,8 @@ const cardVariants: Variants = {
 
 const Services = () => {
   return (
-    <section className="py-24 md:py-32 bg-background relative" id="services">
-      <div className="container mx-auto px-6">
+    <section className="py-20 md:py-28 lg:py-32 bg-background relative" id="services">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ const Services = () => {
             return (
               <motion.div key={index} variants={cardVariants} className="h-full">
                 <Card 
-                  className="relative group p-8 border-2 border-border/50 hover:border-accent transition-all duration-500 hover:shadow-medium bg-card hover:bg-gradient-subtle cursor-pointer overflow-hidden h-full hover:-translate-y-2"
+                  className="relative group p-6 sm:p-8 border-2 border-border/50 hover:border-accent transition-all duration-500 hover:shadow-medium bg-card hover:bg-gradient-subtle cursor-pointer overflow-hidden h-full hover:-translate-y-2"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   

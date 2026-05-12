@@ -43,8 +43,8 @@ const Portfolio = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="portfolio" className="py-20 lg:py-32 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="portfolio" className="py-16 sm:py-20 lg:py-32 bg-background overflow-x-clip">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6">
         {/* Header Animation */}
         <motion.div 
            initial={{ opacity: 0, y: -20 }}
@@ -67,13 +67,13 @@ const Portfolio = () => {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ margin: "-50px" }}
            transition={{ duration: 0.6, delay: 0.2 }}
-           className="flex flex-wrap justify-center gap-4 mb-12"
+           className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-10 sm:mb-12 px-1"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`px-3 py-2 sm:px-6 text-xs sm:text-base rounded-full font-medium transition-all duration-300 text-center leading-tight ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-soft scale-105"
                   : "bg-secondary text-secondary-foreground hover:bg-accent hover:scale-105"
@@ -92,7 +92,7 @@ const Portfolio = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ margin: "-50px", once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto min-w-0"
         >
           {filteredProjects.map((project, index) => (
             <motion.div key={`${project.slug}-${index}`} variants={cardVariants}>

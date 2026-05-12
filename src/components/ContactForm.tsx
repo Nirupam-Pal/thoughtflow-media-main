@@ -86,8 +86,8 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 bg-gradient-to-b from-background to-secondary/30">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-16 sm:py-20 lg:py-32 bg-gradient-to-b from-background to-secondary/30 overflow-x-clip">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Let's Build Something Amazing
@@ -143,7 +143,7 @@ const ContactForm = () => {
           {/* Form Section */}
           <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-8 rounded-2xl shadow-soft border border-border">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-5 sm:p-8 rounded-2xl shadow-soft border border-border min-w-0">
                 
                 {/* 4. Honeypot Field (Hidden) */}
                 <FormField

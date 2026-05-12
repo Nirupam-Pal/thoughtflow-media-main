@@ -208,8 +208,8 @@ function AnimatedTestimonialsDemo() {
 
 const Testimonials = () => {
   return (
-    <section id="clients" className="relative py-20 lg:py-32 bg-secondary/30 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="clients" className="relative py-16 sm:py-20 lg:py-32 bg-secondary/30 overflow-x-clip overflow-hidden">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             What Our Clients Say
@@ -219,7 +219,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center w-full">
+        <div className="relative flex flex-col items-center justify-center w-full min-w-0 overflow-hidden px-0">
           <AnimatedTestimonialsDemo />
         </div>
       </div>
