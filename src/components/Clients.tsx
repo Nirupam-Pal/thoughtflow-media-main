@@ -76,7 +76,11 @@ const logos = [
   { name: "Barat Gro Kids", src: "/logos/25.png" },
   { name: "Smoke of Longtwrai", src: "/logos/26.jpeg" },
   { name: "Adflow Productions", src: "/logos/27.jpeg" },
-  { name: "Swaad Korok ", src: "/logos/28.png" },
+  { name: "Swaad Korok", src: "/logos/28.png" },
+  { name: "Conjugate", src: "/logos/29.jpeg" },
+  { name: "Saura", src: "/logos/30.jpg" },
+  { name: "Scented Cafe", src: "/logos/31.png" },
+  { name: "Spaces", src: "/logos/32.png" },
 ];
 
 const firstRow = logos.slice(0, logos.length / 2);
@@ -189,12 +193,12 @@ const Clients = () => {
               ))}
             </Marquee>
           </div>
-          <div className="absolute inset-y-0 left-0 w-1/4 pointer-events-none z-30 bg-gradient-to-r from-secondary/30 to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-1/4 pointer-events-none z-30 bg-gradient-to-l from-secondary/30 to-transparent"></div>
+          <div className="hidden md:block absolute inset-y-0 left-0 w-1/4 pointer-events-none z-30 bg-gradient-to-r from-secondary/30 to-transparent"></div>
+          <div className="hidden md:block absolute inset-y-0 right-0 w-1/4 pointer-events-none z-30 bg-gradient-to-l from-secondary/30 to-transparent"></div>
         </div>
       </div>
-      <div className="absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
-      <div className="absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>
+      <div className="hidden md:block absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
+      <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>
     </section>
   );
 };

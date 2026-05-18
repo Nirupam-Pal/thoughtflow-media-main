@@ -73,8 +73,8 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     ]),
   },
   {
-    slug: "okv",
-    title: "OKV",
+    slug: "growthLab-lead-generation",
+    title: "GrowthLab Lead Generation",
     category: "Performance Marketing",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",

@@ -223,8 +223,6 @@ const Testimonials = () => {
           <AnimatedTestimonialsDemo />
         </div>
       </div>
-      <div className="absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
-      <div className="absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>
     </section>
   );
 };

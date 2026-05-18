@@ -246,10 +246,11 @@ const Contents = () => {
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <div className="text-center mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Take a look of our contents
+            Take a look of our high<br />
+            ROI-driven Ad Videos
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Passionate experts dedicated to bringing your vision to life.
+            Highly engineered ROI-driven Ad videos (90% better performance)
           </p>
         </div>
 
@@ -321,7 +322,7 @@ const Contents = () => {
         </Dialog>
       </div>
       <div className="flex flex-col h-full w-full min-w-0 items-center justify-center overflow-x-clip overflow-y-hidden mt-8 sm:mt-10 bg-[#f5f4f3] px-1">
-        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Posters And Banner Designs</h3>
+        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Ad posters that brings enrollments <br /> (50% better performance)</h3>
         <Carousel_001 className="" images={images} showPagination loop autoplay />
       </div>
     </section>
