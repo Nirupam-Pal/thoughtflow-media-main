@@ -173,7 +173,7 @@ function AnimatedTestimonialsDemo() {
       quote:
         "Working with TFM has been an innovative and exciting experience. Their creative content and social media strategies are just amazing and have really helped us stand out. I’m 100% satisfied and would recommend them to anyone!",
       name: "Pratik Saha",
-      designation: "Founder/ Mathematics Mentor/ Prayam Classes",
+      designation: "Founder | Mathematics Mentor | Prayam Classes",
       src: "/clients/PratikSir.jpg",
       rating: 5,
     },
@@ -181,8 +181,8 @@ function AnimatedTestimonialsDemo() {
       quote:
         "I’m so impressed with the work TFM has done; they really are a team that makes the dream work! The service was excellent, and I’m fully satisfied with the results. Keep up the great work and always believe in your team!",
       name: "Aditya Mitra",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Consultant of Bharat Consultancy",
+      src: "/clients/Aditya Mitra.jpg",
       rating: 5,
     },
     {
