@@ -124,7 +124,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Phone</h4>
-                  <p className="text-muted-foreground">+91 XXXXXXXXXX</p>
+                  <p className="text-muted-foreground">+91 7005046836</p>
                 </div>
               </div>
 
@@ -191,7 +191,7 @@ const ContactForm = () => {
                     <FormItem>
                       <FormLabel>Phone (Optional)</FormLabel>
                       <FormControl>
-                        <Input type="tel" placeholder="+91 7005046836" {...field} />
+                        <Input type="tel" placeholder="+91 XXXXXXXXXX" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
