@@ -252,6 +252,76 @@ const PortfolioDetail = () => {
               ))}
             </motion.div>
           )}
+
+          {project.imageSections && project.imageSections.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: gallery.length > 0 ? 0.35 : 0.28, duration: 0.4 }}
+              className={cn(
+                "space-y-14 sm:space-y-16 md:space-y-20",
+                gallery.length === 0 && "mt-0"
+              )}
+            >
+              {project.imageSections.map((section, sectionIndex) => (
+                <motion.section
+                  key={`image-section-${sectionIndex}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.38 + sectionIndex * 0.1, duration: 0.5 }}
+                  aria-label={`${section.title} images`}
+                >
+                  <div className="mb-8">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2">
+                      {section.title}
+                    </h2>
+                    {section.description && (
+                      <p className="text-muted-foreground text-base sm:text-lg">
+                        {section.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {section.images.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                      {section.images.map((image, imageIndex) => (
+                        <motion.button
+                          key={`image-${sectionIndex}-${imageIndex}`}
+                          type="button"
+                          custom={imageIndex}
+                          variants={galleryItemVariants}
+                          initial="hidden"
+                          animate="visible"
+                          viewport={{ once: true, margin: "-40px" }}
+                          onClick={() => openLightbox(imageIndex)}
+                          className={cn(
+                            "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
+                            "shadow-soft ring-1 ring-border/60 transition-all duration-500",
+                            "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                          )}
+                        >
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                            loading="lazy"
+                          />
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                          <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-xs font-medium text-primary-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2">
+                            {image.alt}
+                          </span>
+                        </motion.button>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center rounded-2xl bg-muted p-12">
+                      <p className="text-muted-foreground text-center">No images available in this section yet</p>
+                    </div>
+                  )}
+                </motion.section>
+              ))}
+            </motion.div>
+          )}
         </motion.div>
       </main>
       <Footer />

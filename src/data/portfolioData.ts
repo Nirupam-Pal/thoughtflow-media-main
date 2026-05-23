@@ -15,6 +15,12 @@ export type VideoSection = {
   videos: VideoItem[];
 };
 
+export type ImageSection = {
+  title: string;
+  description?: string;
+  images: PortfolioGalleryItem[];
+};
+
 export type PortfolioProject = {
   slug: string;
   title: string;
@@ -23,6 +29,7 @@ export type PortfolioProject = {
   description: string;
   gallery: PortfolioGalleryItem[];
   videoSections?: VideoSection[];
+  imageSections?: ImageSection[];
 };
 
 const gallery = (
@@ -179,18 +186,79 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
     slug: "creative-designs",
     title: "Creative Designs",
-    category: "Web Development",
+    category: "Graphic Designs",
     image:
       "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&q=80",
     description:
-      "Enterprise admin portal with real-time analytics and refined design systems.",
-    gallery: gallery([
-      { seed: "photo-1547658719-da2b51169166", alt: "Design workspace" },
-      { seed: "photo-1561070791-2526d30994b5", alt: "UI kit" },
-      { seed: "photo-1581291518857-4e27b48ff24e", alt: "Wireframes" },
-      { seed: "photo-1507238691740-187a5b1d37b8", alt: "Web mockup" },
-      { seed: "photo-1618005182384-a83a8bd57fbe", alt: "Abstract interface" },
-    ]),
+      "Stunning creative designs crafted for maximum impact across all platforms and formats.",
+    gallery: [],
+    imageSections: [
+      {
+        title: "Banners & Flex Designs",
+        description: "Eye-catching banners and flexible designs for various platforms",
+        images: [
+          {
+            src: "/Creative Visual Designs/Banners & Flex Designs/Synapse 2025 Crash course.jpg",
+            alt: "Synapse 2025 Crash course Banner"
+          }
+        ],
+      },
+      {
+        title: "Ad Creatives (Social Media Posters)",
+        description: "Engaging social media ad creatives optimized for conversions",
+        images: [],
+      },
+      {
+        title: "High CTR Thumbnails",
+        description: "High-converting thumbnails designed to capture attention and drive clicks",
+        images: [
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/aru podcast thumbnail.jpeg",
+            alt: "Aru Podcast Thumbnail"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/Copy of ADMISSIONS OPEN (Facebook Cover) (3).jpg",
+            alt: "Admissions Open Thumbnail"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/HONSLA - EENDHAN - BADLA (1).jpg",
+            alt: "Honsla Eendhan Badla Thumbnail"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/Prayam TN 1.jpeg",
+            alt: "Prayam Thumbnail 1"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/Prayam TN 2.jpeg",
+            alt: "Prayam Thumbnail 2"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/Prayam TN 3.jpeg",
+            alt: "Prayam Thumbnail 3"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/SK TN 1.jpeg",
+            alt: "SK Thumbnail 1"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/SK TN 2.jpeg",
+            alt: "SK Thumbnail 2"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/Syn TN test 2.jpeg",
+            alt: "Synapse Thumbnail Test 2"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/Synapse test TN 1.jpeg",
+            alt: "Synapse Thumbnail Test 1"
+          },
+          {
+            src: "/Creative Visual Designs/High CTR Thumbnails/ube.jpg",
+            alt: "UBE Thumbnail"
+          }
+        ],
+      },
+    ],
   },
 ];
 
