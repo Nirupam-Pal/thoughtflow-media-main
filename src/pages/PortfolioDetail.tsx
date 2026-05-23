@@ -107,73 +107,151 @@ const PortfolioDetail = () => {
             </Button>
           </motion.div>
 
-          <header className="mb-10 sm:mb-12 md:mb-16 min-w-0">
-            <motion.span
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05, duration: 0.4 }}
-              className="inline-block px-3 py-1 bg-secondary rounded-full text-xs font-medium text-secondary-foreground mb-4"
-            >
-              {project.category}
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 break-words hyphens-auto"
-            >
-              {project.title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.45 }}
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed"
-            >
-              {project.description}
-            </motion.p>
+          <header className="relative mb-12 sm:mb-14 md:mb-16 min-w-0 py-8 sm:py-10 md:py-12 px-6 sm:px-8 rounded-3xl bg-gradient-to-br from-secondary/40 via-secondary/20 to-transparent border border-border/40 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+            <div className="relative z-10">
+              <motion.span
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, duration: 0.4 }}
+                className="inline-flex items-center px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-full text-xs font-semibold text-primary mb-5 backdrop-blur-sm"
+              >
+                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
+                {project.category}
+              </motion.span>
+              <motion.h1
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5 break-words hyphens-auto leading-tight"
+              >
+                {project.title}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.45 }}
+                className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-3xl leading-relaxed font-medium"
+              >
+                {project.description}
+              </motion.p>
+            </div>
           </header>
 
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.22, duration: 0.4 }}
-            aria-label="Project gallery"
-          >
-            <h2 className="sr-only">Gallery</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {gallery.map((item, index) => (
-                <motion.button
-                  key={`${item.src}-${index}`}
-                  type="button"
-                  custom={index}
-                  variants={galleryItemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                  onClick={() => openLightbox(index)}
-                  className={cn(
-                    "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
-                    "shadow-soft ring-1 ring-border/60 transition-all duration-500",
-                    "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    index === 0 &&
-                      "sm:col-span-2 lg:col-span-2 aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]",
-                  )}
+          {gallery.length > 0 && (
+            <motion.section
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.22, duration: 0.4 }}
+              aria-label="Project gallery"
+              className="mb-12 sm:mb-16"
+            >
+              <h2 className="sr-only">Gallery</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                {gallery.map((item, index) => (
+                  <motion.button
+                    key={`${item.src}-${index}`}
+                    type="button"
+                    custom={index}
+                    variants={galleryItemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    viewport={{ once: true, margin: "-40px" }}
+                    onClick={() => openLightbox(index)}
+                    className={cn(
+                      "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
+                      "shadow-soft ring-1 ring-border/60 transition-all duration-500",
+                      "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                      index === 0 &&
+                        "sm:col-span-2 lg:col-span-2 aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]",
+                    )}
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      loading={index < 3 ? "eager" : "lazy"}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-xs font-medium text-primary-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2">
+                      {item.alt}
+                    </span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {project.videoSections && project.videoSections.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: gallery.length > 0 ? 0.35 : 0.28, duration: 0.4 }}
+              className={cn(
+                "space-y-14 sm:space-y-16 md:space-y-20",
+                gallery.length === 0 && "mt-0"
+              )}
+            >
+              {project.videoSections.map((section, sectionIndex) => (
+                <motion.section
+                  key={`video-section-${sectionIndex}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.38 + sectionIndex * 0.1, duration: 0.5 }}
+                  aria-label={`${section.title} videos`}
                 >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    loading={index < 3 ? "eager" : "lazy"}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-xs font-medium text-primary-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2">
-                    {item.alt}
-                  </span>
-                </motion.button>
+                  <div className="mb-8">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2">
+                      {section.title}
+                    </h2>
+                    {section.description && (
+                      <p className="text-muted-foreground text-base sm:text-lg">
+                        {section.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div
+                    className={cn(
+                      "grid gap-4 md:gap-5",
+                      section.videos.some((v) => v.aspectRatio === "9:16")
+                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                        : "grid-cols-1 lg:grid-cols-2",
+                    )}
+                  >
+                    {section.videos.map((video, videoIndex) => (
+                      <motion.div
+                        key={`video-${sectionIndex}-${videoIndex}`}
+                        custom={videoIndex}
+                        variants={galleryItemVariants}
+                        initial="hidden"
+                        animate="visible"
+                        viewport={{ once: true, margin: "-40px" }}
+                        className={cn(
+                          "group relative overflow-hidden rounded-2xl bg-muted",
+                          "shadow-soft ring-1 ring-border/60 transition-all duration-500",
+                          "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1",
+                          video.aspectRatio === "16:9" && "aspect-video",
+                          video.aspectRatio === "9:16" && "aspect-[9/16]",
+                          video.aspectRatio === "1:1" && "aspect-square",
+                          !video.aspectRatio && "aspect-video",
+                        )}
+                      >
+                        <iframe
+                          src={video.src}
+                          title={video.title}
+                          className="h-full w-full border-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          loading="lazy"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.section>
               ))}
-            </div>
-          </motion.section>
+            </motion.div>
+          )}
         </motion.div>
       </main>
       <Footer />

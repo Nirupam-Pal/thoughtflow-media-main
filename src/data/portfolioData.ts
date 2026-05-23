@@ -3,6 +3,18 @@ export type PortfolioGalleryItem = {
   alt: string;
 };
 
+export type VideoItem = {
+  src: string;
+  title: string;
+  aspectRatio?: "16:9" | "9:16" | "1:1" | "auto"; // Default: auto
+};
+
+export type VideoSection = {
+  title: string;
+  description?: string;
+  videos: VideoItem[];
+};
+
 export type PortfolioProject = {
   slug: string;
   title: string;
@@ -10,6 +22,7 @@ export type PortfolioProject = {
   image: string;
   description: string;
   gallery: PortfolioGalleryItem[];
+  videoSections?: VideoSection[];
 };
 
 const gallery = (
@@ -96,13 +109,72 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&h=600&fit=crop&q=80",
     description:
       "High-impact commercial ads, product spots, and social-first cutdowns.",
-    gallery: gallery([
-      { seed: "photo-1492619375914-88005aa9e8fb", alt: "Video shoot" },
-      { seed: "photo-1574717024653-61fd2cf4d44d", alt: "Editing suite" },
-      { seed: "photo-1536240478700-b869070f9279", alt: "Camera setup" },
-      { seed: "photo-1478720568477-152d9b164e26", alt: "Film lighting" },
-      { seed: "photo-1516035069371-29a1b244ccff", alt: "Director monitor" },
-    ]),
+    gallery: [],
+    videoSections: [
+      {
+        title: "YouTube Hooks",
+        description: "Cinematic teasers designed to capture attention in 16:9 format",
+        videos: [
+          {
+            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Hook Video 1",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Hook Video 2",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Hook Video 3",
+            aspectRatio: "16:9",
+          },
+        ],
+      },
+      {
+        title: "Motion Graphics",
+        description: "Dynamic motion graphics and animations in vertical 9:16 format",
+        videos: [
+          {
+            src: "https://www.instagram.com/reel/DWy2eq0kVnJ/embed/",
+            title: "Motion Graphic 1",
+            aspectRatio: "9:16",
+          },
+          {
+            src: "https://www.instagram.com/reel/DWIUJlPEQ5m/embed/",
+            title: "Motion Graphic 2",
+            aspectRatio: "9:16",
+          },
+          {
+            src: "https://www.instagram.com/reel/DYfPGlDj_o6/embed/",
+            title: "Motion Graphic 3",
+            aspectRatio: "9:16",
+          },
+        ],
+      },
+      {
+        title: "Explainer Videos",
+        description: "Comprehensive product and service explanations",
+        videos: [
+          {
+            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Explainer Video 1",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Explainer Video 2",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Explainer Video 3",
+            aspectRatio: "16:9",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "creative-designs",
