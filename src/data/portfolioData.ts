@@ -254,7 +254,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/ube.jpg",
-            alt: "UBE Thumbnail"
+            alt: "YOUTUBE Thumbnail"
           }
         ],
       },

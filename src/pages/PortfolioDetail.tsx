@@ -283,7 +283,7 @@ const PortfolioDetail = () => {
                   </div>
 
                   {section.images.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8">
                       {section.images.map((image, imageIndex) => (
                         <motion.button
                           key={`image-${sectionIndex}-${imageIndex}`}
@@ -295,27 +295,33 @@ const PortfolioDetail = () => {
                           viewport={{ once: true, margin: "-40px" }}
                           onClick={() => openLightbox(imageIndex)}
                           className={cn(
-                            "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
-                            "shadow-soft ring-1 ring-border/60 transition-all duration-500",
-                            "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                            "group relative overflow-hidden rounded-3xl bg-gradient-to-br from-secondary/60 via-secondary/40 to-background text-left flex items-center justify-center",
+                            "shadow-lg hover:shadow-2xl ring-1 ring-border/40 transition-all duration-500",
+                            "hover:ring-primary/30 hover:-translate-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                            "min-h-[350px] backdrop-blur-sm border border-gradient-to-r from-primary/10 via-transparent to-primary/10"
                           )}
                         >
+                          {/* Glow effect */}
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
+                          </div>
+
                           <img
                             src={image.src}
                             alt={image.alt}
-                            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                            className="h-auto w-auto max-h-[600px] max-w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03] p-6 relative z-10"
                             loading="lazy"
                           />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                          <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-xs font-medium text-primary-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2">
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                          <span className="pointer-events-none absolute bottom-4 left-4 right-4 text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2 drop-shadow-md">
                             {image.alt}
                           </span>
                         </motion.button>
                       ))}
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center rounded-2xl bg-muted p-12">
-                      <p className="text-muted-foreground text-center">No images available in this section yet</p>
+                    <div className="flex items-center justify-center rounded-3xl bg-gradient-to-br from-secondary/60 via-secondary/40 to-background p-12 border border-border/40 ring-1 ring-border/40">
+                      <p className="text-muted-foreground text-center font-medium">No images available in this section yet</p>
                     </div>
                   )}
                 </motion.section>
