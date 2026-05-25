@@ -123,18 +123,28 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         description: "Cinematic teasers designed to capture attention in 16:9 format",
         videos: [
           {
-            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            title: "Hook Video 1",
+            src: "https://www.youtube.com/embed/YoIztPluRC8",
+            title: "Synapse hook 3",
             aspectRatio: "16:9",
           },
           {
-            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            title: "Hook Video 2",
+            src: "https://www.youtube.com/embed/vqtB1cl1SHw",
+            title: "Dr. SK hook",
             aspectRatio: "16:9",
           },
           {
-            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            title: "Hook Video 3",
+            src: "https://www.youtube.com/embed/I0CM5uliXSQ",
+            title: "Chessverse hook",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/OjQ2mGTKKpk",
+            title: "Synapse hook 2",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/99zsZAYx5CE",
+            title: "Synapse hook 1",
             aspectRatio: "16:9",
           },
         ],
@@ -144,18 +154,23 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         description: "Dynamic motion graphics and animations in vertical 9:16 format",
         videos: [
           {
-            src: "https://www.instagram.com/reel/DWy2eq0kVnJ/embed/",
-            title: "Motion Graphic 1",
+            src: "https://www.youtube.com/embed/yIh-E16ue6w",
+            title: "Motion Graphics 1",
             aspectRatio: "9:16",
           },
           {
-            src: "https://www.instagram.com/reel/DWIUJlPEQ5m/embed/",
-            title: "Motion Graphic 2",
+            src: "https://www.youtube.com/embed/TT6Yc1Om4iw",
+            title: "Motion Graphics 2",
             aspectRatio: "9:16",
           },
           {
-            src: "https://www.instagram.com/reel/DYfPGlDj_o6/embed/",
-            title: "Motion Graphic 3",
+            src: "https://www.youtube.com/embed/lsFH4fhdSwo",
+            title: "Motion Graphics 3",
+            aspectRatio: "9:16",
+          },
+          {
+            src: "https://www.youtube.com/embed/jJmJWkoXNSI",
+            title: "Motion Graphics 4",
             aspectRatio: "9:16",
           },
         ],
@@ -165,18 +180,23 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         description: "Comprehensive product and service explanations",
         videos: [
           {
-            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            title: "Explainer Video 1",
+            src: "https://www.youtube.com/embed/noVdyBcHs48",
+            title: "Rencare Big Hinglish",
             aspectRatio: "16:9",
           },
           {
-            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            title: "Explainer Video 2",
+            src: "https://www.youtube.com/embed/Kz7vF4ZTCIY",
+            title: "Struggling with mathematics",
             aspectRatio: "16:9",
           },
           {
-            src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            title: "Explainer Video 3",
+            src: "https://www.youtube.com/embed/5Lf6VEaJo0Y",
+            title: "A Proud Moment of collaboration & Growth",
+            aspectRatio: "16:9",
+          },
+          {
+            src: "https://www.youtube.com/embed/6ley8tKyBzs",
+            title: "Something big is coming... Are you ready to enter the universe od chess ?",
             aspectRatio: "16:9",
           },
         ],
