@@ -157,7 +157,7 @@ function AnimatedTestimonialsDemo() {
       quote:
         "TFM delivers exceptional creative content and social media marketing services. My experience working with them has been highly positive, and I truly value the innovative ideas and creativity they consistently bring. It has been a wonderful partnership overall!",
       name: "Sujoy Datta Muhury",
-      designation: "Engineering Lead at DataPro",
+      designation: "Founder & CEO, Trend Crafter",
       src: "/clients/Sujoy.jpeg",
       rating: 4,
     },
