@@ -121,30 +121,30 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 function AnimatedTestimonialsDemo() {
   const testimonials = [
-    {
-      quote:
-        "TFM is hands down the most creative marketing agency in Tripura! I had a fantastic overall experience and couldn't be happier with the service. Best of luck to the team—you guys are doing great work!",
-      name: "Sabarni Choudhury",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      rating: 5,
-    },
-    {
-      quote:
-        "I’m really satisfied with the work TFM has done for me. They are easily the most creative agency in Tripura, and the overall experience was top-notch. Everything was good, and I’d definitely recommend them",
-      name: "Satyajit",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      rating: 5,
-    },
-    {
-      quote:
-        "The creative content ideas and social media marketing services from TFM are just amazing. I’m very happy with the results so far. I'm excited to see them continue to work hard and deliver such great value!",
-      name: "Ratan",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      rating: 4,
-    },
+    // {
+    //   quote:
+    //     "TFM is hands down the most creative marketing agency in Tripura! I had a fantastic overall experience and couldn't be happier with the service. Best of luck to the team—you guys are doing great work!",
+    //   name: "Sabarni Choudhury",
+    //   designation: "Product Manager at TechFlow",
+    //   src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   rating: 5,
+    // },
+    // {
+    //   quote:
+    //     "I’m really satisfied with the work TFM has done for me. They are easily the most creative agency in Tripura, and the overall experience was top-notch. Everything was good, and I’d definitely recommend them",
+    //   name: "Satyajit",
+    //   designation: "CTO at InnovateSphere",
+    //   src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   rating: 5,
+    // },
+    // {
+    //   quote:
+    //     "The creative content ideas and social media marketing services from TFM are just amazing. I’m very happy with the results so far. I'm excited to see them continue to work hard and deliver such great value!",
+    //   name: "Ratan",
+    //   designation: "Operations Director at CloudScale",
+    //   src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   rating: 4,
+    // },
     {
       quote:
         "TFM provides truly amazing creative content and social media marketing services. I’ve had a positive experience working with them and appreciate the fresh ideas they bring to the table. It’s been a great partnership!",
@@ -158,7 +158,7 @@ function AnimatedTestimonialsDemo() {
         "TFM provides truly amazing creative content and social media marketing services. I’ve had a positive experience working with them and appreciate the fresh ideas they bring to the table. It’s been a great partnership!",
       name: "Sujoy Datta Muhury",
       designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      src: "/clients/Sujoy.jpeg",
       rating: 4,
     },
     {
@@ -190,7 +190,15 @@ function AnimatedTestimonialsDemo() {
         "TFM is definitely the most creative marketing agency in Tripura. My experience was flawless from start to finish, and I’m incredibly happy with the service. Best of luck to the whole team!",
       name: "Bhaskar Biswas",
       designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      src: "/clients/Bhashkar.jpeg",
+      rating: 5,
+    },
+    {
+      quote:
+        "Working with TFM has been a smooth and reassuring experience. We truly appreciate their commitment and the thoughtfulness they bring to every step. Creative Content ideas & Social media marketing services.... Just amazing! Quality work... Best Marketing Agency. Most Creative Marketing Agency in Tripura... Best of Luck. Nice work... Satisfied for this work. Go Ahead.",
+      name: "Pratik Debnath",
+      designation: "Founder, Chessverse",
+      src: "/clients/PratikDebnath.jpeg",
       rating: 5,
     },
     {
