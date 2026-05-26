@@ -164,8 +164,8 @@ function AnimatedTestimonialsDemo() {
     {
       quote:
         "The social media marketing and creative content ideas at TFM are simply amazing. I had a perfect 5-star experience and was completely satisfied with the service. Highly recommended for anyone looking for creative flair!",
-      name: "Udita",
-      designation: "VP of Technology at FutureNet",
+      name: "Uttam Kumar Das",
+      designation: "Founder, Oxford Hub of English",
       src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       rating: 5,
     },
