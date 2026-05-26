@@ -149,13 +149,13 @@ function AnimatedTestimonialsDemo() {
       quote:
         "TFM provides truly amazing creative content and social media marketing services. I’ve had a positive experience working with them and appreciate the fresh ideas they bring to the table. It’s been a great partnership!",
       name: "Prasenjit Debnath",
-      designation: "Engineering Lead at DataPro",
+      designation: "Chemistry Mentor, Core Academy",
       src: "/clients/PrasenjitSir2.jpeg",
       rating: 5,
     },
     {
       quote:
-        "TFM provides truly amazing creative content and social media marketing services. I’ve had a positive experience working with them and appreciate the fresh ideas they bring to the table. It’s been a great partnership!",
+        "TFM delivers exceptional creative content and social media marketing services. My experience working with them has been highly positive, and I truly value the innovative ideas and creativity they consistently bring. It has been a wonderful partnership overall!",
       name: "Sujoy Datta Muhury",
       designation: "Engineering Lead at DataPro",
       src: "/clients/Sujoy.jpeg",
@@ -173,7 +173,7 @@ function AnimatedTestimonialsDemo() {
       quote:
         "Working with TFM has been an innovative and exciting experience. Their creative content and social media strategies are just amazing and have really helped us stand out. I’m 100% satisfied and would recommend them to anyone!",
       name: "Pratik Saha",
-      designation: "Founder | Mathematics Mentor | Prayam Classes",
+      designation: "Founder | Mathematics Mentor , Prayam Classes",
       src: "/clients/PratikSir.jpg",
       rating: 5,
     },
@@ -189,7 +189,7 @@ function AnimatedTestimonialsDemo() {
       quote:
         "TFM is definitely the most creative marketing agency in Tripura. My experience was flawless from start to finish, and I’m incredibly happy with the service. Best of luck to the whole team!",
       name: "Bhaskar Biswas",
-      designation: "VP of Technology at FutureNet",
+      designation: "Physics Teacher | Assistant Professor, ICFAI University Tripura",
       src: "/clients/Bhashkar.jpeg",
       rating: 5,
     },
@@ -205,7 +205,7 @@ function AnimatedTestimonialsDemo() {
       quote:
         "Nice work... Satisfied with the service. Go ahead",
       name: "Souptik Bhowmik",
-      designation: "Chemistry Mentor / Aimsas",
+      designation: "Chemistry Mentor | Aimsas-A Hybrid Smart Skool",
       src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       rating: 4,
     },
