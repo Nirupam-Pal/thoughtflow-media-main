@@ -35,9 +35,10 @@ const Skiper30 = () => {
     useEffect(() => {
         const lenis = new Lenis();
 
+        let rafId: number | null = null;
         const raf = (time: number) => {
             lenis.raf(time);
-            requestAnimationFrame(raf);
+            rafId = requestAnimationFrame(raf);
         };
 
         const resize = () => {
@@ -45,11 +46,17 @@ const Skiper30 = () => {
         };
 
         window.addEventListener("resize", resize);
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
         resize();
 
         return () => {
             window.removeEventListener("resize", resize);
+            if (rafId != null) cancelAnimationFrame(rafId);
+            // Best-effort cleanup (lenis version exposes some combination of these).
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (lenis as any)?.destroy?.();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (lenis as any)?.stop?.();
         };
     }, []);
 
