@@ -13,6 +13,7 @@ import { Skiper30 } from "@/components/parallax";
 import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
 import Contents from "@/components/Contents";
+import Seo from "@/components/Seo";
 // import AnimatedTestimonialsDemo from "@/components/Testimonials";
 
 const Index = () => {
@@ -30,6 +31,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen min-w-0 w-full max-w-[100vw] overflow-x-clip">
+      <Seo
+        title="Digital Marketing Agency in Agartala | Thoughtflow Media"
+        description="Thoughtflow Media is a full-service digital marketing agency in Agartala, Tripura. We run Meta & Google Ads, manage social media, and produce videos and graphics for brands across Northeast India."
+        ogType="website"
+        canonicalPath="/"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Thoughtflow Media",
+          url: "https://thoughtflowmediaa.com",
+          logo: "https://thoughtflowmediaa.com/tf-profile.png",
+          sameAs: [],
+        }}
+      />
       <Header />
       <Hero />
       <Services />

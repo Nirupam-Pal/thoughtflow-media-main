@@ -12,13 +12,16 @@ import {
 } from "@/components/ui/dialog";
 import { getPortfolioProjectBySlug, type PortfolioGalleryItem } from "@/data/portfolioData";
 import { cn } from "@/lib/utils";
+import Seo from "@/components/Seo";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.45, ease: EASE },
   },
 };
 
@@ -31,7 +34,7 @@ const galleryItemVariants = {
     transition: {
       delay: 0.08 * i,
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      ease: EASE,
     },
   }),
 };
@@ -82,6 +85,26 @@ const PortfolioDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background min-w-0 w-full max-w-[100vw] overflow-x-clip">
+      <Seo
+        title={`${project.title} | Thoughtflow Media`}
+        description={project.description}
+        image={project.image}
+        ogType="article"
+        canonicalPath={`/portfolio/${project.slug}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.description,
+          url: `https://thoughtflowmediaa.com/portfolio/${project.slug}`,
+          image: project.image,
+          publisher: {
+            "@type": "Organization",
+            name: "Thoughtflow Media",
+            url: "https://thoughtflowmediaa.com",
+          },
+        }}
+      />
       <Header />
       <main className="flex-1 pt-24 pb-16 sm:pt-28 md:pt-32 sm:pb-20 min-w-0">
         <motion.div
@@ -122,7 +145,7 @@ const PortfolioDetail = () => {
               <motion.h1
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.1, duration: 0.5, ease: EASE }}
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5 break-words hyphens-auto leading-tight"
               >
                 {project.title}
@@ -363,7 +386,7 @@ const PortfolioDetail = () => {
                   initial={{ opacity: 0, scale: 0.985 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.985 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.35, ease: EASE }}
                   className="relative"
                 >
                   <img
