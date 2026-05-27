@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { getPortfolioProjectBySlug, type PortfolioGalleryItem } from "@/data/portfolioData";
 import { cn } from "@/lib/utils";
+import { isPrerenderedDocument } from "@/lib/prerender";
 import Seo from "@/components/Seo";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -43,6 +44,7 @@ const PortfolioDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = getPortfolioProjectBySlug(slug);
+  const skipMotionInitial = isPrerenderedDocument();
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -110,7 +112,7 @@ const PortfolioDetail = () => {
         <motion.div
           className="container mx-auto min-w-0 px-4 sm:px-6 max-w-6xl"
           variants={pageVariants}
-          initial="initial"
+          initial={skipMotionInitial ? false : "initial"}
           animate="animate"
         >
           <motion.div
