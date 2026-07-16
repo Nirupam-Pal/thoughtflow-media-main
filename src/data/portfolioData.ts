@@ -124,27 +124,27 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         videos: [
           {
             src: "https://www.youtube.com/embed/YoIztPluRC8",
-            title: "Synapse hook 3",
+            title: "Synapse Brand Teaser",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/vqtB1cl1SHw",
-            title: "Dr. SK hook",
+            title: "Dr. SK Biology Awareness Reel",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/I0CM5uliXSQ",
-            title: "Chessverse hook",
+            title: "Chessverse Launch Trailer",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/OjQ2mGTKKpk",
-            title: "Synapse hook 2",
+            title: "Synapse Product Spotlight",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/99zsZAYx5CE",
-            title: "Synapse hook 1",
+            title: "Synapse Growth Story",
             aspectRatio: "16:9",
           },
         ],
@@ -155,22 +155,22 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         videos: [
           {
             src: "https://www.youtube.com/embed/yIh-E16ue6w",
-            title: "Motion Graphics 1",
+            title: "Animated Brand Motion",
             aspectRatio: "9:16",
           },
           {
             src: "https://www.youtube.com/embed/TT6Yc1Om4iw",
-            title: "Motion Graphics 2",
+            title: "Dynamic Social Ad Animation",
             aspectRatio: "9:16",
           },
           {
             src: "https://www.youtube.com/embed/lsFH4fhdSwo",
-            title: "Motion Graphics 3",
+            title: "Product Launch Motion Graphic",
             aspectRatio: "9:16",
           },
           {
             src: "https://www.youtube.com/embed/jJmJWkoXNSI",
-            title: "Motion Graphics 4",
+            title: "Promotional Motion Loop",
             aspectRatio: "9:16",
           },
         ],
@@ -181,22 +181,22 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         videos: [
           {
             src: "https://www.youtube.com/embed/noVdyBcHs48",
-            title: "Rencare Big Hinglish",
+            title: "Rencare Explainer Video",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/Kz7vF4ZTCIY",
-            title: "Struggling with mathematics",
+            title: "Mathematics Learning Explainer",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/5Lf6VEaJo0Y",
-            title: "A Proud Moment of collaboration & Growth",
+            title: "Collaboration & Growth Spotlight",
             aspectRatio: "16:9",
           },
           {
             src: "https://www.youtube.com/embed/6ley8tKyBzs",
-            title: "Something big is coming... Are you ready to enter the universe od chess ?",
+            title: "Chess Universe Teaser",
             aspectRatio: "16:9",
           },
         ],
@@ -219,7 +219,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         images: [
           {
             src: "/Creative Visual Designs/Banners & Flex Designs/Synapse 2025 Crash course.jpg",
-            alt: "Synapse 2025 Crash course Banner"
+            alt: ""
           }
         ],
       },
@@ -234,47 +234,47 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         images: [
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/aru podcast thumbnail.jpeg",
-            alt: "Aru Podcast Thumbnail"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/Copy of ADMISSIONS OPEN (Facebook Cover) (3).jpg",
-            alt: "Admissions Open Thumbnail"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/HONSLA - EENDHAN - BADLA (1).jpg",
-            alt: "Honsla Eendhan Badla Thumbnail"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/Prayam TN 1.jpeg",
-            alt: "Prayam Thumbnail 1"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/Prayam TN 2.jpeg",
-            alt: "Prayam Thumbnail 2"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/Prayam TN 3.jpeg",
-            alt: "Prayam Thumbnail 3"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/SK TN 1.jpeg",
-            alt: "SK Thumbnail 1"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/SK TN 2.jpeg",
-            alt: "SK Thumbnail 2"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/Syn TN test 2.jpeg",
-            alt: "Synapse Thumbnail Test 2"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/Synapse test TN 1.jpeg",
-            alt: "Synapse Thumbnail Test 1"
+            alt: ""
           },
           {
             src: "/Creative Visual Designs/High CTR Thumbnails/ube.jpg",
-            alt: "YOUTUBE Thumbnail"
+            alt: ""
           }
         ],
       },
