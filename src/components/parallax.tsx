@@ -5,15 +5,16 @@ import Lenis from "lenis";
 import { useEffect, useRef, useState } from "react";
 
 const images = [
-    "/parallax/1.png",
-    "/parallax/2.png",
-    "/parallax/3.png",
-    "/parallax/4.png",
-    "/parallax/5.png",
-    "/parallax/6.png",
-    "/parallax/7.png",
-    "/parallax/8.png",
-    "/parallax/9.png",
+    "/parallax/logos/1.png",
+    "/parallax/logos/2.png",
+    "/parallax/logos/3.png",
+    "/parallax/logos/4.png",
+    "/parallax/logos/5.png",
+    "/parallax/logos/6.png",
+    "/parallax/logos/7.png",
+    "/parallax/logos/8.png",
+    "/parallax/logos/9.png",
+    "/parallax/logos/10.png",
 
 ];
 
@@ -74,10 +75,10 @@ const Skiper30 = () => {
                 ref={gallery}
                 className="relative box-border grid grid-cols-2 lg:grid-cols-4 h-[125vh] sm:h-[150vh] lg:h-[175vh] gap-2 p-2 sm:gap-[2vw] sm:p-[2vw] overflow-hidden bg-white"
             >
-                <Column images={[images[0], images[1], images[2]]} y={y} />
-                <Column images={[images[3], images[4], images[5]]} y={y2} />
-                <Column images={[images[6], images[7], images[8]]} y={y3} />
-                <Column images={[images[6], images[7], images[8]]} y={y4} />
+                <Column images={[images[0], images[1], images[6]]} y={y} />
+                <Column images={[images[7], images[4], images[5]]} y={y2} />
+                <Column images={[images[6], images[7], images[0]]} y={y3} />
+                <Column images={[images[2], images[7], images[8]]} y={y4} />
             </div>
             {/* <div className="font-geist relative flex items-center justify-center gap-2">
                 <div className="absolute left-1/2 top-[10%] grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-black">
@@ -105,7 +106,7 @@ const Column = ({ images, y }: ColumnProps) => {
                 <div key={i} className="relative min-h-[100px] flex-1 w-full overflow-hidden rounded-lg sm:rounded-none">
                     <img
                         src={`${src}`}
-                        alt="image"
+                        alt="tfm"
                         className="pointer-events-none h-full w-full min-h-[100px] object-cover"
                     />
                 </div>
