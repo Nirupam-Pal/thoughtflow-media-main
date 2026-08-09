@@ -1,11 +1,13 @@
 import { CtaButton } from "./ui/cta-button";
 import CountUp from "react-countup";
+import HeroBackground from "./HeroBackground";
 
 const Hero = () => {
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-x-clip overflow-y-hidden bg-gradient-subtle pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(38_45%_90%),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(38_35%_92%),transparent_50%)]" />
+      <HeroBackground />
 
       <div className="container mx-auto min-w-0 px-4 sm:px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
