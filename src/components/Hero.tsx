@@ -4,19 +4,17 @@ import HeroBackground from "./HeroBackground";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-x-clip overflow-y-hidden bg-gradient-subtle pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(38_45%_90%),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(38_35%_92%),transparent_50%)]" />
-      {/* <HeroBackground /> */}
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-x-clip bg-background pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20">
+      <HeroBackground />
 
       <div className="container mx-auto min-w-0 px-4 sm:px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <h1 className="font-display text-[clamp(1.75rem,5vw+1rem,4.5rem)] md:text-7xl lg:text-7xl font-bold mb-5 sm:mb-6 tracking-tight px-0.5">
-              <div className="bg-gradient-to-r from-primary via-primary/35 to-primary bg-clip-text text-transparent break-words">
+              <div className="bg-gradient-to-r mb-4 from-primary via-primary/35 to-primary bg-clip-text text-transparent break-words leading-tight">
                 AI-Powered Marketing Agency 
               </div>
-              <span className="block mt-2 text-foreground">
+              <span className="block  text-foreground">
                 In Agartala, India 
                 {/* <span><HeroText /> </span> */}
               </span>
@@ -58,7 +56,7 @@ const Hero = () => {
               { number: "1000+", label: "Projects Delivered" },
               { number: "98%", label: "Client Satisfaction Rate" },
               { number: "20+", label: "Creative Specialists" },
-              { number: "15+ lakhs", label: "Ads Spend Experience" },
+              { number: "15+ L", label: "Ads Spend Experience" },
             ].map((stat, index) => {
               const numericValue = parseInt(stat.number.replace(/[^\d]/g, ''));
               const suffix = stat.number.replace(/\d/g, '');

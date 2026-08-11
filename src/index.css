@@ -74,115 +74,84 @@ All colors MUST be HSL.
   }
 }
 
+/* ─── Hero background — aurora mesh ─── */
 @layer utilities {
-  .hero-grid {
+  .hero-pill {
+    background: hsl(40 30% 97% / 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      0 2px 16px -2px hsl(30 10% 15% / 0.06),
+      inset 0 1px 0 hsl(40 30% 97% / 0.9);
+  }
+
+  .hero-fine-grid {
     background-image:
-      linear-gradient(hsl(30 10% 15% / 0.11) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(30 10% 15% / 0.11) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 82%);
+      linear-gradient(hsl(30 10% 15% / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(30 10% 15% / 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 0%, transparent 75%);
   }
 
-  .hero-blob-drift-a {
-    animation: hero-blob-drift-a 28s ease-in-out infinite alternate;
+  .hero-orb-float-a {
+    animation: hero-orb-a 24s ease-in-out infinite alternate;
   }
 
-  .hero-blob-drift-b {
-    animation: hero-blob-drift-b 32s ease-in-out infinite alternate;
+  .hero-orb-float-b {
+    animation: hero-orb-b 30s ease-in-out infinite alternate;
   }
 
-  .hero-blob-pulse {
-    animation: hero-blob-pulse 24s ease-in-out infinite;
+  .hero-orb-float-c {
+    animation: hero-orb-c 26s ease-in-out infinite alternate;
   }
 
-  .hero-particle-float {
-    animation: hero-particle-float var(--particle-duration, 20s) ease-in-out infinite;
-    will-change: transform, opacity;
-    box-shadow: 0 0 4px 1px hsl(30 10% 15% / 0.1);
+  .hero-curve-draw {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: hero-curve-reveal 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .hero-network-line {
-    animation: hero-network-fade 6s ease-in-out infinite;
-  }
-
-  .hero-network-node {
-    animation: hero-node-pulse 4s ease-in-out infinite;
+  .hero-curve-dot {
+    animation: hero-dot-pulse 4s ease-in-out 3s infinite;
     transform-origin: center;
     transform-box: fill-box;
   }
 }
 
-@keyframes hero-blob-drift-a {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(40px, -30px) scale(1.08);
-  }
+@keyframes hero-orb-a {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 20px) scale(1.06); }
 }
 
-@keyframes hero-blob-drift-b {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(-35px, 25px) scale(1.06);
-  }
+@keyframes hero-orb-b {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-25px, 15px) scale(1.04); }
 }
 
-@keyframes hero-blob-pulse {
-  0%,
-  100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.05);
-  }
+@keyframes hero-orb-c {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  100% { transform: translate(15px, -20px) scale(1.05); opacity: 1; }
 }
 
-@keyframes hero-particle-float {
-  0%,
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translate(12px, -18px);
-    opacity: 0.75;
-  }
+@keyframes hero-curve-reveal {
+  to { stroke-dashoffset: 0; }
 }
 
-@keyframes hero-network-fade {
-  0%,
-  100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.85;
-  }
-}
-
-@keyframes hero-node-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.55;
-  }
-  50% {
-    transform: scale(1.35);
-    opacity: 0.85;
-  }
+@keyframes hero-dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.4); opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-blob-drift-a,
-  .hero-blob-drift-b,
-  .hero-blob-pulse,
-  .hero-particle-float,
-  .hero-network-line,
-  .hero-network-node {
+  .hero-orb-float-a,
+  .hero-orb-float-b,
+  .hero-orb-float-c,
+  .hero-curve-draw,
+  .hero-curve-dot {
     animation: none !important;
+  }
+
+  .hero-curve-draw {
+    stroke-dashoffset: 0;
   }
 }
