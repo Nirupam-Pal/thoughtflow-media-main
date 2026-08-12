@@ -11,7 +11,8 @@ import { cn } from "@/lib/utils";
 type MetricPill = {
   value: string;
   label: string;
-  className: string;
+  desktopClassName: string;
+  mobileClassName: string;
   depth: number;
 };
 
@@ -19,25 +20,29 @@ const METRICS: MetricPill[] = [
   {
     value: "+48.6%",
     label: "Growth",
-    className: "left-4 top-[14%] sm:left-8 sm:top-[16%]",
+    desktopClassName: "hidden sm:flex left-4 top-4 sm:left-8 sm:top-[10%] lg:top-[22%]",
+    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
     depth: 18,
   },
   {
     value: "3.8x ROAS",
     label: "Meta Ads",
-    className: "right-4 top-[14%] sm:right-8 sm:top-[16%]",
+    desktopClassName: "hidden sm:flex right-4 top-4 sm:right-8 sm:top-[10%] lg:top-[24%]",
+    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
     depth: 22,
   },
   {
     value: "94 SEO",
     label: "Score",
-    className: "left-4 bottom-[26%] hidden sm:flex sm:left-8 sm:bottom-[28%]",
+    desktopClassName: "hidden sm:flex left-4 bottom-24 sm:left-8 sm:bottom-[28%]",
+    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
     depth: 14,
   },
   {
     value: "24.8K Reach",
     label: "Weekly",
-    className: "right-4 bottom-[26%] hidden sm:flex sm:right-8 sm:bottom-[28%]",
+    desktopClassName: "hidden sm:flex right-4 bottom-24 sm:right-8 sm:bottom-[28%]",
+    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
     depth: 16,
   },
 ];
@@ -91,7 +96,7 @@ const HeroBackground = () => {
       {/* Aurora mesh — soft overlapping orbs */}
       <motion.div
         className={cn(
-          "hero-orb absolute -left-[15%] -top-[10%] h-[min(70vw,520px)] w-[min(70vw,520px)] rounded-full",
+          "hero-orb absolute -left-[10%] -top-[8%] h-[min(60vw,520px)] w-[min(60vw,520px)] rounded-full sm:-left-[15%] sm:-top-[10%] sm:h-[min(70vw,520px)] sm:w-[min(70vw,520px)]",
           "bg-[radial-gradient(circle,hsl(38_50%_85%/0.7)_0%,transparent_70%)] blur-[80px]",
           !reduced && "hero-orb-float-a"
         )}
@@ -99,7 +104,7 @@ const HeroBackground = () => {
       />
       <motion.div
         className={cn(
-          "hero-orb absolute -right-[10%] top-[20%] h-[min(60vw,440px)] w-[min(60vw,440px)] rounded-full",
+          "hero-orb absolute -right-[6%] top-[14%] h-[min(50vw,380px)] w-[min(50vw,380px)] rounded-full sm:-right-[10%] sm:top-[20%] sm:h-[min(60vw,440px)] sm:w-[min(60vw,440px)]",
           "bg-[radial-gradient(circle,hsl(38_45%_88%/0.55)_0%,transparent_68%)] blur-[72px]",
           !reduced && "hero-orb-float-b"
         )}
@@ -107,7 +112,7 @@ const HeroBackground = () => {
       />
       <motion.div
         className={cn(
-          "hero-orb absolute bottom-[5%] left-[25%] hidden h-[min(50vw,360px)] w-[min(50vw,360px)] rounded-full sm:block",
+          "hero-orb absolute bottom-12 left-[18%] hidden h-[min(45vw,300px)] w-[min(45vw,300px)] rounded-full sm:block sm:bottom-[5%] sm:left-[25%] sm:h-[min(50vw,360px)] sm:w-[min(50vw,360px)]",
           "bg-[radial-gradient(circle,hsl(38_35%_92%/0.45)_0%,transparent_70%)] blur-[64px]",
           !reduced && "hero-orb-float-c"
         )}
@@ -122,9 +127,9 @@ const HeroBackground = () => {
 
       {/* Single elegant growth curve */}
       <svg
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full pointer-events-none"
+        preserveAspectRatio="xMidYMid meet slice"
         viewBox="0 0 1200 600"
-        preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
       >
         <defs>
@@ -165,6 +170,7 @@ const HeroBackground = () => {
           reduced={reduced}
           springX={sx}
           springY={sy}
+          className={m.desktopClassName}
         />
       ))}
 
@@ -180,12 +186,16 @@ function MetricPillCard({
   reduced,
   springX,
   springY,
+  className,
+  absolute = true,
 }: {
   metric: MetricPill;
   index: number;
   reduced: boolean;
   springX: ReturnType<typeof useSpring>;
   springY: ReturnType<typeof useSpring>;
+  className?: string;
+  absolute?: boolean;
 }) {
   const x = useTransform(springX, (v) => v * metric.depth);
   const y = useTransform(springY, (v) => v * metric.depth);
@@ -193,8 +203,10 @@ function MetricPillCard({
   return (
     <motion.div
       className={cn(
-        "hero-pill absolute flex items-center gap-2.5 rounded-full border border-primary/[0.08] px-3.5 py-2 sm:px-4 sm:py-2.5",
-        metric.className
+        "hero-pill flex items-center gap-2.5 rounded-full border border-primary/[0.08] px-3.5 py-2 sm:px-4 sm:py-2.5",
+        absolute ? "absolute" : "relative",
+        absolute ? metric.desktopClassName : undefined,
+        className
       )}
       style={reduced ? undefined : { x, y }}
       initial={{ opacity: 0, scale: 0.96 }}
