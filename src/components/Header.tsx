@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { MotionButton } from "./ui/motionButton";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -135,16 +134,6 @@ const Header = () => {
                   ))}
                 </div>
 
-                <div className="mt-8 relative z-10">
-                  <MotionButton/>
-                  {/* <Button
-                    onClick={() => scrollToSection("#contact")}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft"
-                    size="lg"
-                  >
-                    Get Started
-                  </Button> */}
-                </div>
               </div>
 
               {/* Footer */}
@@ -231,14 +220,6 @@ const Header = () => {
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                 </button>
               ))}
-
-              {/* <Button
-                onClick={() => scrollToSection("#contact")}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105"
-              >
-                Get Started
-              </Button> */}
-              <MotionButton/>
             </div>
 
             {/* Mobile Menu Button */}

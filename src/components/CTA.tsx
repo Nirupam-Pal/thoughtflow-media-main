@@ -1,7 +1,12 @@
-import { ArrowRight, Mail } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, CalendarDays, Mail } from "lucide-react";
+import { PopupModal } from "react-calendly";
 import { Button } from "@/components/ui/button";
+import { CALENDLY_PAGE_SETTINGS, CALENDLY_URL } from "@/lib/calendly";
 
 const CTA = () => {
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
+
   return (
     <section className="py-16 sm:py-20 md:py-28 lg:py-32 bg-background overflow-x-clip">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
@@ -21,20 +26,25 @@ const CTA = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full min-w-0">
-                <Button 
+                <Button
+                  asChild
                   size="lg"
                   className="group w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105"
                 >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Get in Touch
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <a href="#contact">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Get in Touch
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
                 </Button>
                 
-                <Button 
+                <Button
                   size="lg"
                   variant="outline"
+                  onClick={() => setCalendlyOpen(true)}
                   className="w-full sm:w-auto border-2 border-primary/30 hover:border-primary/50 hover:bg-background/50 backdrop-blur-sm"
                 >
+                  <CalendarDays className="mr-2 h-5 w-5" />
                   Schedule a Call
                 </Button>
               </div>
@@ -42,6 +52,17 @@ const CTA = () => {
           </div>
         </div>
       </div>
+
+      {/* Mounted only after a click so it never touches `document` during prerender */}
+      {calendlyOpen && (
+        <PopupModal
+          url={CALENDLY_URL}
+          pageSettings={CALENDLY_PAGE_SETTINGS}
+          open={calendlyOpen}
+          onModalClose={() => setCalendlyOpen(false)}
+          rootElement={document.getElementById("root") as HTMLElement}
+        />
+      )}
     </section>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./style.css"
 import { motion } from 'motion/react';
 
-export const MotionButton = () => {
+export const MotionButton = ({ onClick }: { onClick?: () => void }) => {
 
     const [isAnimating, setIsAnimating] = useState(false)
 
@@ -16,7 +16,9 @@ export const MotionButton = () => {
 
     return (
         <motion.button
+            type='button'
             className='button'
+            onClick={onClick}
             initial={false}
         >
             <motion.p

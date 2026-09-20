@@ -8,48 +8,6 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type MetricPill = {
-  value: string;
-  label: string;
-  desktopClassName: string;
-  mobileClassName: string;
-  depth: number;
-};
-
-const METRICS: MetricPill[] = [
-  {
-    value: "+48.6%",
-    label: "Growth",
-    desktopClassName: "hidden sm:flex left-4 top-4 sm:left-8 sm:top-[10%] lg:top-[22%]",
-    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
-    depth: 18,
-  },
-  {
-    value: "3.8x ROAS",
-    label: "Meta Ads",
-    desktopClassName: "hidden sm:flex right-4 top-4 sm:right-8 sm:top-[10%] lg:top-[24%]",
-    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
-    depth: 22,
-  },
-  {
-    value: "94 SEO",
-    label: "Score",
-    desktopClassName: "hidden sm:flex left-4 bottom-24 sm:left-8 sm:bottom-[28%]",
-    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
-    depth: 14,
-  },
-  {
-    value: "24.8K Reach",
-    label: "Weekly",
-    desktopClassName: "hidden sm:flex right-4 bottom-24 sm:right-8 sm:bottom-[28%]",
-    mobileClassName: "relative flex min-w-[140px] max-w-[calc(50vw-0.75rem)] justify-center",
-    depth: 16,
-  },
-];
-
-const CURVE =
-  "M 0 520 Q 180 480 320 400 T 640 280 T 960 120 T 1200 40";
-
 const HeroBackground = () => {
   const reduced = !!useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
@@ -104,8 +62,8 @@ const HeroBackground = () => {
       />
       <motion.div
         className={cn(
-          "hero-orb absolute -right-[6%] top-[14%] h-[min(50vw,380px)] w-[min(50vw,380px)] rounded-full sm:-right-[10%] sm:top-[20%] sm:h-[min(60vw,440px)] sm:w-[min(60vw,440px)]",
-          "bg-[radial-gradient(circle,hsl(38_45%_88%/0.55)_0%,transparent_68%)] blur-[72px]",
+          "hero-orb absolute -right-[6%] top-[14%] h-[min(50vw,380px)] w-[min(50vw,380px)] rounded-full sm:-right-[10%] sm:top-[16%] sm:h-[min(60vw,520px)] sm:w-[min(60vw,520px)]",
+          "bg-[radial-gradient(circle,hsl(16_95%_72%/0.38)_0%,hsl(340_80%_75%/0.14)_45%,transparent_70%)] blur-[72px]",
           !reduced && "hero-orb-float-b"
         )}
         style={reduced ? undefined : { x: orb2X, y: orb2Y }}
@@ -119,120 +77,13 @@ const HeroBackground = () => {
         style={reduced ? undefined : { x: orb3X, y: orb3Y }}
       />
 
-      {/* Subtle editorial grid — fades at center */}
+      {/* Subtle editorial grid — fades at edges */}
       <div className="hero-fine-grid absolute inset-0" />
 
-      {/* Spotlight behind headline */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_42%,hsl(40_30%_97%/0.95)_0%,transparent_100%)]" />
-
-      {/* Single elegant growth curve */}
-      <svg
-        className="absolute inset-0 h-full w-full pointer-events-none"
-        preserveAspectRatio="xMidYMid meet slice"
-        viewBox="0 0 1200 600"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="curve-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(30 10% 15% / 0)" />
-            <stop offset="30%" stopColor="hsl(30 10% 15% / 0.12)" />
-            <stop offset="70%" stopColor="hsl(30 10% 15% / 0.22)" />
-            <stop offset="100%" stopColor="hsl(30 10% 15% / 0.08)" />
-          </linearGradient>
-        </defs>
-
-        <path
-          d={CURVE}
-          fill="none"
-          stroke="url(#curve-grad)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          className={cn(!reduced && "hero-curve-draw")}
-        />
-
-        {/* Highlight dot at peak */}
-        <circle
-          cx="960"
-          cy="120"
-          r="4"
-          fill="hsl(30 10% 15% / 0.2)"
-          className={cn(!reduced && "hero-curve-dot")}
-        />
-        <circle cx="960" cy="120" r="2" fill="hsl(30 10% 15% / 0.45)" />
-      </svg>
-
-      {/* Metric pills */}
-      {METRICS.map((m, i) => (
-        <MetricPillCard
-          key={m.label}
-          metric={m}
-          index={i}
-          reduced={reduced}
-          springX={sx}
-          springY={sy}
-          className={m.desktopClassName}
-        />
-      ))}
-
-      {/* Bottom soft fade */}
+      {/* Bottom soft fade into the next section */}
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[hsl(40_30%_97%)] to-transparent" />
     </div>
   );
 };
-
-function MetricPillCard({
-  metric,
-  index,
-  reduced,
-  springX,
-  springY,
-  className,
-  absolute = true,
-}: {
-  metric: MetricPill;
-  index: number;
-  reduced: boolean;
-  springX: ReturnType<typeof useSpring>;
-  springY: ReturnType<typeof useSpring>;
-  className?: string;
-  absolute?: boolean;
-}) {
-  const x = useTransform(springX, (v) => v * metric.depth);
-  const y = useTransform(springY, (v) => v * metric.depth);
-
-  return (
-    <motion.div
-      className={cn(
-        "hero-pill flex items-center gap-2.5 rounded-full border border-primary/[0.08] px-3.5 py-2 sm:px-4 sm:py-2.5",
-        absolute ? "absolute" : "relative",
-        absolute ? metric.desktopClassName : undefined,
-        className
-      )}
-      style={reduced ? undefined : { x, y }}
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={
-        reduced
-          ? { opacity: 1, scale: 1, y: 0 }
-          : { opacity: 1, scale: 1, y: [0, -4, 0] }
-      }
-      transition={
-        reduced
-          ? { duration: 0.5, delay: index * 0.1 }
-          : {
-              y: { duration: 5 + index, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 },
-              opacity: { duration: 0.6, delay: index * 0.1 },
-            }
-      }
-    >
-      <span className="font-display text-sm font-bold tabular-nums text-primary sm:text-[15px]">
-        {metric.value}
-      </span>
-      <span className="h-3 w-px bg-primary/15" />
-      <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-[11px]">
-        {metric.label}
-      </span>
-    </motion.div>
-  );
-}
 
 export default HeroBackground;
