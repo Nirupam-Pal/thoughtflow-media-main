@@ -44,7 +44,7 @@ const gallery = (
   items: { seed: string; alt: string }[],
 ): PortfolioGalleryItem[] =>
   items.map(({ seed, alt }) => ({
-    src: `https://images.unsplash.com/${seed}?w=1600&h=1000&fit=crop&q=80`,
+    src: `https://images.unsplash.com/${seed}?w=1600&h=1000&fit=crop&q=80&auto=format`,
     alt,
   }));
 
@@ -54,7 +54,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     title: "TechStart Brand Campaign",
     category: "Content Production",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80&auto=format",
     description:
       "Complete brand transformation with UGC content strategy, launch films, and channel toolkits.",
     gallery: gallery([
@@ -71,7 +71,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     title: "Funnel Workshop Training",
     category: "Social Media",
     image:
-      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop&q=80&auto=format",
     description:
       "Full-funnel marketing curriculum, ad creative frameworks, and hands-on workshop assets.",
     gallery: gallery([
@@ -88,7 +88,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     title: "Organic Growth Engine",
     category: "Web Development",
     image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop&q=80&auto=format",
     description:
       "Custom-engineered organic growth: landing pages, SEO content hubs, and performance dashboards.",
     gallery: gallery([
@@ -105,7 +105,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     title: "GrowthLab Lead Generation",
     category: "Performance Marketing",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80&auto=format",
     description:
       "Data-driven campaigns and reporting dashboards delivering measurable ROI.",
     gallery: gallery([
@@ -121,7 +121,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     title: "Scroll Stopping Video Production",
     category: "Content Production",
     image:
-      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&h=600&fit=crop&q=80&auto=format",
     description:
       "High-impact commercial ads, product spots, and social-first cutdowns.",
     gallery: [],
@@ -216,7 +216,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     title: "Creative Designs",
     category: "Graphic Designs",
     image:
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&q=80&auto=format",
     description:
       "Stunning creative designs crafted for maximum impact across all platforms and formats.",
     gallery: [],

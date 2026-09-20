@@ -226,9 +226,10 @@ const Portfolio = () => {
     activeCategory === "All" ? PORTFOLIO_PROJECTS : PORTFOLIO_PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="portfolio" className="section-aurora relative overflow-x-clip bg-background py-16 sm:py-20 lg:py-32">
+    <section aria-labelledby="portfolio-heading" id="portfolio" className="section-aurora relative overflow-x-clip bg-background py-16 sm:py-20 lg:py-32">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="portfolio-heading"
           eyebrow="Case Studies"
           title="Work that"
           accent="moves the needle"

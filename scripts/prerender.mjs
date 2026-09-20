@@ -69,12 +69,22 @@ try {
 
   for (const route of routes) {
     const page = await browser.newPage();
-    await page.goto(`${BASE}${route}`, {
-      waitUntil: "networkidle",
-      timeout: 120_000,
-    });
+
+    // Third-party video embeds keep the network busy forever (so "networkidle" never fires) and add
+    // nothing to the captured HTML — the <iframe> tags stay in the DOM either way. Block them.
+    await page.route(/(youtube\.com|youtube-nocookie\.com|ytimg\.com|googlevideo\.com|calendly\.com)/, (r) => r.abort());
+
+    await page.goto(`${BASE}${route}`, { waitUntil: "load", timeout: 120_000 });
 
     await page.waitForSelector("#root h1", { timeout: 60_000 });
+    if (route === "/") {
+      // The carousel and form sections are code-split; make sure they've rendered before capture.
+      await page.waitForSelector("#team .swiper", { timeout: 60_000 });
+      await page.waitForSelector("#contact form", { timeout: 60_000 });
+    }
+    // Best-effort settle for images / fonts / effects (Seo removes the static default tags in an effect).
+    await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
+    await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => {
       document.documentElement.setAttribute("data-prerendered", "true");
     });

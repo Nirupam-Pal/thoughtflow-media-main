@@ -20,12 +20,12 @@ const Footer = () => {
         <Reveal>
           <div className="mb-10 grid gap-10 sm:mb-12 sm:grid-cols-2 sm:gap-12 md:grid-cols-4">
             <div className="md:col-span-2">
-              <h3 className="mb-4 font-display text-2xl font-bold">
+              <h2 className="mb-4 font-display text-2xl font-bold">
                 Thoughtflow <span className="text-ember">Mediaa</span>
-              </h3>
+              </h2>
               <p className="mb-6 max-w-md leading-relaxed text-muted-foreground">
-                AI-powered creative marketing agency specializing in content creation,
-                performance marketing, and web development.
+                Thoughtflow Mediaa (TFM) is an AI-powered creative marketing agency in Agartala, Tripura,
+                specializing in content creation, performance marketing, and web development.
               </p>
               <div className="flex gap-3">
                 {socials.map(({ icon: Icon, label, href }) => (
@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="mb-4 font-display font-semibold">Services</h4>
+              <h3 className="mb-4 font-display font-semibold">Services</h3>
               <ul className="space-y-3">
                 {[
                   "Content Creation",
@@ -67,7 +67,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="mb-4 font-display font-semibold">Contact</h4>
+              <h3 className="mb-4 font-display font-semibold">Contact</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3 text-muted-foreground">
                   <Mail className="mt-0.5 h-5 w-5 flex-shrink-0" />

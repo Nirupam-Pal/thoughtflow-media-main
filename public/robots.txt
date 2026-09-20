@@ -1,16 +1,7 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Thoughtflow Mediaa — https://thoughtflowmediaa.com
+# The whole site is a public brochure: nothing is private, so crawlers get full access.
 User-agent: *
 Allow: /
 
+# Machine-readable list of every indexable URL (regenerated on each build).
 Sitemap: https://thoughtflowmediaa.com/sitemap.xml

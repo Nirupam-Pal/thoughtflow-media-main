@@ -2,36 +2,16 @@ import { Video, TrendingUp, Code2, Play, MousePointer2, type LucideIcon } from "
 import { SectionHeader } from "@/components/motion/SectionHeader";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
+import { SERVICES } from "@/data/services";
 
-const services: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  features: string[];
-  Visual: () => JSX.Element;
-}[] = [
-  {
-    icon: Video,
-    title: "Content Services",
-    description: "End-to-end content creation including UGC videos, commercial ads, and social media content. From pre-production to post-production, we bring your brand story to life.",
-    features: ["UGC Videos", "Commercial Ads", "YouTube Content", "Social Media Posts", "Pre & Post Production"],
-    Visual: ContentVisual,
-  },
-  {
-    icon: TrendingUp,
-    title: "Performance Marketing",
-    description: "Data-driven marketing strategies that generate leads, drive conversions, and maximize sales. We turn clicks into customers and browsers into buyers.",
-    features: ["Lead Generation", "Conversion Optimization", "ROI Tracking", "Sales Funnels", "Campaign Management"],
-    Visual: PerformanceVisual,
-  },
-  {
-    icon: Code2,
-    title: "Web Development",
-    description: "Dynamic websites, admin portals, and landing pages built with cutting-edge technology. Automation solutions that streamline your business operations.",
-    features: ["Custom Websites", "Admin Portals", "Landing Pages", "Work Automation", "API Integration"],
-    Visual: WebVisual,
-  },
-];
+// Copy lives in src/data/services.js (shared with the structured data); only the visuals are UI-specific.
+const SERVICE_UI: Record<string, { icon: LucideIcon; Visual: () => JSX.Element }> = {
+  content: { icon: Video, Visual: ContentVisual },
+  performance: { icon: TrendingUp, Visual: PerformanceVisual },
+  web: { icon: Code2, Visual: WebVisual },
+};
+
+const services = SERVICES.map((service) => ({ ...service, ...SERVICE_UI[service.id] }));
 
 /* ── Floating CSS-3D "data cards". Children sit at different translateZ
       depths, so the card's tilt gives them real parallax. ── */
@@ -118,9 +98,10 @@ function WebVisual() {
 
 const Services = () => {
   return (
-    <section className="section-aurora relative bg-background py-20 md:py-28 lg:py-32" id="services">
+    <section aria-labelledby="services-heading" className="section-aurora relative bg-background py-20 md:py-28 lg:py-32" id="services">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="services-heading"
           eyebrow="Our Services"
           title="What We Do"
           accent="Best"

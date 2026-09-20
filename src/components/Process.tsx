@@ -76,9 +76,10 @@ const Process = () => {
   const line = useTransform(progress, (v) => (reduced ? 1 : v));
 
   return (
-    <section className="relative overflow-x-clip bg-secondary/30 py-20 md:py-28 lg:py-32" id="process">
+    <section aria-labelledby="process-heading" className="relative overflow-x-clip bg-secondary/30 py-20 md:py-28 lg:py-32" id="process">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="process-heading"
           eyebrow="How We Work"
           title="From idea to"
           accent="impact"

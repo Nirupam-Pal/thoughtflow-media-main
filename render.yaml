@@ -5,6 +5,9 @@ services:
   - type: web
     name: thoughtflow-media-hub
     runtime: node
+    # `bun run build` bakes each page's full <head> (title, meta, Open Graph, JSON-LD) into static HTML
+    # and writes sitemap.xml. For fully rendered pages too (best for non-JS crawlers), switch to
+    # `bun run build:prerender` — it needs Chromium, i.e. `bunx playwright install --with-deps chromium`.
     buildCommand: bun run build
     startCommand: bun run start
     envVars:

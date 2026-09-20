@@ -101,9 +101,10 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="section-aurora py-16 sm:py-20 lg:py-32 bg-gradient-to-b from-background to-secondary/30 overflow-x-clip">
+    <section aria-labelledby="contact-heading" id="contact" className="section-aurora py-16 sm:py-20 lg:py-32 bg-gradient-to-b from-background to-secondary/30 overflow-x-clip">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="contact-heading"
           eyebrow="Contact"
           title="Let's Build Something"
           accent="Amazing"

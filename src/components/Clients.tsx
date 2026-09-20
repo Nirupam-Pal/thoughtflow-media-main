@@ -51,38 +51,38 @@ import { Reveal } from "@/components/motion/Reveal";
 // ];
 
 const logos = [
-  { name: "Vidya Bridge", src: "/logos/1.png" },
-  { name: "Refresh Rays", src: "/logos/2.png" },
-  { name: "Fit Factory", src: "/logos/3.png" },
-  { name: "Aimsas", src: "/logos/4.png" },
-  { name: "The Core Acedemy", src: "/logos/5.png" },
-  { name: "Milestone Institute", src: "/logos/6.png" },
-  { name: "Dr. SK Biology", src: "/logos/7.png" },
-  { name: "Synapse", src: "/logos/8.png" },
-  { name: "Longtharai", src: "/logos/9.png" },
-  { name: "Petuk Somabesh 3.0", src: "/logos/10.png" },
-  { name: "Smoke Of Longtwrai", src: "/logos/11.png" },
-  { name: "Dr. SK Global", src: "/logos/12.png" },
-  { name: "Aadhyan", src: "/logos/13.png" },
-  { name: "Junior", src: "/logos/14.png" },
-  { name: "Untitled 3", src: "/logos/15.png" },
-  { name: "CA ANKITA BORA", src: "/logos/16.png" },
-  { name: "Green Hub", src: "/logos/17.png" },
-  { name: "Rencare Energy", src: "/logos/18.jpg" },
-  { name: "Prayam Classes", src: "/logos/19.png" },
-  { name: "7 Oceans Centre of Music", src: "/logos/20.jpg" },
-  { name: "Chessverse", src: "/logos/21.jpg" },
-  { name: "Dilaas", src: "/logos/22.png" },
-  { name: "NPA", src: "/logos/23.png" },
-  { name: "stylelinepols", src: "/logos/24.png" },
-  { name: "Barat Gro Kids", src: "/logos/25.png" },
-  { name: "Smoke of Longtwrai", src: "/logos/26.jpeg" },
-  { name: "Adflow Productions", src: "/logos/27.jpeg" },
-  { name: "Swaad Korok", src: "/logos/28.png" },
-  { name: "Conjugate", src: "/logos/29.jpeg" },
-  { name: "Saura", src: "/logos/30.jpg" },
-  { name: "Scented Cafe", src: "/logos/31.png" },
-  { name: "Spaces", src: "/logos/32.png" },
+  { name: "Vidya Bridge", src: "/logos/1.webp" },
+  { name: "Refresh Rays", src: "/logos/2.webp" },
+  { name: "Fit Factory", src: "/logos/3.webp" },
+  { name: "Aimsas", src: "/logos/4.webp" },
+  { name: "The Core Acedemy", src: "/logos/5.webp" },
+  { name: "Milestone Institute", src: "/logos/6.webp" },
+  { name: "Dr. SK Biology", src: "/logos/7.webp" },
+  { name: "Synapse", src: "/logos/8.webp" },
+  { name: "Longtharai", src: "/logos/9.webp" },
+  { name: "Petuk Somabesh 3.0", src: "/logos/10.webp" },
+  { name: "Smoke Of Longtwrai", src: "/logos/11.webp" },
+  { name: "Dr. SK Global", src: "/logos/12.webp" },
+  { name: "Aadhyan", src: "/logos/13.webp" },
+  { name: "Junior", src: "/logos/14.webp" },
+  { name: "Untitled 3", src: "/logos/15.webp" },
+  { name: "CA ANKITA BORA", src: "/logos/16.webp" },
+  { name: "Green Hub", src: "/logos/17.webp" },
+  { name: "Rencare Energy", src: "/logos/18.webp" },
+  { name: "Prayam Classes", src: "/logos/19.webp" },
+  { name: "7 Oceans Centre of Music", src: "/logos/20.webp" },
+  { name: "Chessverse", src: "/logos/21.webp" },
+  { name: "Dilaas", src: "/logos/22.webp" },
+  { name: "NPA", src: "/logos/23.webp" },
+  { name: "stylelinepols", src: "/logos/24.webp" },
+  { name: "Barat Gro Kids", src: "/logos/25.webp" },
+  { name: "Smoke of Longtwrai", src: "/logos/26.webp" },
+  { name: "Adflow Productions", src: "/logos/27.webp" },
+  { name: "Swaad Korok", src: "/logos/28.webp" },
+  { name: "Conjugate", src: "/logos/29.webp" },
+  { name: "Saura", src: "/logos/30.webp" },
+  { name: "Scented Cafe", src: "/logos/31.webp" },
+  { name: "Spaces", src: "/logos/32.webp" },
 ];
 
 const firstRow = logos.slice(0, logos.length / 2);
@@ -177,9 +177,10 @@ const LogoCard = ({ src, name }) => {
 
 const Clients = () => {
   return (
-    <section id="testimonials" className="section-aurora relative pt-12 pb-14 sm:pt-16 sm:pb-16 lg:pt-20 lg:pb-20 bg-secondary/30 overflow-x-clip overflow-hidden">
+    <section aria-labelledby="clients-heading" id="testimonials" className="section-aurora relative pt-12 pb-14 sm:pt-16 sm:pb-16 lg:pt-20 lg:pb-20 bg-secondary/30 overflow-x-clip overflow-hidden">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="clients-heading"
           eyebrow="Our Clients"
           title="Trusted by"
           accent="50+ Brands"

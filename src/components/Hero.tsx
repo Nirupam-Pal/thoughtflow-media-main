@@ -64,17 +64,17 @@ const Hero = () => {
             <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
               <h1 className="font-display font-bold tracking-tight">
                 <span className="mb-6 block">
-                  <span className="hero-glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-sans text-xs font-medium tracking-wide text-muted-foreground sm:text-[13px]">
+                  <span className="hero-glass inline-flex items-center gap-2 rounded-2xl px-3.5 py-1.5 text-left font-sans sm:rounded-full text-xs font-medium tracking-wide text-muted-foreground sm:text-[13px]">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[hsl(16_98%_55%)] opacity-60 motion-reduce:animate-none" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-[hsl(16_98%_55%)]" />
                     </span>
-                    AI-Powered Marketing Agency in Agartala, India
+                    Thoughtflow Mediaa · AI-Powered Marketing Agency in Agartala
                   </span>
-                </span>
+                </span>{" "}
                 <span className="block text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.04] text-foreground">
                   {ACTIVE.line}
-                </span>
+                </span>{" "}
                 <span className="block bg-gradient-to-r from-[hsl(22_98%_54%)] via-[hsl(8_90%_54%)] to-[hsl(340_82%_52%)] bg-clip-text pb-2 text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.04] text-transparent">
                   {ACTIVE.accent}
                 </span>

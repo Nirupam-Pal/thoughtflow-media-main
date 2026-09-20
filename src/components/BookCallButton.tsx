@@ -1,8 +1,10 @@
-import { useState, type ReactNode } from "react";
+import { lazy, Suspense, useState, type ReactNode } from "react";
 import { CalendarDays } from "lucide-react";
-import { PopupModal } from "react-calendly";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { CALENDLY_PAGE_SETTINGS, CALENDLY_URL } from "@/lib/calendly";
+
+// react-calendly is only downloaded when the button is first clicked, keeping it off the critical path.
+const PopupModal = lazy(() => import("react-calendly").then((m) => ({ default: m.PopupModal })));
 
 /** Opens the Calendly popup. Mounted only after a click so prerender never touches `document`. */
 export function BookCallButton({
@@ -18,13 +20,15 @@ export function BookCallButton({
         {children}
       </Button>
       {open && (
-        <PopupModal
-          url={CALENDLY_URL}
-          pageSettings={CALENDLY_PAGE_SETTINGS}
-          open={open}
-          onModalClose={() => setOpen(false)}
-          rootElement={document.getElementById("root") as HTMLElement}
-        />
+        <Suspense fallback={null}>
+          <PopupModal
+            url={CALENDLY_URL}
+            pageSettings={CALENDLY_PAGE_SETTINGS}
+            open={open}
+            onModalClose={() => setOpen(false)}
+            rootElement={document.getElementById("root") as HTMLElement}
+          />
+        </Suspense>
       )}
     </>
   );

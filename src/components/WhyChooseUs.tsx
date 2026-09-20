@@ -28,11 +28,12 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="section-aurora relative overflow-hidden bg-gradient-premium py-20 md:py-28 lg:py-32">
+    <section aria-labelledby="why-heading" className="section-aurora relative overflow-hidden bg-gradient-premium py-20 md:py-28 lg:py-32">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(38_25%_88%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(38_25%_88%)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,black,transparent)]" />
 
       <div className="container relative z-10 mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="why-heading"
           eyebrow="Why Thoughtflow"
           title="Why Choose"
           accent="Thoughtflow Mediaa"

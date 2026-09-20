@@ -1,23 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.ico" />
-  <!-- Default SEO (overridden per-route by react-helmet; baked into HTML at build via prerender) -->
-  <title>Thoughtflow Mediaa | Digital Marketing Agency in Agartala</title>
-  <meta name="description"
-    content="Thoughtflow Mediaa is a full-service digital marketing agency in Agartala, Tripura. Meta & Google Ads, social media, and video production for brands across Northeast India." />
-  <meta name="author" content="Thoughtflow Mediaa" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet">
+  <!-- Title, description, keywords, canonical, Open Graph, Twitter Card and JSON-LD are injected
+       here at build time by the tfm-seo plugin in vite.config.ts (source: src/seo/site.js), so the
+       raw HTML is complete for crawlers that don't run JavaScript. React (Seo.tsx) takes over
+       after load and removes these defaults, so nothing is ever duplicated. -->
+  <!--seo:start--><!--seo:end-->
 
+  <!-- Fonts are self-hosted (@fontsource-variable, imported in entry-client.tsx): no third-party
+       request, no render-blocking stylesheet. The Latin files are preloaded by the same plugin. -->
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -32,13 +29,23 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
   <link rel="manifest" href="/favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#faf8f5">
+  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#faf8f5">
 </head>
 
 <body>
   <div id="root"></div>
+  <noscript>
+    <div style="max-width:40rem;margin:4rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6">
+      <p><strong style="font-size:1.5rem">Thoughtflow Mediaa (TFM) — AI-Powered Digital Marketing Agency in Agartala</strong></p>
+      <p>Thoughtflow Mediaa is a digital marketing and advertising agency in Agartala, Tripura, serving brands across
+        Northeast India with Meta &amp; Google Ads, UGC video production, social media marketing and web development.</p>
+      <p>Email: <a href="mailto:thoughtflowmedia@gmail.com">thoughtflowmedia@gmail.com</a> · Phone:
+        <a href="tel:+917005046836">+91 7005046836</a></p>
+      <p>Please enable JavaScript to view the full site.</p>
+    </div>
+  </noscript>
   <script type="module" src="/src/entry-client.tsx"></script>
 </body>
 

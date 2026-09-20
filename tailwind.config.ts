@@ -49,8 +49,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "system-ui", "sans-serif"],
+        sans: ["Inter Variable", "Inter Fallback", "Inter", "system-ui", "sans-serif"],
+        display: ["Space Grotesk Variable", "Space Grotesk Fallback", "Space Grotesk", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "gradient-premium": "var(--gradient-premium)",

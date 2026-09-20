@@ -118,117 +118,20 @@
 // export default Testimonials
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { TESTIMONIALS } from "@/data/testimonials";
 import { SectionHeader } from "@/components/motion/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
 
 function AnimatedTestimonialsDemo() {
-  const testimonials = [
-    // {
-    //   quote:
-    //     "TFM is hands down the most creative marketing agency in Tripura! I had a fantastic overall experience and couldn't be happier with the service. Best of luck to the team—you guys are doing great work!",
-    //   name: "Sabarni Choudhury",
-    //   designation: "Product Manager at TechFlow",
-    //   src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   rating: 5,
-    // },
-    // {
-    //   quote:
-    //     "I’m really satisfied with the work TFM has done for me. They are easily the most creative agency in Tripura, and the overall experience was top-notch. Everything was good, and I’d definitely recommend them",
-    //   name: "Satyajit",
-    //   designation: "CTO at InnovateSphere",
-    //   src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   rating: 5,
-    // },
-    // {
-    //   quote:
-    //     "The creative content ideas and social media marketing services from TFM are just amazing. I’m very happy with the results so far. I'm excited to see them continue to work hard and deliver such great value!",
-    //   name: "Ratan",
-    //   designation: "Operations Director at CloudScale",
-    //   src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   rating: 4,
-    // },
-    {
-      quote:
-        "TFM provides truly amazing creative content and social media marketing services. I’ve had a positive experience working with them and appreciate the fresh ideas they bring to the table. It’s been a great partnership!",
-      name: "Prasenjit Debnath",
-      designation: "Chemistry Mentor, Core Academy",
-      src: "/clients/PrasenjitSir2.jpeg",
-      rating: 5,
-      focus: "50% 35%",
-    },
-    {
-      quote:
-        "TFM delivers exceptional creative content and social media marketing services. My experience working with them has been highly positive, and I truly value the innovative ideas and creativity they consistently bring. It has been a wonderful partnership overall!",
-      name: "Sujoy Datta Muhury",
-      designation: "Founder & CEO, Trend Crafter",
-      src: "/clients/Sujoy.jpeg",
-      rating: 4,
-      focus: "50% 8%",
-    },
-    {
-      quote:
-        "The social media marketing and creative content ideas at TFM are simply amazing. I had a perfect 5-star experience and was completely satisfied with the service. Highly recommended for anyone looking for creative flair!",
-      name: "Uttam Kumar Das",
-      designation: "Founder, Oxford Hub of English",
-      src: "/clients/UttamKumarDas.jpeg",
-      rating: 5,
-      focus: "50% 15%",
-    },
-    {
-      quote:
-        "Working with TFM has been an innovative and exciting experience. Their creative content and social media strategies are just amazing and have really helped us stand out. I’m 100% satisfied and would recommend them to anyone!",
-      name: "Pratik Saha",
-      designation: "Founder | Mathematics Mentor , Prayam Classes",
-      src: "/clients/PratikSir.jpg",
-      rating: 5,
-      focus: "50% 30%",
-    },
-    {
-      quote:
-        "I’m so impressed with the work TFM has done; they really are a team that makes the dream work! The service was excellent, and I’m fully satisfied with the results. Keep up the great work and always believe in your team!",
-      name: "Aditya Mitra",
-      designation: "Consultant of Bharat Consultancy",
-      src: "/clients/Aditya Mitra.jpg",
-      rating: 5,
-      focus: "50% 30%",
-    },
-    {
-      quote:
-        "TFM is definitely the most creative marketing agency in Tripura. My experience was flawless from start to finish, and I’m incredibly happy with the service. Best of luck to the whole team!",
-      name: "Bhaskar Biswas",
-      designation: "Physics Teacher | Assistant Professor, ICFAI University Tripura",
-      src: "/clients/Bhashkar.jpeg",
-      rating: 5,
-      focus: "55% 25%",
-    },
-    {
-      quote:
-        "Working with TFM has been a smooth and reassuring experience. We truly appreciate their commitment and the thoughtfulness they bring to every step. Creative Content ideas & Social media marketing services.... Just amazing! Quality work... Best Marketing Agency. Most Creative Marketing Agency in Tripura... Best of Luck. Nice work... Satisfied for this work. Go Ahead.",
-      name: "Pratik Debnath",
-      designation: "Founder, Chessverse",
-      src: "/clients/PratikDebnath.jpeg",
-      rating: 5,
-      focus: "50% 40%",
-    },
-    {
-      quote:
-        "Nice work... Satisfied with the service. Go ahead",
-      name: "Souptik Bhowmik",
-      designation: "Chemistry Mentor, Aimsas-A Hybrid Smart Skool",
-      src: "/clients/Souptik.jpeg",
-      rating: 4,
-      focus: "50% 35%",
-    },
-  ];
-
-  return <AnimatedTestimonials testimonials={testimonials} autoplay={true} />;
+  return <AnimatedTestimonials testimonials={TESTIMONIALS} autoplay={true} />;
 }
 
 const Testimonials = () => {
   return (
-    <section id="clients" className="section-aurora relative pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-32 bg-background overflow-x-clip overflow-hidden">
+    <section aria-labelledby="testimonials-heading" id="clients" className="section-aurora relative pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-32 bg-background overflow-x-clip overflow-hidden">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="testimonials-heading"
           eyebrow="Testimonials"
           title="What Our Clients"
           accent="Say"

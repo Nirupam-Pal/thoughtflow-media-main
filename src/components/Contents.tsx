@@ -183,55 +183,55 @@ const baseImages = [
 
 const images = [
   {
-    src: "/posters/1.jpg",
+    src: "/posters/1.webp",
     alt: "Modern Office Interior"
   },
   {
-    src: "/posters/2.jpg",
+    src: "/posters/2.webp",
     alt: "Minimalist Architecture"
   },
   {
-    src: "/posters/3.jpg",
+    src: "/posters/3.webp",
     alt: "Skyscraper Facade"
   },
   {
-    src: "/posters/4.jpg",
+    src: "/posters/4.webp",
     alt: "Professional Workspace"
   },
   {
-    src: "/posters/5.jpg",
+    src: "/posters/5.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/6.jpg",
+    src: "/posters/6.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/7.jpg",
+    src: "/posters/7.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/8.jpg",
+    src: "/posters/8.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/9.jpg",
+    src: "/posters/9.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/10.jpg",
+    src: "/posters/10.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/11.jpg",
+    src: "/posters/11.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/12.jpg",
+    src: "/posters/12.webp",
     alt: "Abstract Geometry"
   },
   {
-    src: "/posters/13.jpg",
+    src: "/posters/13.webp",
     alt: "Abstract Geometry"
   },
 ];
@@ -245,9 +245,10 @@ const Contents = () => {
   const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
 
   return (
-    <section id="team" className="pt-16 pb-0 sm:pt-20 lg:pt-32 bg-[#f5f4f3] overflow-x-clip">
+    <section aria-labelledby="contents-heading" id="team" className="pt-16 pb-0 sm:pt-20 lg:pt-32 bg-[#f5f4f3] overflow-x-clip">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
+          id="contents-heading"
           eyebrow="Creative Studio"
           title="Take a look of our high ROI-driven"
           accent="Ad Videos"

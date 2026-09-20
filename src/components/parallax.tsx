@@ -27,8 +27,8 @@ import { cn } from "@/lib/utils";
 type Tile = { src: string; kind: "work" | "brand"; alt: string };
 type Mode = "css" | "js" | "static";
 
-const work = (n: number): Tile => ({ src: `/posters/${n}.jpg`, kind: "work", alt: "Ad creative by Thoughtflow Mediaa" });
-const brand = (n: number): Tile => ({ src: `/parallax/logos/${n}.png`, kind: "brand", alt: "Thoughtflow Mediaa" });
+const work = (n: number): Tile => ({ src: `/posters/${n}.webp`, kind: "work", alt: "Ad creative by Thoughtflow Mediaa" });
+const brand = (n: number): Tile => ({ src: `/parallax/logos/${n}.webp`, kind: "brand", alt: "Thoughtflow Mediaa" });
 
 const COLUMNS: Tile[][] = [
   [work(2), brand(4), work(6)],
@@ -82,7 +82,7 @@ const Skiper30 = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_42%_at_50%_50%,hsl(40_30%_97%/0.94),transparent_78%)]" />
             <div className="glass-solid pointer-events-auto relative w-full max-w-md rounded-3xl p-7 text-center sm:p-10">
               <img
-                src="/tf-profile.png"
+                src="/logo-128.webp"
                 alt=""
                 width={56}
                 height={56}

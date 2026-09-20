@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -6,17 +6,26 @@ import Services from "@/components/Services";
 import Process from "@/components/Process";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Portfolio from "@/components/Portfolio";
-// import Team from "@/components/Contents";
-import ContactForm from "@/components/ContactForm";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { Skiper30 } from "@/components/parallax";
 import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
-import Contents from "@/components/Contents";
 import Seo from "@/components/Seo";
 import { scrollToTarget } from "@/lib/smooth-scroll";
-// import AnimatedTestimonialsDemo from "@/components/Testimonials";
+import { getHomeSeo } from "@/seo/site.js";
+
+// Below-the-fold sections with heavy dependencies (Swiper carousels; form + validation + EmailJS)
+// are split into their own chunks so they don't compete with the hero for the main thread.
+// They still hydrate/render right after load — they are not scroll-gated — so their content is
+// always present for crawlers. The fallback reserves height to avoid layout shift.
+const Contents = lazy(() => import("@/components/Contents"));
+const ContactForm = lazy(() => import("@/components/ContactForm"));
+const SectionFallback = ({ minHeight }: { minHeight: number }) => (
+  <div aria-hidden="true" style={{ minHeight }} />
+);
+
+const HOME_SEO = getHomeSeo();
 
 const Index = () => {
   const location = useLocation();
@@ -33,34 +42,34 @@ const Index = () => {
 
   return (
     <div className="min-h-screen min-w-0 w-full max-w-[100vw] overflow-x-clip">
-      <Seo
-        title="Digital Marketing Agency in Agartala | Thoughtflow Mediaa"
-        description="Thoughtflow Mediaa is a full-service digital marketing agency in Agartala, Tripura. We run Meta & Google Ads, manage social media, and produce videos and graphics for brands across Northeast India."
-        ogType="website"
-        canonicalPath="/"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Thoughtflow Mediaa",
-          url: "https://thoughtflowmediaa.com",
-          logo: "https://thoughtflowmediaa.com/tf-profile.png",
-          sameAs: [],
-        }}
-      />
+      <Seo {...HOME_SEO} />
+
+      {/* Lets keyboard and screen-reader users bypass the navigation. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-primary-foreground"
+      >
+        Skip to main content
+      </a>
+
       <Header />
-      <Hero />
-      <Services />
-      <Process />
-      <WhyChooseUs />
-      <Portfolio />
-      {/* <AnimatedTestimonialsDemo /> */}
-      <Contents />
-      {/* <Testimonials /> */}
-      <Clients/>
-      <Testimonials/>
-      <ContactForm />
-      <Skiper30/>
-      <CTA />
+      <main id="main">
+        <Hero />
+        <Services />
+        <Process />
+        <WhyChooseUs />
+        <Portfolio />
+        <Suspense fallback={<SectionFallback minHeight={1200} />}>
+          <Contents />
+        </Suspense>
+        <Clients />
+        <Testimonials />
+        <Suspense fallback={<SectionFallback minHeight={900} />}>
+          <ContactForm />
+        </Suspense>
+        <Skiper30 />
+        <CTA />
+      </main>
       <Footer />
     </div>
   );

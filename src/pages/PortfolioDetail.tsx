@@ -14,6 +14,7 @@ import { getPortfolioProjectBySlug, type PortfolioGalleryItem } from "@/data/por
 import { cn } from "@/lib/utils";
 import { isPrerenderedDocument } from "@/lib/prerender";
 import Seo from "@/components/Seo";
+import { getProjectSeo } from "@/seo/site.js";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -87,26 +88,7 @@ const PortfolioDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background min-w-0 w-full max-w-[100vw] overflow-x-clip">
-      <Seo
-        title={`${project.title} | Thoughtflow Mediaa`}
-        description={project.description}
-        image={project.image}
-        ogType="article"
-        canonicalPath={`/portfolio/${project.slug}`}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          name: project.title,
-          description: project.description,
-          url: `https://thoughtflowmediaa.com/portfolio/${project.slug}`,
-          image: project.image,
-          publisher: {
-            "@type": "Organization",
-            name: "Thoughtflow Mediaa",
-            url: "https://thoughtflowmediaa.com",
-          },
-        }}
-      />
+      <Seo {...getProjectSeo(project)} />
       <Header />
       <main className="flex-1 pt-24 pb-16 sm:pt-28 md:pt-32 sm:pb-20 min-w-0">
         <motion.div

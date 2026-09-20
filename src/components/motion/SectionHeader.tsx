@@ -4,12 +4,15 @@ import { Reveal } from "./Reveal";
 
 /** Same eyebrow chip + ember-gradient accent as the hero, for every section. */
 export function SectionHeader({
+  id,
   eyebrow,
   title,
   accent,
   description,
   className,
 }: {
+  /** id for the <h2>, referenced by the section's aria-labelledby. */
+  id?: string;
   eyebrow: string;
   title: ReactNode;
   /** Rendered after `title` in the ember gradient. */
@@ -26,7 +29,7 @@ export function SectionHeader({
         </span>
       </Reveal>
       <Reveal delay={0.06}>
-        <h2 className="font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-5xl lg:text-6xl">
+        <h2 id={id} className="font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-5xl lg:text-6xl">
           {title}
           {accent && (
             <>

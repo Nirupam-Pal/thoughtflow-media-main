@@ -457,3 +457,24 @@ html.lenis body {
     transform: translate3d(0, calc(var(--drift) * 50svh), 0);
   }
 }
+
+/* ─── Font-swap CLS guard ─── */
+/* Metric-matched local fallbacks: while the real fonts load, text is laid out with almost the
+   same widths and line heights, so the swap doesn't shift anything (Cumulative Layout Shift). */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  size-adjust: 107.06%;
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial");
+  /* Measured in Chromium against the real font at weight 600 (headings). */
+  size-adjust: 101%;
+  ascent-override: 97%;
+  descent-override: 28.7%;
+  line-gap-override: 0%;
+}
