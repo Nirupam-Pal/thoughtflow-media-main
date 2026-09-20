@@ -131,6 +131,9 @@ import "swiper/css/effect-coverflow";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { cn } from "@/lib/utils";
+import { SectionHeader } from "@/components/motion/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
+import { LazyVideo } from "@/components/motion/LazyVideo";
 import {
   Dialog,
   DialogContent,
@@ -242,19 +245,16 @@ const Contents = () => {
   const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
 
   return (
-    <section id="team" className="py-16 sm:py-20 lg:py-32 bg-[#f5f4f3] overflow-x-clip">
+    <section id="team" className="section-aurora py-16 sm:py-20 lg:py-32 bg-[#f5f4f3] overflow-x-clip">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Take a look of our high<br />
-            ROI-driven Ad Videos
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Highly engineered ROI-driven Ad videos (90% better performance)
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Creative Studio"
+          title="Take a look of our high ROI-driven"
+          accent="Ad Videos"
+          description="Highly engineered ROI-driven Ad videos (90% better performance)"
+        />
 
-        <div className="flex flex-col h-full w-full items-center justify-center overflow-hidden">
+        <Reveal className="flex flex-col h-full w-full items-center justify-center overflow-hidden">
           <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Video Production</h3>
           <Carousel_003
             items={contentItems}
@@ -263,7 +263,7 @@ const Contents = () => {
             autoplay={!openVideoSrc}
             onItemClick={(src) => setOpenVideoSrc(src)}
           />
-        </div>
+        </Reveal>
 
         <Dialog open={!!openVideoSrc} onOpenChange={(open) => !open && setOpenVideoSrc(null)}>
           {/* CHANGED: Changed sm:max-w-[450px] to max-w-fit to allow wider videos */}
@@ -322,7 +322,9 @@ const Contents = () => {
         </Dialog>
       </div>
       <div className="flex flex-col h-full w-full min-w-0 items-center justify-center overflow-x-clip overflow-y-hidden mt-8 sm:mt-10 bg-[#f5f4f3] px-1">
-        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Ad posters that brings enrollments <br /> (50% better performance)</h3>
+        <Reveal>
+          <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Ad posters that brings enrollments <br /> (50% better performance)</h3>
+        </Reveal>
         <Carousel_001 className="" images={images} showPagination loop autoplay />
       </div>
     </section>
@@ -450,14 +452,7 @@ const Carousel_003 = ({
             onClick={() => item.videoSrc && onItemClick?.(item.videoSrc)}
           >
             <div className="relative w-full h-full group">
-              <video
-                className="h-full w-full object-cover"
-                src={item.videoSrc || ""}
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
+              <LazyVideo src={item.videoSrc || ""} />
 
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                 <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full">
@@ -576,6 +571,8 @@ const Carousel_001 = ({
               className="h-full w-full max-h-full object-contain"
               src={image.src}
               alt={image.alt}
+              loading="lazy"
+              decoding="async"
             />
           </SwiperSlide>
         ))}

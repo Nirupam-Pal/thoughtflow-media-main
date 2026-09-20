@@ -260,3 +260,59 @@ All colors MUST be HSL.
     stroke-dashoffset: 0;
   }
 }
+
+/* ─── Shared section system (mirrors the hero's visual language) ─── */
+@layer utilities {
+  .glass {
+    background: hsl(0 0% 100% / 0.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid hsl(0 0% 100% / 0.75);
+    box-shadow:
+      0 8px 28px -8px hsl(30 10% 15% / 0.14),
+      inset 0 1px 0 hsl(0 0% 100% / 0.9);
+  }
+
+  .text-ember {
+    background-image: linear-gradient(90deg, hsl(22 98% 54%), hsl(8 90% 54%) 55%, hsl(340 82% 52%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 0.08em;
+  }
+
+  .bg-ember {
+    background-image: linear-gradient(135deg, hsl(22 98% 58%), hsl(340 82% 52%));
+  }
+
+  /* Soft ambient colour behind a section — plain radial gradients, no blur filter. */
+  .section-aurora {
+    background:
+      radial-gradient(45% 40% at 90% 8%, hsl(16 95% 72% / 0.18), transparent 70%),
+      radial-gradient(40% 35% at 6% 92%, hsl(38 60% 80% / 0.35), transparent 70%);
+  }
+
+  .svc-float { animation: svc-float 6s ease-in-out infinite alternate; }
+  .svc-float-b { animation: svc-float 7.5s ease-in-out -2s infinite alternate; }
+}
+
+@keyframes svc-float {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -6px, 0); }
+}
+
+/* Touch devices: backdrop-filter is the costliest glass effect on mobile GPUs. */
+@media (hover: none) {
+  .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: hsl(0 0% 100% / 0.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-float,
+  .svc-float-b {
+    animation: none !important;
+  }
+}

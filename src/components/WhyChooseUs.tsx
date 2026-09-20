@@ -1,5 +1,7 @@
 import { Sparkles, Target, Zap, Users } from "lucide-react";
-import { motion, Variants } from "framer-motion";
+import { SectionHeader } from "@/components/motion/SectionHeader";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { TiltCard } from "@/components/motion/TiltCard";
 
 const reasons = [
   {
@@ -24,99 +26,41 @@ const reasons = [
   }
 ];
 
-// Animation Variants matching the Service section style
-const containerVariants: Variants = {
-  hidden: { 
-    opacity: 1, 
-    transition: {
-      // Stagger backwards when animating out
-      staggerChildren: 0.1,
-      staggerDirection: -1,
-      when: "afterChildren"
-    }
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      // Stagger forwards when animating in
-      staggerChildren: 0.2,
-      when: "beforeChildren"
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 30, // Slight slide up/down
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut"
-    }
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: {
-      duration: 0.5,
-      ease: "easeOut"
-    }
-  },
-};
-
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 md:py-28 lg:py-32 bg-gradient-premium relative overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(38_25%_88%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(38_25%_88%)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
-      
-      <div className="container mx-auto min-w-0 px-4 sm:px-6 relative z-10">
-        {/* Header Animation */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-16"
-        >
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-            Why Choose Thoughtflow Media
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            We don't just deliver projects—we build partnerships that drive lasting success.
-          </p>
-        </motion.div>
-        
-        {/* Grid Animation */}
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ margin: "-100px" }}
-        >
-          {reasons.map((reason, index) => {
-            const Icon = reason.icon;
-            return (
-              <motion.div 
-                key={index}
-                variants={itemVariants}
-                className="text-center group"
-              >
-                <div className="inline-flex w-16 h-16 rounded-2xl bg-background shadow-soft items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-medium transition-all duration-300">
-                  <Icon className="w-8 h-8 text-primary" />
+    <section className="section-aurora relative overflow-hidden bg-gradient-premium py-20 md:py-28 lg:py-32">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(38_25%_88%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(38_25%_88%)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,black,transparent)]" />
+
+      <div className="container relative z-10 mx-auto min-w-0 px-4 sm:px-6">
+        <SectionHeader
+          eyebrow="Why Thoughtflow"
+          title="Why Choose"
+          accent="Thoughtflow Media"
+          description="We don't just deliver projects—we build partnerships that drive lasting success."
+        />
+
+        <Stagger className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {reasons.map(({ icon: Icon, title, description }, i) => (
+            <StaggerItem key={title} className="h-full">
+              <TiltCard className="rounded-3xl" max={9}>
+                <div className="group flex h-full flex-col p-6 sm:p-7">
+                  <div
+                    className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-background shadow-soft transition-shadow duration-300 group-hover:shadow-medium"
+                    style={{ transform: "translateZ(36px)" }}
+                  >
+                    <span className="absolute inset-0 rounded-2xl bg-ember opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <Icon className="relative h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white" />
+                  </div>
+                  <span className="mb-2 font-display text-sm font-semibold tabular-nums text-muted-foreground">
+                    0{i + 1}
+                  </span>
+                  <h3 className="mb-3 font-display text-xl font-semibold">{title}</h3>
+                  <p className="leading-relaxed text-muted-foreground">{description}</p>
                 </div>
-                
-                <h3 className="font-display text-xl font-semibold mb-3">
-                  {reason.title}
-                </h3>
-                
-                <p className="text-muted-foreground leading-relaxed">
-                  {reason.description}
-                </p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+              </TiltCard>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
     </section>
   );

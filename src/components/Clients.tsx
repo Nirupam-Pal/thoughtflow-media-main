@@ -1,5 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import Marquee from "./ui/marquee";
+import { SectionHeader } from "@/components/motion/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
 
 
 
@@ -113,18 +115,24 @@ const secondRow = logos.slice(logos.length / 2);
 //   );
 // };
 
+// Plain translucent tiles (no backdrop-filter): the marquee renders each logo
+// several times, and blur on that many layers would tank scroll FPS.
 const LogoCard = ({ src, name }) => {
   return (
     <div
       className={twMerge(
-        "relative flex items-center justify-center overflow-hidden from-card to-muted hover:from-accent/20 hover:to-secondary/20 transition-all duration-300 w-24 p-2 sm:w-28 sm:p-3 md:w-32 md:p-4"
+        "relative flex shrink-0 items-center justify-center rounded-2xl border border-white/80 bg-white/70 shadow-soft transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-medium",
+        "h-24 w-24 p-2 sm:h-28 sm:w-28 sm:p-3 md:h-32 md:w-32"
       )}
     >
       <img
-        // className="max-h-12 w-auto object-contain"
-        className="rounded-full bg-white/10 object-contain w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
+        className="h-full w-full rounded-full object-contain"
         alt={name}
         src={src}
+        loading="lazy"
+        decoding="async"
+        width={96}
+        height={96}
       />
     </div>
   );
@@ -169,18 +177,16 @@ const LogoCard = ({ src, name }) => {
 
 const Clients = () => {
   return (
-    <section id="testimonials" className="relative py-16 sm:py-20 lg:py-32 bg-secondary/30 overflow-x-clip overflow-hidden">
+    <section id="testimonials" className="section-aurora relative py-16 sm:py-20 lg:py-32 bg-secondary/30 overflow-x-clip overflow-hidden">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Trusted by 50+ Brands
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            We've partnered with ambitious brands to drive meaningful growth.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Our Clients"
+          title="Trusted by"
+          accent="50+ Brands"
+          description="We've partnered with ambitious brands to drive meaningful growth."
+        />
 
-        <div className="relative flex flex-col items-center justify-center w-full min-w-0 mt-8 sm:mt-12 overflow-hidden">
+        <Reveal className="relative flex flex-col items-center justify-center w-full min-w-0 mt-8 sm:mt-12 overflow-hidden">
           <div className="relative w-full [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]">
             <Marquee pauseOnHover className="[--duration:30s] [--gap:.5rem] sm:[--gap:.75rem] md:[--gap:1rem]">
               {firstRow.map((logo) => (
@@ -195,7 +201,7 @@ const Clients = () => {
           </div>
           <div className="hidden md:block absolute inset-y-0 left-0 w-1/4 pointer-events-none z-30 bg-gradient-to-r from-secondary/30 to-transparent"></div>
           <div className="hidden md:block absolute inset-y-0 right-0 w-1/4 pointer-events-none z-30 bg-gradient-to-l from-secondary/30 to-transparent"></div>
-        </div>
+        </Reveal>
       </div>
       <div className="hidden md:block absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
       <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>

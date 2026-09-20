@@ -118,6 +118,8 @@
 // export default Testimonials
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { SectionHeader } from "@/components/motion/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
 
 function AnimatedTestimonialsDemo() {
   const testimonials = [
@@ -216,20 +218,18 @@ function AnimatedTestimonialsDemo() {
 
 const Testimonials = () => {
   return (
-    <section id="clients" className="relative py-16 sm:py-20 lg:py-32 bg-secondary/30 overflow-x-clip overflow-hidden">
+    <section id="clients" className="section-aurora relative py-16 sm:py-20 lg:py-32 bg-background overflow-x-clip overflow-hidden">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            What Our Clients Say
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            See what our clients have to say about our services and the results they've achieved.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Testimonials"
+          title="What Our Clients"
+          accent="Say"
+          description="See what our clients have to say about our services and the results they've achieved."
+        />
 
-        <div className="relative flex flex-col items-center justify-center w-full min-w-0 overflow-hidden px-0">
+        <Reveal className="relative flex flex-col items-center justify-center w-full min-w-0 px-0">
           <AnimatedTestimonialsDemo />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
