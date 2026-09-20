@@ -119,11 +119,13 @@
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { TESTIMONIALS } from "@/data/testimonials";
+import { useSlowConnection } from "@/lib/connection";
 import { SectionHeader } from "@/components/motion/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
 
 function AnimatedTestimonialsDemo() {
-  return <AnimatedTestimonials testimonials={TESTIMONIALS} autoplay={true} />;
+  const slow = useSlowConnection();
+  return <AnimatedTestimonials testimonials={TESTIMONIALS} autoplay={!slow} />;
 }
 
 const Testimonials = () => {

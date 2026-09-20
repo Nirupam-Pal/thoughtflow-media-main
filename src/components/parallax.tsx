@@ -4,6 +4,7 @@ import { motion, MotionValue, useInView, useScroll, useTransform } from "framer-
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { Magnetic } from "@/components/motion/Magnetic";
+import { SmartImage, POSTER_WIDTHS } from "@/components/SmartImage";
 import { cn } from "@/lib/utils";
 
 /**
@@ -166,11 +167,12 @@ const Column = ({ tiles, index, y, hot, className }: ColumnProps) => {
     <div key={i} className="group relative min-h-[100px] w-full flex-1 rounded-xl bg-muted shadow-soft sm:rounded-2xl">
       {/* The image carries the rounded corners itself: no overflow:hidden clip layer per tile,
           which is a real cost when 12 of them move at once on a phone GPU. */}
-      <img
+      <SmartImage
         src={tile.src}
+        // Work posters have 480/900px variants; the brand tiles are already tiny single files.
+        widths={tile.kind === "work" ? POSTER_WIDTHS : undefined}
+        sizes="(max-width: 640px) 46vw, 24vw"
         alt={tile.alt}
-        loading="lazy"
-        decoding="async"
         draggable={false}
         className={cn(
           "h-full w-full min-h-[100px] select-none rounded-[inherit] object-cover",

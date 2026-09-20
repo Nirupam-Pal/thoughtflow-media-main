@@ -21,7 +21,22 @@ export const SITE = {
   themeColor: "#faf8f5",
   email: "thoughtflowmedia@gmail.com",
   phone: "+917005046836",
-  address: { locality: "Agartala", region: "Tripura", country: "IN" },
+  address: {
+    street: "Barjala, near Barjala High School, Bhubanban",
+    locality: "Agartala",
+    region: "Tripura",
+    postalCode: "799006",
+    country: "IN",
+  },
+  /** One-line version, identical everywhere it appears (name/address/phone consistency matters for local SEO). */
+  addressLine: "Barjala, near Barjala High School, Bhubanban, Agartala, Tripura 799006",
+  /** Open every day, 10:00–21:00 (IST). `label` is what the footer shows. */
+  hours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "10:00",
+    closes: "21:00",
+    label: "Open daily, 10 AM – 9 PM",
+  },
   areaServed: ["Agartala", "Tripura", "Northeast India"],
   social: [
     "https://www.instagram.com/thoughtflowmediaa/",
@@ -218,10 +233,19 @@ function organizationNode(description) {
     telephone: SITE.phone,
     address: {
       "@type": "PostalAddress",
+      streetAddress: SITE.address.street,
       addressLocality: SITE.address.locality,
       addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
       addressCountry: SITE.address.country,
     },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: SITE.hours.days,
+      opens: SITE.hours.opens,
+      closes: SITE.hours.closes,
+    },
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.addressLine)}`,
     areaServed: areaServedNodes(),
     knowsAbout: [
       "Digital marketing",

@@ -1,18 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useSlowConnection } from "@/lib/connection";
 
 /**
- * Muted looping video that only downloads once it's near the viewport and
- * only plays while visible. Replaces "autoplay every video on the page",
- * which is the single biggest mobile CPU / bandwidth cost in a carousel.
+ * Muted looping *preview* video for a carousel tile.
+ *
+ * Built for slow networks:
+ *  • the poster still (a few KB) shows instantly, so a tile is never blank;
+ *  • the video itself is a small preview loop (see scripts/optimize-videos.mjs), and is only
+ *    downloaded once the tile is near the viewport and only plays while visible;
+ *  • on a slow connection / Data Saver / reduced motion, no video is fetched at all — the
+ *    poster stays, and the full video loads only if the visitor taps to open it.
  */
-export function LazyVideo({ src, className }: { src: string; className?: string }) {
+export function LazyVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const reduced = useReducedMotion();
+  const slow = useSlowConnection();
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const canPlay = !slow && !reduced;
 
   useEffect(() => {
     const el = wrap.current;
@@ -31,17 +39,29 @@ export function LazyVideo({ src, className }: { src: string; className?: string 
   useEffect(() => {
     const v = video.current;
     if (!v) return;
-    if (visible && !reduced) v.play().catch(() => {});
+    if (visible && canPlay) v.play().catch(() => {});
     else v.pause();
-  }, [visible, mounted, reduced]);
+  }, [visible, mounted, canPlay]);
 
   return (
-    <div ref={wrap} className={cn("h-full w-full bg-gradient-to-br from-primary/80 to-primary", className)}>
-      {mounted && (
+    <div ref={wrap} className={cn("relative h-full w-full bg-gradient-to-br from-primary/80 to-primary", className)}>
+      {poster && (
+        <img
+          src={poster}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+      {mounted && canPlay && (
         <video
           ref={video}
-          className="h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
           src={src}
+          poster={poster}
           muted
           loop
           playsInline

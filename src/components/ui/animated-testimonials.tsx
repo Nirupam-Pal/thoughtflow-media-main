@@ -3,6 +3,7 @@
 import { IconArrowLeft, IconArrowRight, IconQuote, IconStarFilled } from "@tabler/icons-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
+import { SmartImage } from "@/components/SmartImage";
 
 type Testimonial = {
   quote: string;
@@ -81,12 +82,13 @@ export const AnimatedTestimonials = ({
                   }}
                   aria-hidden={!front}
                 >
-                  <img
+                  <SmartImage
                     src={t.src}
+                    widths={[360, 720]}
+                    sizes="(max-width: 768px) 288px, 380px"
+                    priority={i < 3}
                     alt={front ? t.name : ""}
                     draggable={false}
-                    loading={i < 3 ? "eager" : "lazy"}
-                    decoding="async"
                     className="h-full w-full object-cover"
                     style={{ objectPosition: t.focus ?? "50% 22%" }}
                   />

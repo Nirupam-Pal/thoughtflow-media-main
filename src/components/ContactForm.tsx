@@ -20,8 +20,8 @@ const contactMethods = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Agartala, Tripura",
-    href: "https://www.google.com/maps/search/?api=1&query=Agartala%2C+Tripura",
+    value: "Barjala, near Barjala High School, Bhubanban, Agartala, Tripura 799006",
+    href: "https://www.google.com/maps/search/?api=1&query=Barjala%2C+near+Barjala+High+School%2C+Bhubanban%2C+Agartala%2C+Tripura+799006",
   },
 ];
 

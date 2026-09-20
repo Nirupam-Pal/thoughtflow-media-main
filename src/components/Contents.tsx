@@ -134,6 +134,8 @@ import { cn } from "@/lib/utils";
 import { SectionHeader } from "@/components/motion/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
 import { LazyVideo } from "@/components/motion/LazyVideo";
+import { SmartImage, POSTER_WIDTHS } from "@/components/SmartImage";
+import { useSlowConnection } from "@/lib/connection";
 import {
   Dialog,
   DialogContent,
@@ -236,13 +238,21 @@ const images = [
   },
 ];
 
-const contentItems = localVideos.map((videoPath, index) => ({
-  videoSrc: videoPath,
-  ...baseImages[index % baseImages.length]
-}));
+// The carousel shows a tiny preview loop + poster still per video; the full-quality original
+// (videoSrc) is only fetched when a visitor taps a slide. Files come from scripts/optimize-videos.mjs.
+const contentItems = localVideos.map((videoPath, index) => {
+  const id = videoPath.match(/(\d+)\.mp4$/)?.[1];
+  return {
+    videoSrc: videoPath,
+    previewSrc: `/videos/preview/${id}.mp4`,
+    poster: `/videos/poster/${id}.webp`,
+    ...baseImages[index % baseImages.length],
+  };
+});
 
 const Contents = () => {
   const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
+  const slow = useSlowConnection();
 
   return (
     <section aria-labelledby="contents-heading" id="team" className="pt-16 pb-0 sm:pt-20 lg:pt-32 bg-[#f5f4f3] overflow-x-clip">
@@ -261,7 +271,7 @@ const Contents = () => {
             items={contentItems}
             loop={true}
             showNavigation={true}
-            autoplay={!openVideoSrc}
+            autoplay={!openVideoSrc && !slow}
             onItemClick={(src) => setOpenVideoSrc(src)}
           />
         </Reveal>
@@ -326,7 +336,7 @@ const Contents = () => {
         <Reveal>
           <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center font-display">Ad posters that brings enrollments <br /> (50% better performance)</h3>
         </Reveal>
-        <Carousel_001 className="" images={images} showPagination loop autoplay />
+        <Carousel_001 className="" images={images} showPagination loop autoplay={!slow} />
       </div>
     </section>
   );
@@ -342,7 +352,7 @@ const Carousel_003 = ({
   spaceBetween = 0,
   onItemClick,
 }: {
-  items: { src: string; alt: string; videoSrc: string | null }[];
+  items: { src: string; alt: string; videoSrc: string | null; previewSrc: string; poster: string }[];
   className?: string;
   showPagination?: boolean;
   showNavigation?: boolean;
@@ -453,7 +463,7 @@ const Carousel_003 = ({
             onClick={() => item.videoSrc && onItemClick?.(item.videoSrc)}
           >
             <div className="relative w-full h-full group">
-              <LazyVideo src={item.videoSrc || ""} />
+              <LazyVideo src={item.previewSrc} poster={item.poster} />
 
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                 <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full">
@@ -568,12 +578,12 @@ const Carousel_001 = ({
             key={index}
             className="h-[min(52vh,360px)] w-full sm:h-[min(50vh,420px)] md:h-[min(55vh,480px)] lg:h-[500px]"
           >
-            <img
+            <SmartImage
               className="h-full w-full max-h-full object-contain"
               src={image.src}
+              widths={POSTER_WIDTHS}
+              sizes="(max-width: 640px) 85vw, 480px"
               alt={image.alt}
-              loading="lazy"
-              decoding="async"
             />
           </SwiperSlide>
         ))}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 
@@ -83,10 +83,17 @@ const Footer = () => {
                 </li>
                 <li className="flex items-start gap-3 text-muted-foreground">
                   <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0" />
-                  <span>
-                    Agartala, West Tripura<br />
-                    Tripura,
-                  </span>
+                  <address className="not-italic">
+                    Barjala, near Barjala High School,
+                    <br />
+                    Bhubanban, Agartala,
+                    <br />
+                    Tripura 799006
+                  </address>
+                </li>
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <Clock className="mt-0.5 h-5 w-5 flex-shrink-0" />
+                  <span>Open daily, 10 AM – 9 PM</span>
                 </li>
               </ul>
             </div>
