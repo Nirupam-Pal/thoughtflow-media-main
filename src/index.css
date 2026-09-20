@@ -418,3 +418,42 @@ html.lenis body {
       inset 0 1px 0 hsl(0 0% 100% / 0.9);
   }
 }
+
+/* ─── Parallax wall: scroll-linked drift on the compositor ─── */
+/* `--drift` is the column's travel in viewport heights (set inline per column).
+   Uses svh, which — unlike vh/dvh/innerHeight — does NOT change when a phone's
+   URL bar collapses mid-scroll, so the columns never jump. */
+.wall-static {
+  transform: translate3d(0, calc(var(--drift) * 50vh), 0);
+  transform: translate3d(0, calc(var(--drift) * 50svh), 0);
+}
+
+@supports (animation-timeline: view()) {
+  /* The gallery is the timeline subject; every column reads its progress, matching the old
+     framer offset ["start end", "end start"] (0% as it enters, 100% as it leaves). */
+  .wall {
+    view-timeline: --wall block;
+  }
+  .wall-col {
+    animation: wall-drift linear both;
+    animation-timeline: --wall;
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+@keyframes wall-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, calc(var(--drift) * 100vh), 0);
+    transform: translate3d(0, calc(var(--drift) * 100svh), 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wall-col {
+    animation: none;
+    transform: translate3d(0, calc(var(--drift) * 50svh), 0);
+  }
+}

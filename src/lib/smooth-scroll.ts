@@ -19,6 +19,10 @@ export function startSmoothScroll(): () => void {
   if (typeof window === "undefined" || lenis) return () => {};
   // Visitors who ask for reduced motion keep native scrolling.
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return () => {};
+  // Touch devices already have the best possible scrolling: native, compositor-driven, with
+  // real momentum. Lenis adds nothing there, and its always-on frame loop just burns main-thread
+  // time that scroll-linked effects need.
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) return () => {};
 
   const instance = new Lenis({ anchors: true });
   lenis = instance;
