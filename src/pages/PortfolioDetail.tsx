@@ -88,7 +88,7 @@ const PortfolioDetail = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background min-w-0 w-full max-w-[100vw] overflow-x-clip">
       <Seo
-        title={`${project.title} | Thoughtflow Media`}
+        title={`${project.title} | Thoughtflow Mediaa`}
         description={project.description}
         image={project.image}
         ogType="article"
@@ -102,7 +102,7 @@ const PortfolioDetail = () => {
           image: project.image,
           publisher: {
             "@type": "Organization",
-            name: "Thoughtflow Media",
+            name: "Thoughtflow Mediaa",
             url: "https://thoughtflowmediaa.com",
           },
         }}

@@ -22,7 +22,7 @@ const HEADLINES = {
     accent: "It's engineered.",
     sub: (
       <>
-        Thoughtflow Media maps your audience, tests creative fast and scales what converts. <Em>1,000+ projects</Em>{" "}
+        Thoughtflow Mediaa maps your audience, tests creative fast and scales what converts. <Em>1,000+ projects</Em>{" "}
         for <Em>50+ brands</Em> prove the system works — from our studio in Agartala, Tripura.
       </>
     ),

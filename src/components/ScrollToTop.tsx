@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { getLenis } from "@/lib/smooth-scroll";
 
 /**
  * Resets window scroll when the route pathname changes.
@@ -17,6 +18,13 @@ const ScrollToTop = () => {
   }, []);
 
   useLayoutEffect(() => {
+    // Route change: jump to top instantly through Lenis so its internal position stays in sync.
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+      return;
+    }
+
     const scrollEl = document.scrollingElement;
 
     const getScrollTop = () => scrollEl?.scrollTop ?? window.scrollY ?? 0;

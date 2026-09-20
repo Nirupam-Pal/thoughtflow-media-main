@@ -21,12 +21,20 @@ export type ImageSection = {
   images: PortfolioGalleryItem[];
 };
 
+/** A real, verified result to headline on the card, e.g. { value: "+240%", label: "ROI" }. */
+export type ProjectMetric = {
+  value: string;
+  label: string;
+};
+
 export type PortfolioProject = {
   slug: string;
   title: string;
   category: string;
   image: string;
   description: string;
+  /** Optional. Shown as large stats on the card; only add numbers you can back up. */
+  metrics?: ProjectMetric[];
   gallery: PortfolioGalleryItem[];
   videoSections?: VideoSection[];
   imageSections?: ImageSection[];

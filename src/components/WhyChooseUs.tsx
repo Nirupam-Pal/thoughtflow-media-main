@@ -35,7 +35,7 @@ const WhyChooseUs = () => {
         <SectionHeader
           eyebrow="Why Thoughtflow"
           title="Why Choose"
-          accent="Thoughtflow Media"
+          accent="Thoughtflow Mediaa"
           description="We don't just deliver projects—we build partnerships that drive lasting success."
         />
 

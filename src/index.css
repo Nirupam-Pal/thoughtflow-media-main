@@ -285,8 +285,18 @@ All colors MUST be HSL.
     background-image: linear-gradient(135deg, hsl(22 98% 58%), hsl(340 82% 52%));
   }
 
-  /* Soft ambient colour behind a section — plain radial gradients, no blur filter. */
+  /* Soft ambient colour behind a section. Lives on a ::before overlay so it can
+     never clobber the section's own background colour / gradient. */
   .section-aurora {
+    position: relative;
+    isolation: isolate;
+  }
+  .section-aurora::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background:
       radial-gradient(45% 40% at 90% 8%, hsl(16 95% 72% / 0.18), transparent 70%),
       radial-gradient(40% 35% at 6% 92%, hsl(38 60% 80% / 0.35), transparent 70%);
@@ -314,5 +324,97 @@ All colors MUST be HSL.
   .svc-float,
   .svc-float-b {
     animation: none !important;
+  }
+}
+
+/* ─── Testimonial progress + case-study card expansion ─── */
+@layer utilities {
+  /* Fills over the slide duration; its animationend advances the testimonial,
+     so hover-pause (animation-play-state) and reduced-motion just work. */
+  .tf-progress {
+    transform-origin: left;
+    animation: tf-progress linear forwards;
+  }
+
+  /* Height-animates from 0 → auto without JS or layout thrash. */
+  .case-more {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  }
+  .group:hover .case-more,
+  .group:focus-visible .case-more {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+@keyframes tf-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Touch has no hover: keep the details open so nothing is hidden. */
+@media (hover: none) {
+  .case-more {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-progress {
+    animation: none !important;
+    transform: scaleX(1);
+  }
+  .case-more {
+    transition: none;
+  }
+}
+
+/* ─── Smooth scrolling (Lenis) — required rules ─── */
+/* Without the scroll-behavior override, the browser's own smooth-scroll re-smooths
+   every frame Lenis scrolls, which is what makes scrolling feel laggy and stiff. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+/* Keyed on `.lenis` (present from mount), not `.lenis-smooth`, which Lenis only adds
+   after the first wheel event. Native smooth-scroll stays for reduced-motion visitors,
+   where Lenis never starts and this class is never set. */
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+/* Don't let embedded iframes (Calendly, YouTube) swallow wheel events mid-scroll. */
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ─── Glass variants for surfaces that MOVE ─── */
+/* backdrop-filter re-blurs every frame something behind or around it changes.
+   Anything that tilts, scrolls over moving content, or animates gets a flat version. */
+@layer utilities {
+  .glass-flat {
+    background: hsl(0 0% 100% / 0.72);
+    border: 1px solid hsl(0 0% 100% / 0.75);
+    box-shadow:
+      0 8px 28px -8px hsl(30 10% 15% / 0.14),
+      inset 0 1px 0 hsl(0 0% 100% / 0.9);
+  }
+
+  .glass-solid {
+    background: hsl(40 30% 98% / 0.92);
+    border: 1px solid hsl(0 0% 100% / 0.8);
+    box-shadow:
+      0 10px 30px -10px hsl(30 10% 15% / 0.28),
+      inset 0 1px 0 hsl(0 0% 100% / 0.9);
   }
 }

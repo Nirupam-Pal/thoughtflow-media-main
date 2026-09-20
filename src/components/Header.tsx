@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { scrollToTarget } from "@/lib/smooth-scroll";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -14,7 +15,6 @@ const navLinks = [
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
   const { scrollY } = useScroll();
@@ -41,21 +41,10 @@ const Header = () => {
     }
   })
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const scrollToSection = useCallback(
     (href: string) => {
       if (isHome) {
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+        if (scrollToTarget(href)) {
           setIsMobileMenuOpen(false);
         }
         return;
@@ -107,7 +96,7 @@ const Header = () => {
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
                   <img 
                     src="/header_logo.png" 
-                    alt="Thoughtflow Media" 
+                    alt="Thoughtflow Mediaa" 
                     className="h-14 w-auto object-contain"
                   />
                 </Link>
@@ -139,7 +128,7 @@ const Header = () => {
               {/* Footer */}
               <div className="p-4 sm:p-6 border-t border-border shrink-0">
                 <p className="text-xs sm:text-sm text-muted-foreground text-center">
-                  © 2024 Thoughtflow Media
+                  © 2024 Thoughtflow Mediaa
                 </p>
               </div>
             </div>
@@ -183,7 +172,7 @@ const Header = () => {
           damping: 60,
           mass: 1
         }}
-        className={`fixed top-0 z-50 max-w-[100vw] overflow-x-clip transition-all ${isScrolled ? "backdrop-blur-lg" : ""}`}
+        className="fixed top-0 z-50 max-w-[100vw] overflow-x-clip"
       >
         <nav className="container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
@@ -194,7 +183,7 @@ const Header = () => {
             >
               <img 
                 src="/header_logo.png" 
-                alt="Thoughtflow Media" 
+                alt="Thoughtflow Mediaa" 
                 className="h-12 w-auto max-h-12 object-contain sm:h-14 sm:max-h-14"
               />
             </Link>

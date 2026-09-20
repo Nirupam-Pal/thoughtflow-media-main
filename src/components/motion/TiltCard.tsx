@@ -4,6 +4,7 @@ import {
   useMotionTemplate,
   useMotionValue,
   useSpring,
+  useWillChange,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useInteractiveMotion } from "@/lib/motion";
@@ -24,6 +25,7 @@ export function TiltCard({
   glassClassName,
   max = 8,
   spotlight = true,
+  spotlightOver = false,
 }: {
   children: ReactNode;
   className?: string;
@@ -31,8 +33,11 @@ export function TiltCard({
   /** Max tilt in degrees. 0 keeps the spotlight but disables rotation. */
   max?: number;
   spotlight?: boolean;
+  /** Paint the spotlight above the content (for full-bleed images) instead of under it. */
+  spotlightOver?: boolean;
 }) {
   const interactive = useInteractiveMotion();
+  const willChange = useWillChange();
   const ref = useRef<HTMLDivElement>(null);
   const rect = useRef<DOMRect | null>(null);
 
@@ -43,7 +48,14 @@ export function TiltCard({
   const lightX = useMotionValue(-400);
   const lightY = useMotionValue(-400);
   const glow = useMotionTemplate`radial-gradient(360px circle at ${lightX}px ${lightY}px, hsl(16 98% 58% / 0.16), transparent 62%)`;
-  const sheen = useMotionTemplate`radial-gradient(240px circle at ${lightX}px ${lightY}px, hsl(0 0% 100% / 0.55), transparent 70%)`;
+  const sheen = useMotionTemplate`radial-gradient(240px circle at ${lightX}px ${lightY}px, hsl(0 0% 100% / 0.28), transparent 70%)`;
+
+  const light = interactive && spotlight && (
+    <>
+      <motion.div className="absolute inset-0" style={{ background: glow }} />
+      <motion.div className="absolute inset-0" style={{ background: sheen }} />
+    </>
+  );
 
   const onEnter = () => {
     rect.current = ref.current?.getBoundingClientRect() ?? null;
@@ -83,27 +95,22 @@ export function TiltCard({
     >
       <motion.div
         className="relative h-full rounded-[inherit]"
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d", willChange }}
       >
         <div
           className={cn(
-            "glass pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]",
+            "glass-flat pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]",
             glassClassName
           )}
         >
-          {interactive && spotlight && (
-            <>
-              <motion.div className="absolute inset-0" style={{ background: glow }} />
-              <motion.div
-                className="absolute inset-0 mix-blend-soft-light"
-                style={{ background: sheen }}
-              />
-            </>
-          )}
+          {!spotlightOver && light}
         </div>
         <div className="relative h-full" style={{ transformStyle: "preserve-3d" }}>
           {children}
         </div>
+        {spotlightOver && (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">{light}</div>
+        )}
       </motion.div>
     </div>
   );

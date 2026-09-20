@@ -245,7 +245,7 @@ const Contents = () => {
   const [openVideoSrc, setOpenVideoSrc] = useState<string | null>(null);
 
   return (
-    <section id="team" className="section-aurora py-16 sm:py-20 lg:py-32 bg-[#f5f4f3] overflow-x-clip">
+    <section id="team" className="pt-16 pb-0 sm:pt-20 lg:pt-32 bg-[#f5f4f3] overflow-x-clip">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
           eyebrow="Creative Studio"

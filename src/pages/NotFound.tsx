@@ -12,7 +12,7 @@ const NotFound = () => {
   return (
     <div className="flex min-h-screen min-w-0 items-center justify-center overflow-x-clip bg-muted px-4 py-8">
       <Seo
-        title="Page not found | Thoughtflow Media"
+        title="Page not found | Thoughtflow Mediaa"
         description="The page you’re looking for doesn’t exist."
         canonicalPath={location.pathname}
         noIndex

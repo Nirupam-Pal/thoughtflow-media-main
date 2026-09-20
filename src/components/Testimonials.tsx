@@ -8,7 +8,7 @@
 //         name: "Alex Thompson",
 //         role: "CEO, TechStart Inc",
 //         image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
-//         content: "Thoughtflow Media transformed our online presence completely. Their strategic approach to content and performance marketing delivered a 300% increase in qualified leads within 3 months.",
+//         content: "Thoughtflow Mediaa transformed our online presence completely. Their strategic approach to content and performance marketing delivered a 300% increase in qualified leads within 3 months.",
 //         rating: 5
 //     },
 //     {
@@ -22,28 +22,28 @@
 //         name: "Robert Chang",
 //         role: "Founder, GrowthLab",
 //         image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop",
-//         content: "Working with Thoughtflow Media was a game-changer. Their web development expertise and marketing insights helped us scale from startup to market leader.",
+//         content: "Working with Thoughtflow Mediaa was a game-changer. Their web development expertise and marketing insights helped us scale from startup to market leader.",
 //         rating: 5
 //     },
 //     {
 //         name: "Maria Santos",
 //         role: "CMO, EcoProducts",
 //         image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
-//         content: "Professional, responsive, and results-driven. Thoughtflow Media doesn't just deliver projects—they deliver growth. Our ROI has been exceptional.",
+//         content: "Professional, responsive, and results-driven. Thoughtflow Mediaa doesn't just deliver projects—they deliver growth. Our ROI has been exceptional.",
 //         rating: 5
 //     },
 //     {
 //         name: "James Wilson",
 //         role: "VP Sales, CloudSolutions",
 //         image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
-//         content: "The performance marketing campaigns exceeded all expectations. Thoughtflow Media's data-driven approach consistently delivers measurable results.",
+//         content: "The performance marketing campaigns exceeded all expectations. Thoughtflow Mediaa's data-driven approach consistently delivers measurable results.",
 //         rating: 5
 //     },
 //     {
 //         name: "Sophia Lee",
 //         role: "Brand Manager, StyleCo",
 //         image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
-//         content: "From concept to execution, every project was handled with precision and creativity. Thoughtflow Media is our go-to partner for all marketing needs.",
+//         content: "From concept to execution, every project was handled with precision and creativity. Thoughtflow Mediaa is our go-to partner for all marketing needs.",
 //         rating: 5
 //     }
 // ];
@@ -154,6 +154,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Chemistry Mentor, Core Academy",
       src: "/clients/PrasenjitSir2.jpeg",
       rating: 5,
+      focus: "50% 35%",
     },
     {
       quote:
@@ -162,6 +163,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Founder & CEO, Trend Crafter",
       src: "/clients/Sujoy.jpeg",
       rating: 4,
+      focus: "50% 8%",
     },
     {
       quote:
@@ -170,6 +172,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Founder, Oxford Hub of English",
       src: "/clients/UttamKumarDas.jpeg",
       rating: 5,
+      focus: "50% 15%",
     },
     {
       quote:
@@ -178,6 +181,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Founder | Mathematics Mentor , Prayam Classes",
       src: "/clients/PratikSir.jpg",
       rating: 5,
+      focus: "50% 30%",
     },
     {
       quote:
@@ -186,6 +190,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Consultant of Bharat Consultancy",
       src: "/clients/Aditya Mitra.jpg",
       rating: 5,
+      focus: "50% 30%",
     },
     {
       quote:
@@ -194,6 +199,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Physics Teacher | Assistant Professor, ICFAI University Tripura",
       src: "/clients/Bhashkar.jpeg",
       rating: 5,
+      focus: "55% 25%",
     },
     {
       quote:
@@ -202,6 +208,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Founder, Chessverse",
       src: "/clients/PratikDebnath.jpeg",
       rating: 5,
+      focus: "50% 40%",
     },
     {
       quote:
@@ -210,6 +217,7 @@ function AnimatedTestimonialsDemo() {
       designation: "Chemistry Mentor, Aimsas-A Hybrid Smart Skool",
       src: "/clients/Souptik.jpeg",
       rating: 4,
+      focus: "50% 35%",
     },
   ];
 
@@ -218,7 +226,7 @@ function AnimatedTestimonialsDemo() {
 
 const Testimonials = () => {
   return (
-    <section id="clients" className="section-aurora relative py-16 sm:py-20 lg:py-32 bg-background overflow-x-clip overflow-hidden">
+    <section id="clients" className="section-aurora relative pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-32 bg-background overflow-x-clip overflow-hidden">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
           eyebrow="Testimonials"

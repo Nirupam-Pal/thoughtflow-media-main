@@ -15,6 +15,7 @@ import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
 import Contents from "@/components/Contents";
 import Seo from "@/components/Seo";
+import { scrollToTarget } from "@/lib/smooth-scroll";
 // import AnimatedTestimonialsDemo from "@/components/Testimonials";
 
 const Index = () => {
@@ -25,7 +26,7 @@ const Index = () => {
     if (!hash) return;
     const id = hash.replace(/^#/, "");
     const t = window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      scrollToTarget(document.getElementById(id));
     }, 80);
     return () => window.clearTimeout(t);
   }, [location.hash, location.pathname]);
@@ -33,14 +34,14 @@ const Index = () => {
   return (
     <div className="min-h-screen min-w-0 w-full max-w-[100vw] overflow-x-clip">
       <Seo
-        title="Digital Marketing Agency in Agartala | Thoughtflow Media"
-        description="Thoughtflow Media is a full-service digital marketing agency in Agartala, Tripura. We run Meta & Google Ads, manage social media, and produce videos and graphics for brands across Northeast India."
+        title="Digital Marketing Agency in Agartala | Thoughtflow Mediaa"
+        description="Thoughtflow Mediaa is a full-service digital marketing agency in Agartala, Tripura. We run Meta & Google Ads, manage social media, and produce videos and graphics for brands across Northeast India."
         ogType="website"
         canonicalPath="/"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Thoughtflow Media",
+          name: "Thoughtflow Mediaa",
           url: "https://thoughtflowmediaa.com",
           logo: "https://thoughtflowmediaa.com/tf-profile.png",
           sameAs: [],

@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="mb-10 grid gap-10 sm:mb-12 sm:grid-cols-2 sm:gap-12 md:grid-cols-4">
             <div className="md:col-span-2">
               <h3 className="mb-4 font-display text-2xl font-bold">
-                Thoughtflow <span className="text-ember">Media</span>
+                Thoughtflow <span className="text-ember">Mediaa</span>
               </h3>
               <p className="mb-6 max-w-md leading-relaxed text-muted-foreground">
                 AI-powered creative marketing agency specializing in content creation,
@@ -94,7 +94,7 @@ const Footer = () => {
         </Reveal>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 text-center text-sm text-muted-foreground md:flex-row md:text-left">
-          <p>© {currentYear} Thoughtflow Media. All rights reserved.</p>
+          <p>© {currentYear} Thoughtflow Mediaa. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:justify-end">
             <a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a>
             <a href="#" className="transition-colors hover:text-foreground">Terms of Service</a>
