@@ -155,7 +155,7 @@ const ContactForm = () => {
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[hsl(140_60%_45%)] opacity-60 motion-reduce:animate-none" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-[hsl(140_60%_45%)]" />
                   </span>
-                  Free 30-minute strategy call
+                  Free 1-hour strategy call
                 </p>
               </div>
               <BookCallButton variant="outline" className="border-2 border-primary/30 bg-background/60 hover:bg-background">
