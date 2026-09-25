@@ -2,7 +2,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, type LucideIcon } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, type LucideIcon } from "lucide-react";
 import { PORTFOLIO_PROJECTS, type PortfolioProject, type ProjectMetric } from "@/data/portfolioData";
 import { Button } from "@/components/ui/button";
 import { BookCallButton } from "@/components/BookCallButton";
@@ -28,9 +28,53 @@ export const sectionId = (title: string) =>
   `work-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
 
 /** The project after this one in the portfolio (wrapping), or undefined if it's the only one. */
-export function nextProjectOf(project: PortfolioProject) {
-  const next = PORTFOLIO_PROJECTS[(PORTFOLIO_PROJECTS.findIndex((p) => p.slug === project.slug) + 1) % PORTFOLIO_PROJECTS.length];
-  return next.slug === project.slug ? undefined : next;
+/** The project `step` places away in the portfolio (wrapping), or undefined if it's the only one. */
+function projectAt(project: PortfolioProject, step: number) {
+  const n = PORTFOLIO_PROJECTS.length;
+  const i = PORTFOLIO_PROJECTS.findIndex((p) => p.slug === project.slug);
+  const other = PORTFOLIO_PROJECTS[(((i + step) % n) + n) % n];
+  return other.slug === project.slug ? undefined : other;
+}
+
+export const nextProjectOf = (project: PortfolioProject) => projectAt(project, 1);
+
+/** Top row of a case study: back to the portfolio on the left, "Case 06 / 06" and prev/next on the right. */
+function CaseBar({ project }: { project: PortfolioProject }) {
+  const index = PORTFOLIO_PROJECTS.findIndex((p) => p.slug === project.slug);
+  const prev = projectAt(project, -1);
+  const next = projectAt(project, 1);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const step = "glass-flat flex h-10 w-10 items-center justify-center rounded-full text-foreground transition duration-300 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+  return (
+    <nav aria-label="Case studies" className="mb-8 flex items-center justify-between gap-4 border-b border-primary/10 pb-4 lg:mb-6">
+      <Button variant="ghost" className="group -ml-3 rounded-full text-muted-foreground hover:text-foreground" asChild>
+        <Link to="/#portfolio">
+          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+          Back to Portfolio
+        </Link>
+      </Button>
+      <div className="flex items-center gap-3 sm:gap-4">
+        {index >= 0 && (
+          <span className="hidden text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground sm:inline">
+            Case <span className="font-display text-sm tabular-nums text-foreground">{pad(index + 1)}</span>
+            <span className="mx-1 text-primary/30">/</span>
+            <span className="font-display text-sm tabular-nums">{pad(PORTFOLIO_PROJECTS.length)}</span>
+          </span>
+        )}
+        {prev && (
+          <Link to={`/portfolio/${prev.slug}`} aria-label={`Previous case study: ${prev.title}`} title={prev.title} className={step}>
+            <ChevronLeft className="h-4 w-4" />
+          </Link>
+        )}
+        {next && (
+          <Link to={`/portfolio/${next.slug}`} aria-label={`Next case study: ${next.title}`} title={next.title} className={step}>
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
 }
 
 export function Eyebrow({ children, pulse, dark }: { children: ReactNode; pulse?: boolean; dark?: boolean }) {
@@ -91,12 +135,7 @@ export function CaseHero({
 
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <motion.div {...fade(0)}>
-          <Button variant="ghost" className="group -ml-2 mb-6 rounded-full text-muted-foreground hover:text-foreground sm:mb-10" asChild>
-            <Link to="/#portfolio">
-              <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-              Back to Portfolio
-            </Link>
-          </Button>
+          <CaseBar project={project} />
         </motion.div>
 
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-8">
@@ -120,7 +159,8 @@ export function CaseHero({
                         >
                           {word}
                         </motion.span>
-                        {" "}
+                        {/* Non-breaking: a normal trailing space collapses inside the inline-block. */}
+                        {" "}
                       </span>
                     );
                   })}
@@ -160,7 +200,7 @@ export function CaseHero({
         </div>
 
         {/* Project metadata */}
-        <motion.dl {...fade(0.7)} className="mt-14 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-primary/10 pt-6 sm:mt-20 md:grid-cols-3 lg:grid-cols-5">
+        <motion.dl {...fade(0.7)} className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-primary/10 pt-6 sm:mt-14 md:grid-cols-3 lg:grid-cols-5">
           {meta.map((m, i) => (
             <div key={m.label} className={cn("min-w-0", i === meta.length - 1 && meta.length % 2 === 1 && "col-span-2 md:col-span-1")}>
               <dt className="mb-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">{m.label}</dt>
@@ -214,7 +254,7 @@ export function FannedStack({
   ];
 
   return (
-    <div className="relative mx-auto aspect-[1/1.02] w-full max-w-[560px]">
+    <div className="relative mx-auto aspect-[1/1.02] w-full max-w-[520px]">
       <div className="pointer-events-none absolute inset-[12%] rounded-full bg-[radial-gradient(circle,hsl(16_98%_58%/0.35),transparent_65%)] blur-2xl" />
       {slots.map(({ card, y, rotate, className, delay }) =>
         card ? (
