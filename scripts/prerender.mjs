@@ -78,8 +78,7 @@ try {
 
     await page.waitForSelector("#root h1", { timeout: 60_000 });
     if (route === "/") {
-      // The carousel and form sections are code-split; make sure they've rendered before capture.
-      await page.waitForSelector("#team .swiper", { timeout: 60_000 });
+      // The form section is code-split; make sure it's rendered before capture.
       await page.waitForSelector("#contact form", { timeout: 60_000 });
     }
     // Best-effort settle for images / fonts / effects (Seo removes the static default tags in an effect).

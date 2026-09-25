@@ -15,11 +15,10 @@ import Seo from "@/components/Seo";
 import { scrollToTarget } from "@/lib/smooth-scroll";
 import { getHomeSeo } from "@/seo/site.js";
 
-// Below-the-fold sections with heavy dependencies (Swiper carousels; form + validation + EmailJS)
+// Below-the-fold sections with heavy dependencies (form + validation + EmailJS)
 // are split into their own chunks so they don't compete with the hero for the main thread.
 // They still hydrate/render right after load — they are not scroll-gated — so their content is
 // always present for crawlers. The fallback reserves height to avoid layout shift.
-const Contents = lazy(() => import("@/components/Contents"));
 const ContactForm = lazy(() => import("@/components/ContactForm"));
 const SectionFallback = ({ minHeight }: { minHeight: number }) => (
   <div aria-hidden="true" style={{ minHeight }} />
@@ -59,9 +58,6 @@ const Index = () => {
         <Process />
         <WhyChooseUs />
         <Portfolio />
-        <Suspense fallback={<SectionFallback minHeight={1200} />}>
-          <Contents />
-        </Suspense>
         <Clients />
         <Testimonials />
         <Suspense fallback={<SectionFallback minHeight={900} />}>

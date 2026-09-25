@@ -41,6 +41,8 @@ const galleryItemVariants = {
   }),
 };
 
+const isEmbed = (src: string) => /^https?:\/\//.test(src);
+
 const PortfolioDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -48,6 +50,7 @@ const PortfolioDetail = () => {
   const skipMotionInitial = isPrerenderedDocument();
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxItems, setLightboxItems] = useState<PortfolioGalleryItem[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -57,20 +60,22 @@ const PortfolioDetail = () => {
   }, [project, navigate]);
 
   const gallery = project?.gallery ?? [];
-  const activeItem: PortfolioGalleryItem | undefined = gallery[activeIndex];
+  const activeItem: PortfolioGalleryItem | undefined = lightboxItems[activeIndex];
 
-  const openLightbox = useCallback((index: number) => {
+  // The lightbox pages through whichever set of images was clicked (the gallery or one image section).
+  const openLightbox = useCallback((items: PortfolioGalleryItem[], index: number) => {
+    setLightboxItems(items);
     setActiveIndex(index);
     setLightboxOpen(true);
   }, []);
 
   const goPrev = useCallback(() => {
-    setActiveIndex((i) => (i <= 0 ? gallery.length - 1 : i - 1));
-  }, [gallery.length]);
+    setActiveIndex((i) => (i <= 0 ? lightboxItems.length - 1 : i - 1));
+  }, [lightboxItems.length]);
 
   const goNext = useCallback(() => {
-    setActiveIndex((i) => (i >= gallery.length - 1 ? 0 : i + 1));
-  }, [gallery.length]);
+    setActiveIndex((i) => (i >= lightboxItems.length - 1 ? 0 : i + 1));
+  }, [lightboxItems.length]);
 
   useEffect(() => {
     if (!lightboxOpen) return;
@@ -164,7 +169,7 @@ const PortfolioDetail = () => {
                     initial="hidden"
                     animate="visible"
                     viewport={{ once: true, margin: "-40px" }}
-                    onClick={() => openLightbox(index)}
+                    onClick={() => openLightbox(gallery, index)}
                     className={cn(
                       "group relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted text-left",
                       "shadow-soft ring-1 ring-border/60 transition-all duration-500",
@@ -244,14 +249,28 @@ const PortfolioDetail = () => {
                           !video.aspectRatio && "aspect-video",
                         )}
                       >
-                        <iframe
-                          src={video.src}
-                          title={video.title}
-                          className="h-full w-full border-0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          loading="lazy"
-                        />
+                        {isEmbed(video.src) ? (
+                          <iframe
+                            src={video.src}
+                            title={video.title}
+                            className="h-full w-full border-0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            loading="lazy"
+                          />
+                        ) : (
+                          // Self-hosted: only the poster loads until the visitor presses play.
+                          <video
+                            src={video.src}
+                            poster={video.poster}
+                            title={video.title}
+                            aria-label={video.title}
+                            className="h-full w-full bg-black object-cover"
+                            controls
+                            playsInline
+                            preload="none"
+                          />
+                        )}
                       </motion.div>
                     ))}
                   </div>
@@ -300,7 +319,7 @@ const PortfolioDetail = () => {
                           initial="hidden"
                           animate="visible"
                           viewport={{ once: true, margin: "-40px" }}
-                          onClick={() => openLightbox(imageIndex)}
+                          onClick={() => openLightbox(section.images, imageIndex)}
                           className={cn(
                             "group relative overflow-hidden rounded-3xl bg-gradient-to-br from-secondary/60 via-secondary/40 to-background text-left flex items-center justify-center",
                             "shadow-lg hover:shadow-2xl ring-1 ring-border/40 transition-all duration-500",
@@ -385,7 +404,7 @@ const PortfolioDetail = () => {
               )}
             </AnimatePresence>
 
-            {gallery.length > 1 && (
+            {lightboxItems.length > 1 && (
               <>
                 <button
                   type="button"
@@ -404,7 +423,7 @@ const PortfolioDetail = () => {
                   <ChevronRight className="h-6 w-6" />
                 </button>
                 <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-1.5">
-                  {gallery.map((_, i) => (
+                  {lightboxItems.map((_, i) => (
                     <button
                       key={i}
                       type="button"

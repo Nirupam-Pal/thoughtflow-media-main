@@ -4,8 +4,11 @@ export type PortfolioGalleryItem = {
 };
 
 export type VideoItem = {
+  /** A YouTube embed URL, or a self-hosted file path (e.g. "/videos/1.mp4"). */
   src: string;
   title: string;
+  /** Still frame for self-hosted videos, shown until the visitor presses play. */
+  poster?: string;
   aspectRatio?: "16:9" | "9:16" | "1:1" | "auto"; // Default: auto
 };
 
@@ -39,6 +42,21 @@ export type PortfolioProject = {
   videoSections?: VideoSection[];
   imageSections?: ImageSection[];
 };
+
+// Self-hosted ad videos and posters (optimized by scripts/optimize-videos.mjs and scripts/optimize-images.mjs).
+const adVideos = (count: number): VideoItem[] =>
+  Array.from({ length: count }, (_, i) => ({
+    src: `/videos/${i + 1}.mp4`,
+    poster: `/videos/poster/${i + 1}.webp`,
+    title: `Ad video ${i + 1}`,
+    aspectRatio: "9:16",
+  }));
+
+const adPosters = (count: number): PortfolioGalleryItem[] =>
+  Array.from({ length: count }, (_, i) => ({
+    src: `/posters/${i + 1}.webp`,
+    alt: `Ad poster ${i + 1}`,
+  }));
 
 const gallery = (
   items: { seed: string; alt: string }[],
@@ -126,6 +144,11 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "High-impact commercial ads, product spots, and social-first cutdowns.",
     gallery: [],
     videoSections: [
+      {
+        title: "ROI-Driven Ad Videos",
+        description: "Highly engineered ad videos built for performance (90% better performance)",
+        videos: adVideos(12),
+      },
       {
         title: "YouTube Hooks",
         description: "Cinematic teasers designed to capture attention in 16:9 format",
@@ -233,8 +256,8 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       },
       {
         title: "Ad Creatives (Social Media Posters)",
-        description: "Engaging social media ad creatives optimized for conversions",
-        images: [],
+        description: "Ad posters that bring enrollments (50% better performance)",
+        images: adPosters(13),
       },
       {
         title: "High CTR Thumbnails",

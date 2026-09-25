@@ -7,7 +7,6 @@ import { scrollToTarget } from "@/lib/smooth-scroll";
 const navLinks = [
   { name: "Services", href: "#services" },
   { name: "Portfolio", href: "#portfolio" },
-  { name: "Contents", href: "#team" },
   { name: "Clients", href: "#testimonials" },
   { name: "Contact", href: "#contact" }
 ];
