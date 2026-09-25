@@ -5,8 +5,56 @@ import type { PortfolioGalleryItem } from "@/data/portfolioData";
 import { SmartImage } from "@/components/SmartImage";
 import { cn } from "@/lib/utils";
 import { useFinePointer } from "@/lib/motion";
-import { imageWidths } from "@/lib/design";
+import { imageWidths, isUnsplash, unsplashSet } from "@/lib/design";
 import { useMediaCursor } from "./MediaCursor";
+
+/**
+ * Decorative artwork image that picks the right delivery: local images go through SmartImage
+ * (generated WebP variants + blurred placeholder), Unsplash photos get a sized srcset.
+ */
+export function ArtImage({
+  src,
+  sizes,
+  eager,
+  ratio,
+  className,
+}: {
+  src: string;
+  sizes: string;
+  eager?: boolean;
+  /** Crop remote photos to this width / height ratio. */
+  ratio?: number;
+  className?: string;
+}) {
+  if (isUnsplash(src)) {
+    const set = unsplashSet(src, ratio);
+    return (
+      <img
+        src={set.src}
+        srcSet={set.srcSet}
+        sizes={sizes}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        className={className}
+      />
+    );
+  }
+  return (
+    <SmartImage
+      src={src}
+      widths={imageWidths(src)}
+      sizes={sizes}
+      priority={eager}
+      alt=""
+      aria-hidden="true"
+      draggable={false}
+      className={className}
+    />
+  );
+}
 
 /**
  * A design tile. The artwork is the point, so the tile stays clean: just an index chip. The
@@ -21,6 +69,7 @@ export function ImageTile({
   className,
   size = "md",
   eager,
+  noun = "design",
 }: {
   item: PortfolioGalleryItem;
   /** Position in the page-wide gallery (what the lightbox opens at). */
@@ -31,6 +80,8 @@ export function ImageTile({
   className?: string;
   size?: "sm" | "md" | "lg";
   eager?: boolean;
+  /** What the tile shows, for its accessible name ("View design: …", "View image: …"). */
+  noun?: string;
 }) {
   const fine = useFinePointer();
   const reduced = useReducedMotion();
@@ -42,7 +93,7 @@ export function ImageTile({
       type="button"
       data-active={active}
       aria-haspopup="dialog"
-      aria-label={`View design: ${item.alt}`}
+      aria-label={`View ${noun}: ${item.alt}`}
       onClick={() => {
         setActive(false);
         cursor.hide();
@@ -68,16 +119,7 @@ export function ImageTile({
       )}
     >
       <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-focus-visible:scale-[1.04] group-data-[active=true]:scale-[1.04]">
-        <SmartImage
-          src={item.src}
-          widths={imageWidths(item.src)}
-          sizes={sizes}
-          priority={eager}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <ArtImage src={item.src} sizes={sizes} eager={eager} className="absolute inset-0 h-full w-full object-cover" />
       </div>
 
       {/* Hover scrim + caption */}

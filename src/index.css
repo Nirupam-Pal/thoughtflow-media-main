@@ -500,3 +500,41 @@ html.lenis body {
 .lenis.lenis-smooth .video-lightbox iframe {
   pointer-events: auto;
 }
+
+/* ─── Case-study feature bands: tiny looping accents (paused off-screen via [data-inview=false]) ─── */
+@layer utilities {
+  /* A lead dropping through the funnel: starts spread out, converges on the centre line. */
+  .funnel-drop {
+    animation: funnel-drop 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  /* A dot travelling the lead pipeline, left to right. */
+  .pipeline-flow {
+    animation: pipeline-flow 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  [data-inview="false"] .funnel-drop,
+  [data-inview="false"] .pipeline-flow {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes funnel-drop {
+  0% { transform: translate3d(var(--x, 0), 0, 0) scale(1); opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translate3d(0, var(--h, 300px), 0) scale(0.6); opacity: 0; }
+}
+
+@keyframes pipeline-flow {
+  0% { left: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funnel-drop,
+  .pipeline-flow {
+    animation: none !important;
+    opacity: 0;
+  }
+}

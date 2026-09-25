@@ -438,6 +438,7 @@ export function WorkSection({
     <section aria-labelledby="work-heading" className="section-aurora relative overflow-x-clip py-20 sm:py-24 lg:py-32">
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader id="work-heading" eyebrow="Selected Work" title={title} accent={accent} description={description} className="mb-8 sm:mb-10" />
+        {collections.length > 1 && (
         <Reveal className="mb-16 flex flex-wrap justify-center gap-2 sm:mb-24 sm:gap-3">
           <nav aria-label="Collections" className="contents">
             {collections.map((c) => (
@@ -455,6 +456,7 @@ export function WorkSection({
             ))}
           </nav>
         </Reveal>
+        )}
         <div className="space-y-24 sm:space-y-32 lg:space-y-40">{children}</div>
       </div>
     </section>

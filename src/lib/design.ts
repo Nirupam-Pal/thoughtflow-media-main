@@ -31,3 +31,30 @@ export function buildGallery(sections: ImageSection[]): GalleryEntry[] {
   let index = 0;
   return sections.flatMap((section) => section.images.map((item) => ({ item, section, index: index++ })));
 }
+
+/* ─── Remote (Unsplash) photos: sized and cropped through URL parameters ─── */
+
+export const isUnsplash = (src: string) => src.includes("images.unsplash.com");
+
+/** The same Unsplash photo at `width` px (and, with `ratio` = w/h, cropped to that shape). */
+export function unsplashAt(src: string, width: number, ratio?: number, quality = 72): string {
+  const u = new URL(src);
+  u.searchParams.set("w", String(width));
+  if (ratio) {
+    u.searchParams.set("h", String(Math.round(width / ratio)));
+    u.searchParams.set("fit", "crop");
+  } else {
+    u.searchParams.delete("h");
+  }
+  u.searchParams.set("q", String(quality));
+  u.searchParams.set("auto", "format");
+  return u.toString();
+}
+
+/** src + srcset for an Unsplash photo, so each device downloads only the size it shows. */
+export function unsplashSet(src: string, ratio?: number, widths = [480, 960, 1600]) {
+  return {
+    src: unsplashAt(src, widths[1] ?? widths[0], ratio),
+    srcSet: widths.map((w) => `${unsplashAt(src, w, ratio)} ${w}w`).join(", "),
+  };
+}
