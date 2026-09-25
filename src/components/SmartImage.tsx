@@ -40,7 +40,8 @@ export function SmartImage({ src, widths, sizes, priority, alt, style, onLoad, .
   const hasVariants = !!widths && widths.length > 1;
   const smallest = hasVariants ? variant(src, widths[0]) : src;
   const srcSet = hasVariants
-    ? widths.map((w, i) => `${i === widths.length - 1 ? src : variant(src, w)} ${w}w`).join(", ")
+    ? // encodeURI: srcset is whitespace-separated, so paths with spaces must be escaped.
+      widths.map((w, i) => `${encodeURI(i === widths.length - 1 ? src : variant(src, w))} ${w}w`).join(", ")
     : undefined;
 
   const lqip = (LQIP as Record<string, string>)[src];

@@ -23,6 +23,9 @@ const jobs = [
   ["posters", [".jpg", ".jpeg", ".png"], [360, 600, 900], 74, true], // wall tiles + poster carousel
   ["clients", [".jpg", ".jpeg", ".png"], [360, 720], 74, true], // testimonial portraits
   [path.join("parallax", "logos"), [".png"], [640], 80, false], // brand tiles in the wall
+  // Creative Designs case study (originals are up to 12 MB)
+  [path.join("Creative Visual Designs", "High CTR Thumbnails"), [".jpg", ".jpeg", ".png"], [480, 960, 1280], 76, true],
+  [path.join("Creative Visual Designs", "Banners & Flex Designs"), [".jpg", ".jpeg", ".png"], [640, 1280, 2000], 76, true],
 ];
 
 let before = 0;

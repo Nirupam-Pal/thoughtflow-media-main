@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import {
   motion,
   useReducedMotion,
@@ -11,8 +11,11 @@ import { Compass, Lightbulb, Rocket, Clapperboard, type LucideIcon } from "lucid
 import { SectionHeader } from "@/components/motion/SectionHeader";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
+import { cn } from "@/lib/utils";
 
-const steps: { icon: LucideIcon; title: string; description: string }[] = [
+export type ProcessStep = { icon: LucideIcon; title: string; description: string };
+
+const DEFAULT_STEPS: ProcessStep[] = [
   {
     icon: Compass,
     title: "Discover",
@@ -38,14 +41,16 @@ const steps: { icon: LucideIcon; title: string; description: string }[] = [
 /** Step badge that "powers on" as the scroll-drawn line reaches it. Motion values only — no re-renders. */
 function StepBadge({
   index,
+  total,
   progress,
   Icon,
 }: {
   index: number;
+  total: number;
   progress: MotionValue<number>;
   Icon: LucideIcon;
 }) {
-  const start = index / steps.length;
+  const start = index / total;
   const on = useTransform(progress, [start, start + 0.12], [0, 1]);
   const scale = useTransform(on, [0, 1], [0.92, 1]);
 
@@ -66,7 +71,24 @@ function StepBadge({
   );
 }
 
-const Process = () => {
+/** Defaults are the home page's agency process; case studies pass their own steps and copy. */
+const Process = ({
+  id = "process",
+  eyebrow = "How We Work",
+  title = "From idea to",
+  accent = "impact",
+  description = "A simple, transparent process that turns attention into measurable growth.",
+  steps = DEFAULT_STEPS,
+  className,
+}: {
+  id?: string;
+  eyebrow?: string;
+  title?: ReactNode;
+  accent?: ReactNode;
+  description?: ReactNode;
+  steps?: ProcessStep[];
+  className?: string;
+}) => {
   const reduced = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
@@ -76,14 +98,14 @@ const Process = () => {
   const line = useTransform(progress, (v) => (reduced ? 1 : v));
 
   return (
-    <section aria-labelledby="process-heading" className="relative overflow-x-clip bg-secondary/30 py-20 md:py-28 lg:py-32" id="process">
+    <section aria-labelledby={`${id}-heading`} className={cn("relative overflow-x-clip bg-secondary/30 py-20 md:py-28 lg:py-32", className)} id={id}>
       <div className="container mx-auto min-w-0 px-4 sm:px-6">
         <SectionHeader
-          id="process-heading"
-          eyebrow="How We Work"
-          title="From idea to"
-          accent="impact"
-          description="A simple, transparent process that turns attention into measurable growth."
+          id={`${id}-heading`}
+          eyebrow={eyebrow}
+          title={title}
+          accent={accent}
+          description={description}
         />
 
         <div ref={ref} className="relative mx-auto max-w-7xl">
@@ -103,7 +125,7 @@ const Process = () => {
               <StaggerItem key={title}>
                 <div className="flex gap-5 lg:flex-col lg:items-center lg:gap-0 lg:text-center">
                   <div className="shrink-0 lg:mb-6">
-                    <StepBadge index={i} progress={progress} Icon={Icon} />
+                    <StepBadge index={i} total={steps.length} progress={progress} Icon={Icon} />
                   </div>
                   <TiltCard className="flex-1 rounded-3xl" max={6}>
                     <div className="p-6">

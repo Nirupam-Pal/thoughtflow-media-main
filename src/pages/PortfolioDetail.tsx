@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 import { isPrerenderedDocument } from "@/lib/prerender";
 import Seo from "@/components/Seo";
 import { getProjectSeo } from "@/seo/site.js";
+import { VideoCaseStudy } from "@/components/case-study/VideoCaseStudy";
+import { DesignCaseStudy } from "@/components/case-study/DesignCaseStudy";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -40,8 +42,6 @@ const galleryItemVariants = {
     },
   }),
 };
-
-const isEmbed = (src: string) => /^https?:\/\//.test(src);
 
 const PortfolioDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -89,6 +89,20 @@ const PortfolioDetail = () => {
 
   if (!project) {
     return null;
+  }
+
+  // Video and design projects get their case-study layouts; the rest keep the photo gallery below.
+  const hasVideos = !!project.videoSections?.length;
+  const hasDesigns = !!project.imageSections?.some((s) => s.images.length > 0);
+  if (hasVideos || hasDesigns) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background min-w-0 w-full max-w-[100vw] overflow-x-clip">
+        <Seo {...getProjectSeo(project)} />
+        <Header />
+        {hasVideos ? <VideoCaseStudy project={project} /> : <DesignCaseStudy project={project} />}
+        <Footer />
+      </div>
+    );
   }
 
   return (
@@ -192,167 +206,6 @@ const PortfolioDetail = () => {
                 ))}
               </div>
             </motion.section>
-          )}
-
-          {project.videoSections && project.videoSections.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: gallery.length > 0 ? 0.35 : 0.28, duration: 0.4 }}
-              className={cn(
-                "space-y-14 sm:space-y-16 md:space-y-20",
-                gallery.length === 0 && "mt-0"
-              )}
-            >
-              {project.videoSections.map((section, sectionIndex) => (
-                <motion.section
-                  key={`video-section-${sectionIndex}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.38 + sectionIndex * 0.1, duration: 0.5 }}
-                  aria-label={`${section.title} videos`}
-                >
-                  <div className="mb-8">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2">
-                      {section.title}
-                    </h2>
-                    {section.description && (
-                      <p className="text-muted-foreground text-base sm:text-lg">
-                        {section.description}
-                      </p>
-                    )}
-                  </div>
-
-                  <div
-                    className={cn(
-                      "grid gap-4 md:gap-5",
-                      section.videos.some((v) => v.aspectRatio === "9:16")
-                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                        : "grid-cols-1 lg:grid-cols-2",
-                    )}
-                  >
-                    {section.videos.map((video, videoIndex) => (
-                      <motion.div
-                        key={`video-${sectionIndex}-${videoIndex}`}
-                        custom={videoIndex}
-                        variants={galleryItemVariants}
-                        initial="hidden"
-                        animate="visible"
-                        viewport={{ once: true, margin: "-40px" }}
-                        className={cn(
-                          "group relative overflow-hidden rounded-2xl bg-muted",
-                          "shadow-soft ring-1 ring-border/60 transition-all duration-500",
-                          "hover:shadow-medium hover:ring-primary/20 hover:-translate-y-1",
-                          video.aspectRatio === "16:9" && "aspect-video",
-                          video.aspectRatio === "9:16" && "aspect-[9/16]",
-                          video.aspectRatio === "1:1" && "aspect-square",
-                          !video.aspectRatio && "aspect-video",
-                        )}
-                      >
-                        {isEmbed(video.src) ? (
-                          <iframe
-                            src={video.src}
-                            title={video.title}
-                            className="h-full w-full border-0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            loading="lazy"
-                          />
-                        ) : (
-                          // Self-hosted: only the poster loads until the visitor presses play.
-                          <video
-                            src={video.src}
-                            poster={video.poster}
-                            title={video.title}
-                            aria-label={video.title}
-                            className="h-full w-full bg-black object-cover"
-                            controls
-                            playsInline
-                            preload="none"
-                          />
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.section>
-              ))}
-            </motion.div>
-          )}
-
-          {project.imageSections && project.imageSections.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: gallery.length > 0 ? 0.35 : 0.28, duration: 0.4 }}
-              className={cn(
-                "space-y-14 sm:space-y-16 md:space-y-20",
-                gallery.length === 0 && "mt-0"
-              )}
-            >
-              {project.imageSections.map((section, sectionIndex) => (
-                <motion.section
-                  key={`image-section-${sectionIndex}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.38 + sectionIndex * 0.1, duration: 0.5 }}
-                  aria-label={`${section.title} images`}
-                >
-                  <div className="mb-8">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2">
-                      {section.title}
-                    </h2>
-                    {section.description && (
-                      <p className="text-muted-foreground text-base sm:text-lg">
-                        {section.description}
-                      </p>
-                    )}
-                  </div>
-
-                  {section.images.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8">
-                      {section.images.map((image, imageIndex) => (
-                        <motion.button
-                          key={`image-${sectionIndex}-${imageIndex}`}
-                          type="button"
-                          custom={imageIndex}
-                          variants={galleryItemVariants}
-                          initial="hidden"
-                          animate="visible"
-                          viewport={{ once: true, margin: "-40px" }}
-                          onClick={() => openLightbox(section.images, imageIndex)}
-                          className={cn(
-                            "group relative overflow-hidden rounded-3xl bg-gradient-to-br from-secondary/60 via-secondary/40 to-background text-left flex items-center justify-center",
-                            "shadow-lg hover:shadow-2xl ring-1 ring-border/40 transition-all duration-500",
-                            "hover:ring-primary/30 hover:-translate-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                            "min-h-[350px] backdrop-blur-sm border border-gradient-to-r from-primary/10 via-transparent to-primary/10"
-                          )}
-                        >
-                          {/* Glow effect */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-                          </div>
-
-                          <img
-                            src={image.src}
-                            alt={image.alt}
-                            className="h-auto w-auto max-h-[600px] max-w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03] p-6 relative z-10"
-                            loading="lazy"
-                          />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                          <span className="pointer-events-none absolute bottom-4 left-4 right-4 text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 line-clamp-2 drop-shadow-md">
-                            {image.alt}
-                          </span>
-                        </motion.button>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center rounded-3xl bg-gradient-to-br from-secondary/60 via-secondary/40 to-background p-12 border border-border/40 ring-1 ring-border/40">
-                      <p className="text-muted-foreground text-center font-medium">No images available in this section yet</p>
-                    </div>
-                  )}
-                </motion.section>
-              ))}
-            </motion.div>
           )}
         </motion.div>
       </main>
