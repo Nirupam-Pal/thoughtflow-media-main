@@ -9,7 +9,6 @@ import {
 } from "framer-motion";
 import { Compass, Lightbulb, Rocket, Clapperboard, type LucideIcon } from "lucide-react";
 import { SectionHeader } from "@/components/motion/SectionHeader";
-import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { cn } from "@/lib/utils";
 
@@ -38,36 +37,54 @@ const DEFAULT_STEPS: ProcessStep[] = [
   },
 ];
 
-/** Step badge that "powers on" as the scroll-drawn line reaches it. Motion values only — no re-renders. */
-function StepBadge({
+/**
+ * One step that "powers on" as the scroll-drawn line reaches it. The card is always rendered (dimmed
+ * until lit), so the section never reads as empty. Motion values only — no re-renders, and no reliance
+ * on a one-shot in-view trigger that can be missed on a fast scroll.
+ */
+function Step({
   index,
   total,
   progress,
-  Icon,
+  step: { icon: Icon, title, description },
 }: {
   index: number;
   total: number;
   progress: MotionValue<number>;
-  Icon: LucideIcon;
+  step: ProcessStep;
 }) {
   const start = index / total;
   const on = useTransform(progress, [start, start + 0.12], [0, 1]);
   const scale = useTransform(on, [0, 1], [0.92, 1]);
+  const cardOpacity = useTransform(on, [0, 1], [0.45, 1]);
+  const cardY = useTransform(on, [0, 1], [12, 0]);
 
   return (
-    <motion.div
-      className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/10 bg-background shadow-soft"
-      style={{ scale }}
-    >
-      <motion.div className="absolute inset-0 rounded-2xl bg-ember" style={{ opacity: on }} />
-      <Icon className="relative h-6 w-6 text-primary transition-colors" />
-      <motion.span
-        className="absolute inset-0 flex items-center justify-center text-white"
-        style={{ opacity: on }}
-      >
-        <Icon className="h-6 w-6" />
-      </motion.span>
-    </motion.div>
+    <div className="flex gap-5 lg:flex-col lg:items-center lg:gap-0 lg:text-center">
+      <div className="shrink-0 lg:mb-6">
+        <motion.div
+          className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/10 bg-background shadow-soft"
+          style={{ scale }}
+        >
+          <motion.div className="absolute inset-0 rounded-2xl bg-ember" style={{ opacity: on }} />
+          <Icon className="relative h-6 w-6 text-primary transition-colors" />
+          <motion.span className="absolute inset-0 flex items-center justify-center text-white" style={{ opacity: on }}>
+            <Icon className="h-6 w-6" />
+          </motion.span>
+        </motion.div>
+      </div>
+      <motion.div className="flex-1" style={{ opacity: cardOpacity, y: cardY }}>
+        <TiltCard className="h-full rounded-3xl" max={6}>
+          <div className="p-6">
+            <span className="mb-2 block font-display text-sm font-semibold tabular-nums text-muted-foreground">
+              0{index + 1}
+            </span>
+            <h3 className="mb-2 font-display text-xl font-semibold">{title}</h3>
+            <p className="text-[15px] leading-relaxed text-muted-foreground">{description}</p>
+          </div>
+        </TiltCard>
+      </motion.div>
+    </div>
   );
 }
 
@@ -120,26 +137,11 @@ const Process = ({
             style={{ scaleX: line }}
           />
 
-          <Stagger className="relative grid gap-6 lg:grid-cols-4 lg:gap-8">
-            {steps.map(({ icon: Icon, title, description }, i) => (
-              <StaggerItem key={title}>
-                <div className="flex gap-5 lg:flex-col lg:items-center lg:gap-0 lg:text-center">
-                  <div className="shrink-0 lg:mb-6">
-                    <StepBadge index={i} total={steps.length} progress={progress} Icon={Icon} />
-                  </div>
-                  <TiltCard className="flex-1 rounded-3xl" max={6}>
-                    <div className="p-6">
-                      <span className="mb-2 block font-display text-sm font-semibold tabular-nums text-muted-foreground">
-                        0{i + 1}
-                      </span>
-                      <h3 className="mb-2 font-display text-xl font-semibold">{title}</h3>
-                      <p className="text-[15px] leading-relaxed text-muted-foreground">{description}</p>
-                    </div>
-                  </TiltCard>
-                </div>
-              </StaggerItem>
+          <div className="relative grid gap-6 lg:grid-cols-4 lg:gap-8">
+            {steps.map((step, i) => (
+              <Step key={step.title} index={i} total={steps.length} progress={line} step={step} />
             ))}
-          </Stagger>
+          </div>
         </div>
       </div>
     </section>

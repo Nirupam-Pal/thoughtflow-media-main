@@ -83,7 +83,7 @@ function BandShell({
   );
 }
 
-/** Numbered item list on the dark band. `active` highlights one (scroll-driven bands). */
+/** Numbered item list on the dark band. `active` lights items up to and including it (scroll-driven bands), so finished steps stay lit. */
 function ItemList({ items, active, columns }: { items: Item[]; active?: number; columns?: boolean }) {
   return (
     <Stagger className={cn("grid gap-x-8", columns ? "sm:grid-cols-2" : "")}>
@@ -92,7 +92,7 @@ function ItemList({ items, active, columns }: { items: Item[]; active?: number; 
           <div
             className={cn(
               "flex gap-4 border-t border-white/10 py-4 transition-opacity duration-500",
-              active !== undefined && (i === active ? "opacity-100" : "opacity-40")
+              active !== undefined && (i <= active ? "opacity-100" : "opacity-40")
             )}
           >
             <span className="font-display text-sm font-semibold tabular-nums text-ember">{String(i + 1).padStart(2, "0")}</span>
