@@ -185,11 +185,6 @@ export function GalleryCaseStudy({ project }: { project: PortfolioProject }) {
           title={story?.cta?.title ?? "Have a project"}
           accent={story?.cta?.accent ?? "in mind?"}
           body={story?.cta?.body ?? "Let's talk about what you want to build, and how we can help."}
-          peeks={entries.slice(-2).map(({ item, index }) => (
-            <div key={index} className="relative aspect-[4/5]">
-              <img src={sized(item.src, 360, 4 / 5)} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-            </div>
-          ))}
           next={nextProjectOf(project)}
         />
       </main>

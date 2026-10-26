@@ -680,15 +680,12 @@ export function ClosingCta({
   title,
   accent,
   body,
-  peeks,
   next,
 }: {
   eyebrow: string;
   title: string;
   accent: string;
   body: string;
-  /** Up to two decorative pieces of work peeking in from the card's edges (large screens only). */
-  peeks: ReactNode[];
   next?: PortfolioProject;
 }) {
   return (
@@ -700,19 +697,6 @@ export function ClosingCta({
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_85%,hsl(38_45%_86%),transparent_60%)]" />
             <div className="hero-fine-grid absolute inset-0 opacity-60" />
             <div className="grain absolute inset-0 opacity-[0.05]" />
-
-            {peeks.slice(0, 2).map((peek, i) => (
-              <div
-                key={i}
-                aria-hidden="true"
-                className={cn(
-                  "absolute hidden w-36 overflow-hidden rounded-2xl shadow-medium ring-4 ring-white/70 lg:block xl:w-44",
-                  i === 0 ? "svc-float -left-6 top-12 -rotate-12" : "svc-float-b -right-6 bottom-10 rotate-12"
-                )}
-              >
-                {peek}
-              </div>
-            ))}
 
             <div className="relative z-10 mx-auto max-w-3xl">
               <Eyebrow>{eyebrow}</Eyebrow>

@@ -154,11 +154,6 @@ export function DesignCaseStudy({ project }: { project: PortfolioProject }) {
           title="Need designs that"
           accent="stop the thumb?"
           body="Let's make them. Posters, thumbnails and banners built around one clear message, in your brand's look."
-          peeks={posters.slice(-2).map((e) => (
-            <div key={e.index} className="relative aspect-[4/5]">
-              <img src={smallestVariant(e.item.src)} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-            </div>
-          ))}
           next={nextProjectOf(project)}
         />
       </main>
