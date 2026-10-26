@@ -188,7 +188,7 @@ const Clients = () => {
         />
 
         <Reveal className="relative flex flex-col items-center justify-center w-full min-w-0 mt-8 sm:mt-12 overflow-hidden">
-          <div className="relative w-full [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]">
+          <div className="relative w-full [mask-image:linear-gradient(to_right,transparent_0%,rgb(0_0_0/0.25)_3%,rgb(0_0_0/0.6)_6%,black_10%,black_90%,rgb(0_0_0/0.6)_94%,rgb(0_0_0/0.25)_97%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgb(0_0_0/0.25)_3%,rgb(0_0_0/0.6)_6%,black_10%,black_90%,rgb(0_0_0/0.6)_94%,rgb(0_0_0/0.25)_97%,transparent_100%)]">
             <Marquee pauseOnHover className="[--duration:30s] [--gap:.5rem] sm:[--gap:.75rem] md:[--gap:1rem]">
               {firstRow.map((logo) => (
                 <LogoCard key={logo.src} {...logo} />
@@ -200,12 +200,10 @@ const Clients = () => {
               ))}
             </Marquee>
           </div>
-          <div className="hidden md:block absolute inset-y-0 left-0 w-1/4 pointer-events-none z-30 bg-gradient-to-r from-secondary/30 to-transparent"></div>
-          <div className="hidden md:block absolute inset-y-0 right-0 w-1/4 pointer-events-none z-30 bg-gradient-to-l from-secondary/30 to-transparent"></div>
         </Reveal>
       </div>
-      <div className="hidden md:block absolute inset-y-0 left-0 w-1/3 pointer-events-none z-30 bg-gradient-to-r from-secondary via-secondary/50 to-transparent"></div>
-      <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 pointer-events-none z-30 bg-gradient-to-l from-secondary via-secondary/50 to-transparent"></div>
+      <div className="hidden md:block absolute inset-y-0 left-0 w-[10%] pointer-events-none z-30 bg-gradient-to-r from-secondary/60 via-secondary/20 to-transparent"></div>
+      <div className="hidden md:block absolute inset-y-0 right-0 w-[10%] pointer-events-none z-30 bg-gradient-to-l from-secondary/60 via-secondary/20 to-transparent"></div>
     </section>
   );
 };
