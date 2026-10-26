@@ -241,6 +241,7 @@ function PosterWall({ entries, onOpen }: LayoutProps) {
           onOpen={onOpen}
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
           className="aspect-[4/5]"
+          ratio={e.item.width && e.item.height ? e.item.width / e.item.height : undefined}
           size="sm"
         />
       )}

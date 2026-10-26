@@ -70,6 +70,7 @@ export function ImageTile({
   size = "md",
   eager,
   noun = "design",
+  ratio,
 }: {
   item: PortfolioGalleryItem;
   /** Position in the page-wide gallery (what the lightbox opens at). */
@@ -82,6 +83,8 @@ export function ImageTile({
   eager?: boolean;
   /** What the tile shows, for its accessible name ("View design: …", "View image: …"). */
   noun?: string;
+  /** Width / height of the tile; overrides any aspect class so the whole artwork shows. */
+  ratio?: number;
 }) {
   const fine = useFinePointer();
   const reduced = useReducedMotion();
@@ -92,6 +95,7 @@ export function ImageTile({
     <button
       type="button"
       data-active={active}
+      style={ratio ? { aspectRatio: ratio } : undefined}
       aria-haspopup="dialog"
       aria-label={`View ${noun}: ${item.alt}`}
       onClick={() => {

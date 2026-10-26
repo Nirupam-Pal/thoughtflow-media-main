@@ -121,8 +121,9 @@ const adVideos = (items: { title: string; tag: string }[]): VideoItem[] =>
   }));
 
 // Files are numbered 1..N in the order listed here.
-const adPosters = (items: { alt: string; tag: string }[]): PortfolioGalleryItem[] =>
-  items.map(({ alt, tag }, i) => ({ src: `/posters/${i + 1}.webp`, alt, tag }));
+// Feed posters are 4:5 unless marked square (1:1); the wall shows each at its own shape.
+const adPosters = (items: { alt: string; tag: string; square?: boolean }[]): PortfolioGalleryItem[] =>
+  items.map(({ alt, tag, square }, i) => ({ src: `/posters/${i + 1}.webp`, alt, tag, width: 900, height: square ? 900 : 1125 }));
 
 // Optimised .webp next to each original in public/Creative Visual Designs/<folder>/ (scripts/optimize-images.mjs).
 const designs = (
@@ -551,17 +552,17 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         layout: "wall",
         images: adPosters([
           { alt: "NEET 2025 “All the Best” post for The Core Academy", tag: "Motivation Post" },
-          { alt: "“Achievers of Excellence” results post for Prayam Classes", tag: "Results Post" },
+          { alt: "“Achievers of Excellence” results post for Prayam Classes", tag: "Results Post", square: true },
           { alt: "“All the Best Champions” JEE Advanced 2025 post for Prayam Classes", tag: "Motivation Post" },
-          { alt: "MediQuest NEET Test Series 2025 ad for The Core Academy", tag: "Admission Ad" },
+          { alt: "MediQuest NEET Test Series 2025 ad for The Core Academy", tag: "Admission Ad", square: true },
           { alt: "AI117 tribute post for Ready to Ride", tag: "Topical Post" },
           { alt: "Father’s Day special offer for Ready to Ride", tag: "Offer Ad" },
           { alt: "Baleno self-drive rental ad for Ready to Ride", tag: "Product Ad" },
           { alt: "Royal Enfield GT 650 rental ad for Ready to Ride", tag: "Product Ad" },
-          { alt: "“Save up to 80% on electricity bills” ad for Rencare Energy", tag: "Lead Gen Ad" },
-          { alt: "PM Surya Ghar solar subsidy ad for Rencare Energy", tag: "Lead Gen Ad" },
-          { alt: "NEEV 3.0 Chemistry Foundation admission ad for The Core Academy", tag: "Admission Ad" },
-          { alt: "Mentor spotlight on Er. Pratik Sir for Prayam Classes", tag: "Faculty Spotlight" },
+          { alt: "“Save up to 80% on electricity bills” ad for Rencare Energy", tag: "Lead Gen Ad", square: true },
+          { alt: "PM Surya Ghar solar subsidy ad for Rencare Energy", tag: "Lead Gen Ad", square: true },
+          { alt: "NEEV 3.0 Chemistry Foundation admission ad for The Core Academy", tag: "Admission Ad", square: true },
+          { alt: "Mentor spotlight on Er. Pratik Sir for Prayam Classes", tag: "Faculty Spotlight", square: true },
           { alt: "Free solar site visit ad for Rencare Energy", tag: "Lead Gen Ad" },
         ]),
       },
