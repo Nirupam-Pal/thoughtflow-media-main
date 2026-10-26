@@ -17,7 +17,7 @@ type SmartImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet
 };
 
 /** Poster variants produced by scripts/optimize-images.mjs (keep in sync). */
-export const POSTER_WIDTHS = [360, 600, 900];
+export const POSTER_WIDTHS = [360, 600, 900, 1080];
 
 const variant = (src: string, width: number) => src.replace(/\.webp$/, `-${width}.webp`);
 

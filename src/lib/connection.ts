@@ -11,12 +11,13 @@ const connection = (): NetworkInformation | undefined =>
 
 /**
  * True when the visitor is on a slow link or has asked their browser to save data.
- * "3g" is included on purpose: that's ~0.7–1.7 Mbps, where a 100 KB image takes a second or more.
+ * "3g" is left out on purpose: Chrome's estimate often reports it on normal Wi-Fi, which would
+ * serve blurry thumbnail-size images to visitors with perfectly good connections.
  */
 export function isSlowConnection(): boolean {
   const c = connection();
   if (!c) return false;
-  return !!c.saveData || c.effectiveType === "slow-2g" || c.effectiveType === "2g" || c.effectiveType === "3g";
+  return !!c.saveData || c.effectiveType === "slow-2g" || c.effectiveType === "2g";
 }
 
 /**

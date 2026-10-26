@@ -20,12 +20,12 @@ const pub = path.join(process.cwd(), "public");
 /** [directory, extensions, widths (ascending; last = main file), quality, wantsLqip] */
 const jobs = [
   ["logos", [".png", ".jpg", ".jpeg"], [192], 80, false], // client logos: shown at ≤96px
-  ["posters", [".jpg", ".jpeg", ".png"], [360, 600, 900], 74, true], // wall tiles + poster carousel
-  ["clients", [".jpg", ".jpeg", ".png"], [360, 720], 74, true], // testimonial portraits
+  ["posters", [".jpg", ".jpeg", ".png"], [360, 600, 900, 1080], 82, true], // wall tiles + poster carousel
+  ["clients", [".jpg", ".jpeg", ".png"], [360, 720, 1080], 82, true], // testimonial portraits (sharp on retina)
   [path.join("parallax", "logos"), [".png"], [640], 80, false], // brand tiles in the wall
   // Creative Designs case study (originals are up to 12 MB)
-  [path.join("Creative Visual Designs", "High CTR Thumbnails"), [".jpg", ".jpeg", ".png"], [480, 960, 1280], 76, true],
-  [path.join("Creative Visual Designs", "Banners & Flex Designs"), [".jpg", ".jpeg", ".png"], [640, 1280, 2000], 76, true],
+  [path.join("Creative Visual Designs", "High CTR Thumbnails"), [".jpg", ".jpeg", ".png"], [480, 960, 1280], 82, true],
+  [path.join("Creative Visual Designs", "Banners & Flex Designs"), [".jpg", ".jpeg", ".png"], [640, 1280, 2000], 82, true],
 ];
 
 let before = 0;

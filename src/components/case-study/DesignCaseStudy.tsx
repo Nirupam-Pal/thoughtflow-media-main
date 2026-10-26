@@ -453,7 +453,7 @@ function FeedBand({
               <div className="absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-white via-white/90 to-transparent" />
               <Marquee vertical repeat={2} className="h-full p-0 [--duration:60s] [--gap:0px]">
                 {posters.map((e) => (
-                  <FeedPost key={e.index} src={smallestVariant(e.item.src)} caption={e.item.tag ?? ""} />
+                  <FeedPost key={e.index} src={e.item.src} caption={e.item.tag ?? ""} />
                 ))}
               </Marquee>
             </div>
@@ -478,7 +478,7 @@ function FeedPost({ src, caption }: { src: string; caption: string }) {
         </span>
       </div>
       <div className="relative aspect-[4/5] w-full bg-neutral-100">
-        <img src={src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <SmartImage src={src} widths={imageWidths(src)} sizes="284px" alt="" className="absolute inset-0 h-full w-full object-cover" />
       </div>
       <div className="flex items-center gap-3 px-3 pt-2.5">
         <Heart className="h-4 w-4" />

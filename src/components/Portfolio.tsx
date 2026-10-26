@@ -119,12 +119,12 @@ const CaseCard = forwardRef<HTMLDivElement, { project: PortfolioProject; index: 
               transition={reduced ? NO_MOTION : SPRING_REVEAL}
             >
               <motion.img
-                // Phones get a 480px crop, big screens 720px. On a slow link / Data Saver: 480px, lower quality.
-                src={cropUrl(project.image, slow ? 480 : 720, slow ? 55 : 68)}
+                // Phones get a 480px crop, big / retina screens up to 1080px. On a slow link / Data Saver: 480px, lower quality.
+                src={cropUrl(project.image, slow ? 480 : 720, slow ? 55 : 80)}
                 srcSet={
                   slow
                     ? undefined
-                    : `${cropUrl(project.image, 480, 68)} 480w, ${cropUrl(project.image, 720, 68)} 720w`
+                    : `${cropUrl(project.image, 480, 80)} 480w, ${cropUrl(project.image, 720, 80)} 720w, ${cropUrl(project.image, 1080, 80)} 1080w`
                 }
                 sizes="(min-width: 1024px) 380px, (min-width: 768px) 46vw, 92vw"
                 width={720}

@@ -84,7 +84,7 @@ export const AnimatedTestimonials = ({
                 >
                   <SmartImage
                     src={t.src}
-                    widths={[360, 720]}
+                    widths={[360, 720, 1080]}
                     sizes="(max-width: 768px) 288px, 380px"
                     priority={i < 3}
                     alt={front ? t.name : ""}
