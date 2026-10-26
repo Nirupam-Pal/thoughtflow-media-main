@@ -268,6 +268,8 @@ function ThumbnailGrid({ entries, onOpen }: LayoutProps) {
 }
 
 /** Prints "taped" to a textured wall, each at its own proportions, straightening on hover. */
+const isPortrait = (e: GalleryEntry) => !!e.item.width && !!e.item.height && e.item.height > e.item.width;
+
 function Billboard({ entries, onOpen }: LayoutProps) {
   const cursor = useMediaCursor();
   const fine = useFinePointer();
@@ -277,15 +279,21 @@ function Billboard({ entries, onOpen }: LayoutProps) {
       <div className="grain absolute inset-0 opacity-[0.06]" />
       <div className="relative grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
         {entries.map((e, i) => {
-          const portrait = !!e.item.width && !!e.item.height && e.item.height > e.item.width;
+          const portrait = isPortrait(e);
+          // Banners sit in pairs: portrait + landscape split 5/7, two of the same kind split 6/6.
+          const partner = entries[i % 2 === 0 ? i + 1 : i - 1];
+          const span = !partner
+            ? "lg:col-span-8 lg:col-start-3"
+            : portrait === isPortrait(partner)
+              ? "lg:col-span-6"
+              : portrait
+                ? "lg:col-span-5"
+                : "lg:col-span-7";
           return (
             <MaskReveal
               key={e.index}
-              delay={i * 0.12}
-              className={cn(
-                entries.length === 1 ? "lg:col-span-8 lg:col-start-3" : portrait ? "lg:col-span-5" : "lg:col-span-7",
-                portrait && "mx-auto w-full max-w-[420px] lg:max-w-none"
-              )}
+              delay={(i % 2) * 0.12}
+              className={cn(span, portrait && "mx-auto w-full max-w-[420px] lg:max-w-none")}
             >
               <figure>
                 <button

@@ -589,6 +589,8 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         images: [
           ...designs("Banners & Flex Designs", [
             { file: "Synapse 2025 Crash course", alt: "Synapse NEET 2025 Crash Course flex banner", tag: "Print Flex", width: 3375, height: 4219 },
+            { file: "Synapse NEET 2025 Toppers", alt: "Synapse NEET (UG) 2025 toppers results banner", tag: "Results Banner", width: 2000, height: 900 },
+            { file: "Synapse NEET 2026 Crash Course Admission", alt: "Synapse Crack NEET 2026 crash course admission banner", tag: "Admission Banner", width: 2000, height: 1004 },
           ]),
           // Filed with the thumbnails on disk, but it's a 2.7:1 cover banner.
           ...designs("High CTR Thumbnails", [
