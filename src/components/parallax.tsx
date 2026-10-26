@@ -33,7 +33,7 @@ const brand = (n: number): Tile => ({ src: `/parallax/logos/${n}.webp`, kind: "b
 
 const COLUMNS: Tile[][] = [
   [work(2), brand(4), work(6)],
-  [brand(8), work(4), work(7)],
+  [brand(8), work(4), work(13)],
   [work(11), work(9), brand(10)],
   [work(12), work(1), work(5)],
 ];

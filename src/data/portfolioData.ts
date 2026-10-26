@@ -121,9 +121,9 @@ const adVideos = (items: { title: string; tag: string }[]): VideoItem[] =>
   }));
 
 // Files are numbered 1..N in the order listed here.
-// Feed posters are 4:5 unless marked square (1:1); the wall shows each at its own shape.
-const adPosters = (items: { alt: string; tag: string; square?: boolean }[]): PortfolioGalleryItem[] =>
-  items.map(({ alt, tag, square }, i) => ({ src: `/posters/${i + 1}.webp`, alt, tag, width: 900, height: square ? 900 : 1125 }));
+// `n` is the file in public/posters/. Feed posters are 4:5 unless marked square (1:1); the wall shows each at its own shape.
+const adPosters = (items: { n: number; alt: string; tag: string; square?: boolean }[]): PortfolioGalleryItem[] =>
+  items.map(({ n, alt, tag, square }) => ({ src: `/posters/${n}.webp`, alt, tag, width: 1080, height: square ? 1080 : 1350 }));
 
 // Optimised .webp next to each original in public/Creative Visual Designs/<folder>/ (scripts/optimize-images.mjs).
 const designs = (
@@ -551,19 +551,17 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         description: "Feed-ready posters that bring enquiries and enrollments (50% better performance)",
         layout: "wall",
         images: adPosters([
-          { alt: "NEET 2025 “All the Best” post for The Core Academy", tag: "Motivation Post" },
-          { alt: "“Achievers of Excellence” results post for Prayam Classes", tag: "Results Post", square: true },
-          { alt: "“All the Best Champions” JEE Advanced 2025 post for Prayam Classes", tag: "Motivation Post" },
-          { alt: "MediQuest NEET Test Series 2025 ad for The Core Academy", tag: "Admission Ad", square: true },
-          { alt: "AI117 tribute post for Ready to Ride", tag: "Topical Post" },
-          { alt: "Father’s Day special offer for Ready to Ride", tag: "Offer Ad" },
-          { alt: "Baleno self-drive rental ad for Ready to Ride", tag: "Product Ad" },
-          { alt: "Royal Enfield GT 650 rental ad for Ready to Ride", tag: "Product Ad" },
-          { alt: "“Save up to 80% on electricity bills” ad for Rencare Energy", tag: "Lead Gen Ad", square: true },
-          { alt: "PM Surya Ghar solar subsidy ad for Rencare Energy", tag: "Lead Gen Ad", square: true },
-          { alt: "NEEV 3.0 Chemistry Foundation admission ad for The Core Academy", tag: "Admission Ad", square: true },
-          { alt: "Mentor spotlight on Er. Pratik Sir for Prayam Classes", tag: "Faculty Spotlight", square: true },
-          { alt: "Free solar site visit ad for Rencare Energy", tag: "Lead Gen Ad" },
+          { n: 1, alt: "NEET 2025 “All the Best” post for The Core Academy", tag: "Motivation Post" },
+          { n: 2, alt: "“Achievers of Excellence” results post for Prayam Classes", tag: "Results Post", square: true },
+          { n: 3, alt: "“All the Best Champions” JEE Advanced 2025 post for Prayam Classes", tag: "Motivation Post" },
+          { n: 4, alt: "MediQuest NEET Test Series 2025 ad for The Core Academy", tag: "Admission Ad", square: true },
+          { n: 5, alt: "AI117 tribute post for Ready to Ride", tag: "Topical Post" },
+          { n: 6, alt: "Father’s Day special offer for Ready to Ride", tag: "Offer Ad" },
+          { n: 8, alt: "Royal Enfield GT 650 rental ad for Ready to Ride", tag: "Product Ad" },
+          { n: 9, alt: "“Save up to 80% on electricity bills” ad for Rencare Energy", tag: "Lead Gen Ad", square: true },
+          { n: 11, alt: "NEEV 3.0 Chemistry Foundation admission ad for The Core Academy", tag: "Admission Ad", square: true },
+          { n: 12, alt: "Mentor spotlight on Er. Pratik Sir for Prayam Classes", tag: "Faculty Spotlight", square: true },
+          { n: 13, alt: "Free solar site visit ad for Rencare Energy", tag: "Lead Gen Ad" },
         ]),
       },
       {
@@ -642,7 +640,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
           description: "Export-ready files for every size: feed, story, thumbnail, cover and print.",
         },
       ],
-      heroImages: ["/posters/3.webp", "/posters/7.webp", "/posters/9.webp"],
+      heroImages: ["/posters/3.webp", "/posters/8.webp", "/posters/9.webp"],
     },
   },
 ];
